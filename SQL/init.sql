@@ -48,7 +48,6 @@ CREATE TABLE `products` (
 `weight` int NOT NULL,
 `publisher` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
 `publication_year` varchar(4) NOT NULL,
-`rating_id` int NOT NULL,
 `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
 `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
@@ -81,6 +80,7 @@ CREATE TABLE `rating-details` (
 --
 CREATE TABLE `orders` (
 `id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+`code` varchar(50) NOT NULL,
 `user_id` int NOT NULL,
 `discount` int,
 `invoice` int(12) NOT NULL,
@@ -201,9 +201,9 @@ VALUES (NULL, 'VĂN HỌC', current_timestamp(), current_timestamp()),
 -- Add Data for table `products`
 --
 INSERT INTO `products` (`id`,`category_id`,`name`,`code`,`image_url`,`discount`,`price`,`author`,`translator`,`page_num`,`cover`,`dimension`,`weight`,`publisher`,`publication_year`,`created_at`,`updated_at`) 
-VALUES (NULL, 1, 'Cho Tôi Xin Một Vé Đi Tuổi Thơ', '8934974159087', 'https://cdn0.fahasa.com/media/catalog/product/i/m/image_180164_1_43_1_57_1_4_1_2_1_210_1_29_1_98_1_25_1_21_1_5_1_3_1_18_1_18_1_45_1_26_1_32_1_14_1_1233.jpg', 0.0, 80000, 'Nguyễn Nhật Ánh', '', 208, 'Bìa Mềm', '13 x 20', 220, 'NXB Trẻ', '2018', current_timestamp(), current_timestamp()),
+VALUES (NULL, 1, 'Cho Tôi Xin Một Vé Đi Tuổi Thơ', '8934974159087', 'https://cdn0.fahasa.com/media/catalog/product/i/m/image_180164_1_43_1_57_1_4_1_2_1_210_1_29_1_98_1_25_1_21_1_5_1_3_1_18_1_18_1_45_1_26_1_32_1_14_1_1233.jpg', 25.0, 80000, 'Nguyễn Nhật Ánh', '', 208, 'Bìa Mềm', '13 x 20', 220, 'NXB Trẻ', '2018', current_timestamp(), current_timestamp()),
 (NULL, 3, 'Đọc Vị Bất Kỳ Ai', '8935280904262', 'https://cdn0.fahasa.com/media/catalog/product/i/m/image_195509_1_12542.jpg', 32.0, 79000, 'TS David J Lieberman', '', 223, 'Bìa Mềm', '13 x 20.5', 250, 'NXB Lao Động', '2019', current_timestamp(), current_timestamp()),
-(NULL, 2, 'Bí Mật Tư Duy Triệu Phú', '8935086854624', 'https://cdn0.fahasa.com/media/catalog/product/i/m/image_188995_1_1.jpg', 0.0, 108000, 'T Harv Eker', '', 287, 'Bìa Mềm', '20.5 x 14.5', 300, 'NXB Tổng Hợp TP.HCM', '2021', current_timestamp(), current_timestamp()),
+(NULL, 2, 'Bí Mật Tư Duy Triệu Phú', '8935086854624', 'https://cdn0.fahasa.com/media/catalog/product/i/m/image_188995_1_1.jpg', 27.0, 108000, 'T Harv Eker', '', 287, 'Bìa Mềm', '20.5 x 14.5', 300, 'NXB Tổng Hợp TP.HCM', '2021', current_timestamp(), current_timestamp()),
 (NULL, 4, 'Phương Pháp Giáo Dục Con Của Người Do Thái', '8936067605211', 'https://cdn0.fahasa.com/media/catalog/product/8/9/8936067605211.jpg', 40.0, 85000, 'Hà Minh', '', 244, 'Bìa Mềm', '20.5 x 15', 300, 'NXB Phụ Nữ Việt Nam', '2022', current_timestamp(), current_timestamp());
 -- -------------------------------------------------------- 
 
