@@ -89,13 +89,6 @@ label.control-label {
   color: #777;
 }
 
-
-
-
-
-
-
-
 table { 
 	width: 650px; 
 	border-collapse: collapse; 
