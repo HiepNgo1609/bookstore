@@ -17,6 +17,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 
 // $data = {
 //     "id":"11",
+//     "code": "2342Ac",
 //     "user_id": "1",
 //     "discount":"0.0",
 //     "status": "Processing",
@@ -24,6 +25,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 
 $order->id = $data["id"];
 $order->user_id = $data["user_id"];
+$order->code = $data["code"];
 $order->discount = $data["discount"];
 $order->invoice = $data["invoice"];
 $order->status = $data["status"];

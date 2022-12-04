@@ -10,8 +10,8 @@ $db = $database->connect();
 
 $order = new Order($db);
 
-// $result = $order->getAllOrders();
-$result = $order->getOrdersOnProcessing();
+$result = $order->getAllOrders();
+// $result = $order->getOrdersOnProcessing();
 
 $numRow = $result->rowCount();
 
