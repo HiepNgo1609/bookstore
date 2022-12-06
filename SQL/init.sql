@@ -57,19 +57,11 @@ CREATE TABLE `products` (
 CREATE TABLE `ratings` (
 `id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
 `product_id` int NOT NULL,
-`user_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
--- --------------------------------------------------------
-
---
--- Table structure for table `rating-details`
---
-CREATE TABLE `rating-details` (
-`id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-`rating_id` int NOT NULL,
+`user_id` int NOT NULL,
 `rate_star` int NOT NULL,
 `content` longtext NOT NULL,
-`created_at` timestamp NOT NULL DEFAULT current_timestamp()
+`created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+`updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 -- --------------------------------------------------------
 
@@ -137,12 +129,6 @@ ADD FOREIGN KEY (`product_id`) REFERENCES `products`(`id`),
 ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);
 -- -------------------------------------------------------- 
 
---
--- Add Foreign Key for table `rating-details`
---
-ALTER TABLE `rating-details`
-ADD FOREIGN KEY (`rating_id`) REFERENCES `ratings`(`id`);
--- -------------------------------------------------------- 
 
 --
 -- Add Foreign Key for table `orders`
@@ -225,28 +211,16 @@ VALUES (NULL, 1, 'Cho Tôi Xin Một Vé Đi Tuổi Thơ', '8934974159087', 'htt
 --
 -- Add Data for table `ratings`
 --
-INSERT INTO `ratings` (`id`,`product_id`,`user_id`)
-VALUES (NULL, 1, 1),
-(NULL, 1, 2),
-(NULL, 1, 3),
-(NULL, 1, 4),
-(NULL, 2, 2),
-(NULL, 2, 5),
-(NULL, 2, 6);
+INSERT INTO `ratings` (`id`,`product_id`,`user_id`,`rate_star`,`content`,`created_at`,`updated_at`)
+VALUES (NULL, 1, 1, 5, 'REVIEW ngắn gọn “Cho tôi xin một vé đi tuổi thơ” Câu chuyện đáng yêu này kể về bộ tứ cu Mùi, Hải cò, Tí sún và Tủn. Những đứa trẻ ngây thơ hồn nhiên lên dự án để nuôi chó kiếm tiền, đặt tên cho thế giới, gọi nhau bằng những thứ khác,... Câu chuyện đã thực sự mang tôi về với tuổi thơ. Những câu hỏi mà tôi cũng như những đứa trẻ khác luôn đặt ra rằng “Tại sao mọi người lại gọi đàn ông là đàn ông mà không phải là đàn bà?” hay “Tại sao bố mẹ lại gọi là bố mẹ mà không phải ông bà?” vân vân và mây mây... đều được nói đến trong cuốn truyện. “Tôi viết cuốn sách này không phải cho trẻ con mà tôi viết cho những ai từng là trẻ con” Bìa sách mới tái bản rất đẹp, giản dị nhưng bắt mắt.', current_timestamp(), current_timestamp()),
+(NULL, 1, 2, 4, 'Nguyễn Nhật Ánh viết nhiều về tuổi thơ, về tình cảm tuổi học trò, và về những nuối tiếc của con người về những năm tháng áo trắng . Có lẽ tôi sẽ không bao giờ quên cuốn sách đầu tiên đưa tôi về thế giới của tuổi ô mai này :" cho tôi xin một vé đi tuổi thơ " .', current_timestamp(), current_timestamp()),
+(NULL, 1, 3, 5, 'Câu chuyện về một người đàn ông nhìn lại cuộc đời mình, Cho tôi xin một vé đi tuổi thơ ghi lại kết cấu của tuổi thơ trong tất cả sự phong phú của nó. Khi chúng ta học được từ những phép màu và bi kịch nhỏ tạo nên cuộc đời của người kể chuyện - những sai lầm và những hành động sai trái - chúng ta gặp những người bạn đã mất từ lâu của mình, không ai có thể quên được cuộc sống của họ như thế nào.', current_timestamp(), current_timestamp()),
+(NULL, 1, 4, 5, 'Cho tôi xin một vé đi tuổi thơ của tác giả Nguyễn Nhật ánh là một quyển truyện rất sâu sắc. "Một ngày, tôi chợt nhận thấy cuộc sống thật là buồn chán và tẻ nhạt" câu chuyện bắt đầu bằng một câu rất rất gần gũi không chỉ với trẻ nhỏ mà còn cả người lớn nữa, cứ như vậy từng việc từng việc miên man xảy ra khiến tôi bị cuốn hút vào câu chuyện của 4 đứa trẻ lúc nào không hay. Chú Ánh đã khiến tôi nhớ lại rất nhiều kỉ niệm, những ý tưởng điên khùng của bản thân hồi xưa. Có thể đọc 1 lần thì mình không cảm nhận được nhiều nhưng đọc đến lần thứ 2 thứ 3 bạn sẽ thấy cảm xúc hoàn toàn khác với lần trước, khác ở đây chính là từng câu từng chữ mộc mạc mà thấm đậm khiến mình phải suy nghĩ nhiều về chúng.', current_timestamp(), current_timestamp()),
+(NULL, 2, 2, 4, 'Cuốn sách với lối viết đơn giản và dễ hiểu, giúp tôi đi nhanh vào các vấn đề trọng tâm mà David Lieberman truyền tải. Tôi học được cách tiếp xúc với người khác phải hết sức cẩn trọng vì ai cũng có cái tôi dễ bị tổn thương. Nếu muốn có được sự trung thành của người khác, hãy giúp đỡ trong lúc họ ở hoàn cảnh khốn cùng. Nếu có đối đãi với những người xung quanh thì họ sẽ dành sự biết ơn cho chúng ta mà cốt lõi của lòng trung thành chính là thái độ biết ơn. Có được điều này vô cùng quan trọng dù tôi và bạn đang ở vị trí nào. Nói chung thì “Đọc vị bất kỳ ai” đem lại cho tôi rất nhiều bài học và thông tin hữu ích. Mục tiêu luôn là cái để chúng ta đặt ra và cố gắng thực hiện trong cuộc sống này. Vậy nên quyển sách giúp chúng ta hiểu được cần phải có mục tiêu đúng đắn cùng với đó là các kế hoạch khả thi để áp dụng vào trong thực tiễn. Sự quyết tâm và bản lĩnh của mỗi người sẽ giúp cho hành trình đó tiến bước đến thành công.', current_timestamp(), current_timestamp()),
+(NULL, 2, 5, 5, 'Đây đích thị sẽ là cuốn sách giúp bạn trở thành người nắm được thế chủ động hơn trong mọi tình huống, sẽ không phải lo về việc bị lừa dối và lợi dụng, đồng thời góp phần tôi luyện thêm “bản năng“ nhìn nhận người khác một cách chính xác, có logic, giúp ích hơn cho các bạn trong mọi khía cạnh của cuộc sống. Với cách sử dụng từ ngữ logic, sự nhạy bén trong từng suy nghĩ và cử chỉ, cùng với những ví dụ chân thật lại vô cùng cuốn hút thì mình tin rằng không chỉ bản thân mình, mà các bạn cũng sẽ đều hứng thú hơn khi lật qua từng trang sách. Đây là cuốn sách nên có trên giá sách của mỗi người, đặc biệt là những người muốn tạo dựng các mối quan hệ bền vững, tốt đẹp nhất có thể.', current_timestamp(), current_timestamp()),
+(NULL, 2, 6, 5, 'Đây là một câu chuyện nhẹ nhàng nhưng để lại cho mình rất nhiều bài học cuộc sống. Trước tiên, đó là câu chuyện của tình mẫu tử thiêng liêng khi hải âu mẹ quyết hi sinh mạng sống của mình để đẻ ra quả trứng nhỏ. Tiếp theo đó là bài học về việc giữ lời hứa. Chú mèo ú Zorba đã cố gắng nỗ lực hết sức để thực hiện lời hứa của mình đối với hải âu mẹ. Chú đã không ăn quả trứng, chăm sóc quả trứng tới khi nó nở và dạy hải âu con tập bay. Câu chuyện còn là bài học về tình yêu thương “không biên giới”. Yêu không phân biệt nguồn gốc xuất thân như mèo ú Zorba và những chú mèo khác yêu thương hải âu con và tìm mọi cách giúp hải âu tập bay. Cuối cùng, đó là bài học về sự quyết tâm. Chỉ cần có quyết tâm không bỏ cuộc thì đường đến đỉnh vinh quang sẽ không còn xa…', current_timestamp(), current_timestamp());
 -- -------------------------------------------------------- 
 
---
--- Add Data for table `rating-details`
---
-INSERT INTO `rating-details` (`id`,`rating_id`,`rate_star`,`content`,`created_at`)
-VALUES (NULL, 1, 5, 'REVIEW ngắn gọn “Cho tôi xin một vé đi tuổi thơ” Câu chuyện đáng yêu này kể về bộ tứ cu Mùi, Hải cò, Tí sún và Tủn. Những đứa trẻ ngây thơ hồn nhiên lên dự án để nuôi chó kiếm tiền, đặt tên cho thế giới, gọi nhau bằng những thứ khác,... Câu chuyện đã thực sự mang tôi về với tuổi thơ. Những câu hỏi mà tôi cũng như những đứa trẻ khác luôn đặt ra rằng “Tại sao mọi người lại gọi đàn ông là đàn ông mà không phải là đàn bà?” hay “Tại sao bố mẹ lại gọi là bố mẹ mà không phải ông bà?” vân vân và mây mây... đều được nói đến trong cuốn truyện. “Tôi viết cuốn sách này không phải cho trẻ con mà tôi viết cho những ai từng là trẻ con” Bìa sách mới tái bản rất đẹp, giản dị nhưng bắt mắt.', current_timestamp()),
-(NULL, 2, 4, 'Nguyễn Nhật Ánh viết nhiều về tuổi thơ, về tình cảm tuổi học trò, và về những nuối tiếc của con người về những năm tháng áo trắng . Có lẽ tôi sẽ không bao giờ quên cuốn sách đầu tiên đưa tôi về thế giới của tuổi ô mai này :" cho tôi xin một vé đi tuổi thơ " .', current_timestamp()),
-(NULL, 3, 5, 'Câu chuyện về một người đàn ông nhìn lại cuộc đời mình, Cho tôi xin một vé đi tuổi thơ ghi lại kết cấu của tuổi thơ trong tất cả sự phong phú của nó. Khi chúng ta học được từ những phép màu và bi kịch nhỏ tạo nên cuộc đời của người kể chuyện - những sai lầm và những hành động sai trái - chúng ta gặp những người bạn đã mất từ lâu của mình, không ai có thể quên được cuộc sống của họ như thế nào.', current_timestamp()),
-(NULL, 4, 5, 'Cho tôi xin một vé đi tuổi thơ của tác giả Nguyễn Nhật ánh là một quyển truyện rất sâu sắc. "Một ngày, tôi chợt nhận thấy cuộc sống thật là buồn chán và tẻ nhạt" câu chuyện bắt đầu bằng một câu rất rất gần gũi không chỉ với trẻ nhỏ mà còn cả người lớn nữa, cứ như vậy từng việc từng việc miên man xảy ra khiến tôi bị cuốn hút vào câu chuyện của 4 đứa trẻ lúc nào không hay. Chú Ánh đã khiến tôi nhớ lại rất nhiều kỉ niệm, những ý tưởng điên khùng của bản thân hồi xưa. Có thể đọc 1 lần thì mình không cảm nhận được nhiều nhưng đọc đến lần thứ 2 thứ 3 bạn sẽ thấy cảm xúc hoàn toàn khác với lần trước, khác ở đây chính là từng câu từng chữ mộc mạc mà thấm đậm khiến mình phải suy nghĩ nhiều về chúng.', current_timestamp()),
-(NULL, 5, 4, 'Cuốn sách với lối viết đơn giản và dễ hiểu, giúp tôi đi nhanh vào các vấn đề trọng tâm mà David Lieberman truyền tải. Tôi học được cách tiếp xúc với người khác phải hết sức cẩn trọng vì ai cũng có cái tôi dễ bị tổn thương. Nếu muốn có được sự trung thành của người khác, hãy giúp đỡ trong lúc họ ở hoàn cảnh khốn cùng. Nếu có đối đãi với những người xung quanh thì họ sẽ dành sự biết ơn cho chúng ta mà cốt lõi của lòng trung thành chính là thái độ biết ơn. Có được điều này vô cùng quan trọng dù tôi và bạn đang ở vị trí nào. Nói chung thì “Đọc vị bất kỳ ai” đem lại cho tôi rất nhiều bài học và thông tin hữu ích. Mục tiêu luôn là cái để chúng ta đặt ra và cố gắng thực hiện trong cuộc sống này. Vậy nên quyển sách giúp chúng ta hiểu được cần phải có mục tiêu đúng đắn cùng với đó là các kế hoạch khả thi để áp dụng vào trong thực tiễn. Sự quyết tâm và bản lĩnh của mỗi người sẽ giúp cho hành trình đó tiến bước đến thành công.', current_timestamp()),
-(NULL, 6, 5, 'Đây đích thị sẽ là cuốn sách giúp bạn trở thành người nắm được thế chủ động hơn trong mọi tình huống, sẽ không phải lo về việc bị lừa dối và lợi dụng, đồng thời góp phần tôi luyện thêm “bản năng“ nhìn nhận người khác một cách chính xác, có logic, giúp ích hơn cho các bạn trong mọi khía cạnh của cuộc sống. Với cách sử dụng từ ngữ logic, sự nhạy bén trong từng suy nghĩ và cử chỉ, cùng với những ví dụ chân thật lại vô cùng cuốn hút thì mình tin rằng không chỉ bản thân mình, mà các bạn cũng sẽ đều hứng thú hơn khi lật qua từng trang sách. Đây là cuốn sách nên có trên giá sách của mỗi người, đặc biệt là những người muốn tạo dựng các mối quan hệ bền vững, tốt đẹp nhất có thể.', current_timestamp()),
-(NULL, 7, 5, 'Đây đích thị sẽ là cuốn sách giúp bạn trở thành người nắm được thế chủ động hơn trong mọi tình huống, sẽ không phải lo về việc bị lừa dối và lợi dụng, đồng thời góp phần tôi luyện thêm “bản năng“ nhìn nhận người khác một cách chính xác, có logic, giúp ích hơn cho các bạn trong mọi khía cạnh của cuộc sống. Với cách sử dụng từ ngữ logic, sự nhạy bén trong từng suy nghĩ và cử chỉ, cùng với những ví dụ chân thật lại vô cùng cuốn hút thì mình tin rằng không chỉ bản thân mình, mà các bạn cũng sẽ đều hứng thú hơn khi lật qua từng trang sách. Đây là cuốn sách nên có trên giá sách của mỗi người, đặc biệt là những người muốn tạo dựng các mối quan hệ bền vững, tốt đẹp nhất có thể.', current_timestamp());
--- -------------------------------------------------------- 
 
 --
 -- Add Data for table `orders`
