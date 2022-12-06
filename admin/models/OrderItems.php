@@ -20,7 +20,11 @@ class OrderItems {
                 p.image_url,
                 p.discount,
                 p.price,
-                oi.quantity
+                p.publisher,
+                p.author,
+                oi.quantity,
+                oi.id,
+                p.id AS product_id
             FROM `' . $this->table . '` oi
             LEFT JOIN products p ON oi.product_id = p.id
             WHERE oi.order_id = ' . $id . '
