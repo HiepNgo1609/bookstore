@@ -253,9 +253,9 @@ VALUES (NULL, 1, 5, 'REVIEW ngắn gọn “Cho tôi xin một vé đi tuổi th
 --
 INSERT INTO `orders` (`id`,`user_id`,`discount`,`invoice`,`status`,`created_at`,`updated_at`) 
 VALUES (NULL, 2, '', 156000, 'Processing', current_timestamp(), current_timestamp()),
-VALUES (NULL, 3, '', 139000, 'Accepted', current_timestamp(), current_timestamp()),
-VALUES (NULL, 1, '', 122000, 'Cancelled', current_timestamp(), current_timestamp()),
-VALUES (NULL, 5, '', 280000, 'Processing', current_timestamp(), current_timestamp());
+(NULL, 3, '', 139000, 'Accepted', current_timestamp(), current_timestamp()),
+(NULL, 1, '', 122000, 'Cancelled', current_timestamp(), current_timestamp()),
+(NULL, 5, '', 280000, 'Processing', current_timestamp(), current_timestamp());
 -- -------------------------------------------------------- 
 
 --
