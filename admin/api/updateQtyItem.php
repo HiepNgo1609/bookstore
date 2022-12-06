@@ -2,8 +2,7 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: PUT');
-header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
-Access-Control-Allow-Methods, Authorization, X-Requested-With');
+header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 include_once '../config/Database.php';
 include_once '../models/OrderItems.php';
@@ -23,12 +22,24 @@ $data = json_decode(file_get_contents("php://input"), true);
 $orderItem->id = $data["id"];
 $orderItem->quantity = $data["quantity"];
 
-if ($orderItem->updateOrderItems()) {
-    echo json_encode(
-        array('message' => 'Order Item Updated!')
-    );
+if (intval($data["quantity"]) == 0) {
+    if ($orderItem->deleteOrderItems()) {
+        echo json_encode(
+            array('message' => 'Order Item Deleted!')
+        );
+    } else {
+        echo json_encode(
+            array('message' => 'Delete Order Item was Failed!')
+        );
+    }
 } else {
-    echo json_encode(
-        array('message' => 'Order Item Not Updated!')
-    );
+    if ($orderItem->updateOrderItems()) {
+        echo json_encode(
+            array('message' => 'Order Item Updated!')
+        );
+    } else {
+        echo json_encode(
+            array('message' => 'Order Item Not Updated!')
+        );
+    }
 }

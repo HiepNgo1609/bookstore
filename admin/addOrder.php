@@ -64,12 +64,11 @@ session_start();
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-9">
-                                        <h3 style="margin-left: 10px;">Quản lý đơn hàng</h3>
+                                    <div class="col-10">
+                                        <h3 style="margin-left: 10px;">Tạo đơn hàng</h3>
                                     </div>
-                                    <div class="col-3 justify-content-end">
-                                        <button id="create_btn" class="btn btn-success mr-2" type="button">Tạo đơn hàng</button>
-                                        <button id="update_btn" class="btn btn-warning mr-2" type="button">Cập nhật</button>
+                                    <div class="col-2 justify-content-end">
+                                        <button id="create_btn" class="btn btn-warning mr-2" type="button">Tạo đơn hàng</button>
                                         <button id="back_btn" class="btn btn-secondary" type="button">Trở lại</button>
 
                                     </div>
@@ -86,33 +85,19 @@ session_start();
                             <div class="card-body">
                                 <div class="row mb-3">
                                     <h4 class="col-sm-8 card-title">Thông tin khách hàng</h4>
-                                    <button id="update_user_btn" class="btn btn-info col mr-3" type="button">Chỉnh sửa thông tin</button>
                                 </div>
                                 <form action="">
                                     <div class="form-group row">
-                                        <label for="username" class="col-sm-3 col-form-label">Username</label>
+                                        <!-- <label for="username" class="col-sm-3 col-form-label">Username</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="username" placeholder="Enter username" disabled>
-                                            <!-- <span class="check_success"><i class="fa fa-check-circle"></i></span> -->
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="lName" class="col-sm-3 col-form-label">Tên</label>
+                                        </div> -->
+                                        <label class="col-sm-3 col-form-label" for="username">Username</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="lName" placeholder="Enter Last Name" disabled>
-
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="address" class="col-sm-3 col-form-label">Địa chỉ</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="address" placeholder="Enter address" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="phone" class="col-sm-3 col-form-label">SĐT</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="phone" placeholder="Enter Phone" disabled>
+                                            <input class="form-control" list="username_data" id="username" name="username">
+                                            <datalist id="username_data">
+                                                <!-- <option value="Chocolate"> -->
+                                            </datalist>
                                         </div>
                                     </div>
                                 </form>
@@ -124,35 +109,32 @@ session_start();
                             <div class="card-body">
                                 <div class="row mb-3">
                                     <h4 class="col-sm-9 card-title">Thông tin chung đơn hàng</h4>
-                                    <button id="update_order_btn" class="btn btn-info col mr-3" type="button">Chỉnh sửa thông tin</button>
                                 </div>
                                 <form action="">
-                                    <div class="form-group row">
+                                    <!-- <div class="form-group row">
                                         <label for="code" class="col-sm-3 col-form-label">Mã đơn hàng</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="code" placeholder="Enter code" disabled>
-                                            <!-- <small style="color: red;">(*) Some thing went wrong!</small> -->
+                                            <input type="text" class="form-control" id="code" placeholder="Enter code">
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
+                                    </div> -->
+                                    <!-- <div class="form-group row">
                                         <label for="discount" class="col-sm-3 col-form-label">Chiết khấu</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="discount" placeholder="Enter discount">
+                                            <input type="number" class="form-control" id="discount" placeholder="0.0" min="0.0">
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
+                                    </div> -->
+                                    <!-- <div class="form-group row">
                                         <label for="sum" class="col-sm-3 col-form-label">Tổng</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="sum" placeholder="Enter invoice" disabled>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="form-group row">
                                         <label for="status" class="col-sm-3 col-form-label">Trạng thái</label>
                                         <div class="col-sm-9">
                                             <select id="status" class="form-control">
                                                 <option value="Processing">Processing</option>
                                                 <option value="Accepted">Accepted</option>
-                                                <option value="Received">Received</option>
                                                 <option value="Cancelled">Cancelled</option>
                                             </select>
                                         </div>
@@ -162,7 +144,7 @@ session_start();
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col">
                         <div class="card">
                             <h3 class="card-title mb-4">Danh sách sản phẩm</h3>
@@ -196,7 +178,7 @@ session_start();
                                         </select>
                                     </div>
                                     <div class="col-2">
-                                        <input id="qty_item" class="form-control" type="number" placeholder="Quantity" min="1" value='1'>
+                                        <input id="qty_item" class="form-control" type="number" placeholder="1" min="1" value="1">
                                     </div>
                                     <div class="col-2">
                                         <button type="button" id="addProduct" class="btn btn-primary">Thêm sản phẩm</button>
@@ -205,7 +187,7 @@ session_start();
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <!-- Start Modal -->
             <!-- <div id="modalItems" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -258,7 +240,7 @@ session_start();
     <script src="js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <!--Custom JavaScript -->
     <script src="js/custom.min.js"></script>
-    <script src="js/orderInfo.js"></script>
+    <script src="js/addOrder.js"></script>
 
 
     <script src="js/lib/datatables/datatables.min.js"></script>
