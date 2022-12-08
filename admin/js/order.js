@@ -38,8 +38,7 @@ $(document).ready(function() {
             },
             {
                 targets: 5,
-                defaultContent: "<button type='button' class='btn btn-success orderDetail'><i class='fa fa-search'></i> Items</button>" + "    " +
-                    "<button class='btn btn-warning'><i class='fa fa-edit'> Edit</i></button>"
+                defaultContent: "<button type='button' class='btn btn-success orderDetail'><i class='fa fa-search'></i> Details</button>"
             }
         ]
     })
