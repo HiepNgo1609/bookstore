@@ -42,10 +42,10 @@ session_start();
     <!-- Main wrapper  -->
     <div id="main-wrapper">
         <!-- header header  -->
-        <?php include_once './adminHeader.php'; ?>
+        <?php include_once './header.php'; ?>
         <!-- End header header -->
         <!-- Left Sidebar  -->
-        <?php include_once './adminLeftSidebar.php'; ?>
+        <?php include_once './left_sidebar.php'; ?>
         <!-- End Left Sidebar  -->
         <!-- Page wrapper  -->
         <div class="page-wrapper">

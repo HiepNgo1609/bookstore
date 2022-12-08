@@ -34,7 +34,7 @@
                             <ul aria-expanded="false" class="collapse">
 								<li><a href="all_menu.php">Tất cả sách</a></li>
 								<li><a href="add_menu.php">Thêm sách</a></li>
-                              
+                                <li><a href="add_category.php">Thêm loại sách</a></li>
                                 
                             </ul>
                         </li>

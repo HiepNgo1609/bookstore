@@ -230,9 +230,7 @@ if(isset($_POST['submit'] ))
                                                     <input type="text" name="district_id" class="form-control form-control-danger" placeholder="Quận/huyện">
                                                     </div>
                                                 </div>
-                                            
 
-                                            
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Vai trò</label><br>

@@ -15,7 +15,7 @@ session_start();
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon1.png">
-    <title>Ela - Bootstrap Admin Dashboard Template</title>
+    <title>Admin Dashboard</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -136,7 +136,7 @@ session_start();
                                                                                                 <td>'.$rows['created_at'].'</td>
                                                                                                 <td>'.$rows['updated_at'].'</td>
 																							<td><a href="delete_menu.php?menu_del='.$rows['id'].'" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
-																							<a href="update_menu.php?menu_upd='.$rows['id'].'" class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5"><i class="ti-settings"></i></a>
+																							<a href="update_menu.php?menu_upd='.$rows['category_id'].'" class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5"><i class="ti-settings"></i></a>
 																							</td></tr>';
 																					 
 																						

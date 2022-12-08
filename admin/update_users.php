@@ -132,9 +132,7 @@ if(isset($_POST['submit'] ))
 									<?php  
 									        echo $error;
 									        echo $success; 
-											
-											
-											?>	
+									?>	
 					    <div class="col-lg-12">
                         <div class="card card-outline-primary">
                             <div class="card-header">

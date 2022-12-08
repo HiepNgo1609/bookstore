@@ -345,9 +345,11 @@ if(isset($_POST['submit']))           //if upload btn is pressed
 								
 					    <div class="col-lg-12">
                         <div class="card card-outline-primary">
+                            
                             <div class="card-header">
-                                <h4 class="m-b-0 text-white">Chỉnh sửa thông tin sản phẩm</h4>
-                            </div>
+                                    <h4 class="m-b-0 text-white">Chỉnh sửa thông tin sách</h4>
+                                </div>
+                            
                             <div class="card-body">
                             <?php $ssql ="select * from products where id='$_GET[menu_upd]'";
 													$res=mysqli_query($db, $ssql); 
@@ -359,7 +361,7 @@ if(isset($_POST['submit']))           //if upload btn is pressed
                                             <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">Loại sách</label>
-												<select disabled name="category_id" class="form-control custom-select" data-placeholder="Chọn loại sách" tabindex="1">
+												<select  name="category_id" class="form-control custom-select" data-placeholder="Chọn loại sách" tabindex="1">
                                                         
                                                  <?php $category ="select * from category";
 													$re=mysqli_query($db, $category); 
@@ -367,9 +369,8 @@ if(isset($_POST['submit']))           //if upload btn is pressed
                                                     
 													while($row1=mysqli_fetch_array($re))  
 													{
-                                                        $selectStr = ($_GET['menu_upd'] === $row1['id']) ? "selected": '';
-                                                    
-                                                        echo' <option value="'.$row1['id'].'" >'.$row1['name'].'</option>';
+                                                        $selectStr = ($_GET['menu_upd'] == $row1['id']) ? 'selected':'';                                                    
+                                                        echo' <option value="'.$row1['id'].'" '.$selectStr.' >'.$row1['name'].'</option>';
 													}  
                                                  
 													?> 
