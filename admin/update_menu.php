@@ -1,95 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+
 include("../connection/connect.php");
 error_reporting(0);
 session_start();
 
 
 
-
 if(isset($_POST['submit']))           //if upload btn is pressed
 {
-	
-			
-		
-			
-		  
-		
-		
-		if(empty($_POST['d_name'])||empty($_POST['about'])||$_POST['price']==''||$_POST['res_name']=='')
+	if(empty($_POST['category_id'])||empty($_POST['name'])||$_POST['code']==''||$_POST['image_url']==''
+        ||$_POST['discount']==''||$_POST['price']==''||$_POST['author']==''||$_POST['translator']==''
+        ||$_POST['page_num']==''||$_POST['cover']==''||$_POST['dimension']==''||$_POST['weight']==''
+        ||$_POST['publisher']==''||$_POST['publication_year']=='')
 		{	
-											$error = 	'<div class="alert alert-danger alert-dismissible fade show">
+				$error = 	'<div class="alert alert-danger alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																<strong>All fields Must be Fillup!</strong>
-															</div>';
-									
-		
-								
+																<strong>Bạn phải điền vào tất cả các ô</strong>
+				            </div>';
+					
 		}
 	else
-		{
-		
-				$fname = $_FILES['file']['name'];
-								$temp = $_FILES['file']['tmp_name'];
-								$fsize = $_FILES['file']['size'];
-								$extension = explode('.',$fname);
-								$extension = strtolower(end($extension));  
-								$fnew = uniqid().'.'.$extension;
-   
-								$store = "Res_img/dishes/".basename($fnew);                      // the path to store the upload image
+	{
+       
+    
 	
-					if($extension == 'jpg'||$extension == 'png'||$extension == 'gif' )
-					{        
-									if($fsize>=1000000)
-										{
-		
-		
-												$error = 	'<div class="alert alert-danger alert-dismissible fade show">
+
+	if(($_POST['page_num']) < 1 )
+	{
+		$error = '<div class="alert alert-danger alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																<strong>Max Image Size is 1024kb!</strong> Try different Image.
+																<strong>Số trang sách phải lớn hơn 0!</strong>
 															</div>';
-	   
-										}
-		
-									else
-										{
-												
-												
-												
-				                                 
-												$sql = "update dishes set rs_id='$_POST[res_name]',title='$_POST[d_name]',slogan='$_POST[about]',price='$_POST[price]',img='$fnew' where d_id='$_GET[menu_upd]'";  // update the submited data ino the database :images
-												mysqli_query($db, $sql); 
-												move_uploaded_file($temp, $store);
-			  
-													$success = 	'<div class="alert alert-success alert-dismissible fade show">
+	}
+    else if(($_POST['discount']) < 0 )
+	{
+		$error = '<div class="alert alert-danger alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																<strong>Record</strong>Updated.
+																<strong>Giảm giá phải lớn hơn 0% !</strong>
 															</div>';
-                
+	}
+    else if(($_POST['price']) < 0 )
+	{
+		$error = '<div class="alert alert-danger alert-dismissible fade show">
+																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<strong>Giá cuốn sách phải là số lớn hơn 0 !</strong>
+															</div>';
+	}
+    else if(($_POST['weight']) < 0 )
+	{
+		$error = '<div class="alert alert-danger alert-dismissible fade show">
+																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<strong>Khối lượng sách phải là số lớn hơn 0 !</strong>
+															</div>';
+	}
 	
-										}
-					}
-					              
-	   
-	   
-	   }
+	else {
+       
+        $category_id = $_POST['category_id'];
+        $name = $_POST['name'];
+        $code = $_POST['code'];
+        $image_url = $_POST['image_url'];
+        $discount = $_POST['discount'];
+        $price = $_POST['price'];
+        $author = $_POST['author'];
+        $translator = $_POST['translator'];
+        $page_num = $_POST['page_num'];
+        $cover = $_POST['cover'];
+        $dimension = $_POSt['dimension'];
+        $weight = $_POST['weight']; $publisher = $_POST['publisher']; $publication_year = $_POST['publication_year'];
 
-
-
-	
-	
-	
-
+        $mql = "UPDATE products SET category_id = $category_id, name = '$name', code=$code , image_url= '$image_url' , 
+        discount = $discount , price=$price, author='$author' , translator='$translator' , page_num=$page_num, cover='$cover', dimension='$dimension',
+        weight=$weight, publisher = '$publisher' , publication_year=$publication_year WHERE id = $_GET[menu_upd] ";
+        
+        mysqli_query($db, $mql);
+                $success = 	'<div class="alert alert-success alert-dismissible fade show">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Congrass!</strong>Cập nhật thành công!</br></div>';
+        
+    }
+    
 }
-
-
-
-
-
-
-
-
+} 
+?>
 ?>
 <head>
     <meta charset="utf-8">
@@ -99,8 +94,8 @@ if(isset($_POST['submit']))           //if upload btn is pressed
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
-    <title>Ela - Bootstrap Admin Dashboard Template</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon1.png">
+    <title>Admin Dashboard</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -321,59 +316,8 @@ if(isset($_POST['submit']))           //if upload btn is pressed
         </div>
         <!-- End header header -->
         <!-- Left Sidebar  -->
-        <div class="left-sidebar">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                   <ul id="sidebarnav">
-                        <li class="nav-devider"></li>
-                        <li class="nav-label">Home</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="dashboard.php">Dashboard</a></li>
-                                
-                            </ul>
-                        </li>
-                        <li class="nav-label">Log</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false">  <span><i class="fa fa-user f-s-20 "></i></span><span class="hide-menu">Users</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="allusers.php">All Users</a></li>
-								<li><a href="add_users.php">Add Users</a></li>
-								
-                               
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-archive f-s-20 color-warning"></i><span class="hide-menu">Store</span></a>
-                            <ul aria-expanded="false" class="collapse">
-								<li><a href="allrestraunt.php">All Stores</a></li>
-								<li><a href="add_category.php">Add Category</a></li>
-                                <li><a href="add_restraunt.php">Add Restaurant</a></li>
-                                
-                            </ul>
-                        </li>
-                      <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-cutlery" aria-hidden="true"></i><span class="hide-menu">Menu</span></a>
-                            <ul aria-expanded="false" class="collapse">
-								<li><a href="all_menu.php">All Menues</a></li>
-								<li><a href="add_menu.php">Add Menu</a></li>
-                              
-                                
-                            </ul>
-                        </li>
-						 <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="hide-menu">Orders</span></a>
-                            <ul aria-expanded="false" class="collapse">
-								<li><a href="all_orders.php">All Orders</a></li>
-								  
-                            </ul>
-                        </li>
-                         
-                    </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </div>
-        <!-- End Left Sidebar  -->
+        <?php include 'left_sidebar.php'?>
+
         <!-- Page wrapper  -->
         <div class="page-wrapper" style="height:1200px;">
             <!-- Bread crumb -->
@@ -402,86 +346,105 @@ if(isset($_POST['submit']))           //if upload btn is pressed
 					    <div class="col-lg-12">
                         <div class="card card-outline-primary">
                             <div class="card-header">
-                                <h4 class="m-b-0 text-white">Add Menu to Restaurant</h4>
+                                <h4 class="m-b-0 text-white">Chỉnh sửa thông tin sản phẩm</h4>
                             </div>
                             <div class="card-body">
+                            <?php $ssql ="select * from products where id='$_GET[menu_upd]'";
+													$res=mysqli_query($db, $ssql); 
+													$newrow=mysqli_fetch_array($res);?>
                                 <form action='' method='post'  enctype="multipart/form-data">
                                     <div class="form-body">
-                                        <?php $qml ="select * from dishes where d_id='$_GET[menu_upd]'";
-													$rest=mysqli_query($db, $qml); 
-													$roww=mysqli_fetch_array($rest);
-														?>
                                         <hr>
                                         <div class="row p-t-20">
                                             <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Dish Name</label>
-                                                    <input type="text" name="d_name" value="<?php echo $roww['title'];?>" class="form-control" placeholder="Morzirella">
-                                                   </div>
-                                            </div>
-                                            <!--/span-->
-                                            <div class="col-md-6">
-                                                <div class="form-group has-danger">
-                                                    <label class="control-label">About</label>
-                                                    <input type="text" name="about" value="<?php echo $roww['slogan'];?>" class="form-control form-control-danger" placeholder="slogan">
-                                                    </div>
-                                            </div>
-                                            <!--/span-->
-                                        </div>
-                                        <!--/row-->
-                                        <div class="row p-t-20">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">price </label>
-                                                    <input type="text" name="price" value="<?php echo $roww['price'];?>"  class="form-control" placeholder="$">
-                                                   </div>
-                                            </div>
-                                            <!--/span-->
-                                            <div class="col-md-6">
-                                                <div class="form-group has-danger">
-                                                    <label class="control-label">Image</label>
-                                                    <input type="file" name="file"  id="lastName" class="form-control form-control-danger" placeholder="12n">
-                                                    </div>
-                                            </div>
-                                        </div>
-                                        <!--/row-->
-										
-                                            <!--/span-->
-                                        <div class="row">
-                                            
-											
-											
-											
-											
-											
-											
-											 <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="control-label">Select Category</label>
-													<select name="res_name" class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
-                                                        <option>--Select Restaurant--</option>
-                                                 <?php $ssql ="select * from restaurant";
-													$res=mysqli_query($db, $ssql); 
-													while($row=mysqli_fetch_array($res))  
+                                            <div class="form-group">
+                                                <label class="control-label">Loại sách</label>
+												<select disabled name="category_id" class="form-control custom-select" data-placeholder="Chọn loại sách" tabindex="1">
+                                                        
+                                                 <?php $category ="select * from category";
+													$re=mysqli_query($db, $category); 
+                                                   
+                                                    
+													while($row1=mysqli_fetch_array($re))  
 													{
-                                                       echo' <option value="'.$row['rs_id'].'">'.$row['title'].'</option>';;
+                                                        $selectStr = ($_GET['menu_upd'] === $row1['id']) ? "selected": '';
+                                                    
+                                                        echo' <option value="'.$row1['id'].'" >'.$row1['name'].'</option>';
 													}  
                                                  
 													?> 
 													 </select>
+                                                
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Tên sản phẩm</label>
+                                                    <input type="text" name="name" class="form-control" placeholder="Nhập tên sản phẩm" value="<?php  echo $newrow['name']; ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Code</label>
+                                                    <input type="text" name="code" class="form-control" placeholder="Nhập code" value="<?php  echo $newrow['code']; ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Link hình ảnh</label>
+                                                    <input type="text" name="image_url" class="form-control" placeholder="Nhập link hình ảnh" value="<?php  echo $newrow['image_url']; ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Giảm giá (%)</label>
+                                                    <input type="text" name="discount" class="form-control" placeholder="Nhập mã giảm giá" value="<?php  echo $newrow['discount']; ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Giá gốc</label>
+                                                    <input type="text" name="price" class="form-control" placeholder="Nhập giá cuốn sách" value="<?php  echo $newrow['price']; ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Tác giả</label>
+                                                    <input type="text" name="author" class="form-control" placeholder="Nhập tên tác giả" value="<?php  echo $newrow['author']; ?>">
+                                                </div>
+                                                
+                                            </div>
+                                            <!--/span-->
+                                            <div class="col-md-6">
+                                                <div class="form-group has-danger">
+                                                    <label class="control-label">Số trang</label>
+                                                    <input type="text" name="page_num" class="form-control form-control-danger" placeholder="Nhập số trang của cuốn sách" value="<?php  echo $newrow['page_num']; ?>">
+                                                </div>
+                                                <div class="form-group has-danger">
+                                                    <label class="control-label">Chất liệu bìa sách</label>
+                                                    <input type="text" name="cover" class="form-control form-control-danger" placeholder="Nhập tên chất liệu bìa sách" value="<?php  echo $newrow['cover']; ?>">
+                                                </div>
+                                                <div class="form-group has-danger">
+                                                    <label class="control-label">Kích thước</label>
+                                                    <input type="text" name="dimension" class="form-control form-control-danger" placeholder="Nhập kích thước sách" value="<?php  echo $newrow['dimension']; ?>">
+                                                </div>
+                                                <div class="form-group has-danger">
+                                                    <label class="control-label">Khối lượng(gam)</label>
+                                                    <input type="text" name="weight" class="form-control form-control-danger" placeholder="Nhập khối lượng sách" value="<?php  echo $newrow['weight']; ?>">
+                                                </div>
+                                                <div class="form-group has-danger">
+                                                    <label class="control-label">Nhà xuất bản</label>
+                                                    <input type="text" name="publisher" class="form-control form-control-danger" placeholder="Nhập tên nhà xuất bản" value="<?php  echo $newrow['publisher']; ?>">
+                                                </div>
+                                                <div class="form-group has-danger">
+                                                    <label class="control-label">Năm xuất bản</label>
+                                                    <input type="text" name="publication_year" class="form-control form-control-danger" placeholder="Nhập năm xuất bản" value="<?php  echo $newrow['publication_year']; ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Dịch giả</label>
+                                                    <input type="text" name="translator" class="form-control" placeholder="Nhập tên dịch giả (nếu có)" value="<?php  echo $newrow['translator']; ?>">
                                                 </div>
                                             </div>
-											
-											
-											
+                                            <!--/span-->
                                         </div>
-                                     
-                                        </div>
+                                    <!--/span-->
                                     </div>
                                     <div class="form-actions">
-                                        <input type="submit" name="submit" class="btn btn-success" value="save"> 
-                                        <a href="dashboard.php" class="btn btn-inverse">Cancel</a>
+                                        <input type="submit" name="submit" class="btn btn-success" value="Lưu"> 
+                                        <a href="dashboard.php" class="btn btn-inverse">Hủy</a>
                                     </div>
+
+
+                                    </div>
+                                    
                                 </form>
                             </div>
                         </div>

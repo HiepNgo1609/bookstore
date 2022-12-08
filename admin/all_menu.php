@@ -14,7 +14,7 @@ session_start();
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon1.png">
     <title>Ela - Bootstrap Admin Dashboard Template</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -38,120 +38,8 @@ session_start();
     <!-- Main wrapper  -->
     <div id="main-wrapper">
         <!-- header header  -->
-          <div class="header">
-            <nav class="navbar top-navbar navbar-expand-md navbar-light">
-                <!-- Logo -->
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">
-                        <!-- Logo icon -->
-                        <b><img src="images/logo.png" alt="homepage" class="dark-logo" /></b>
-                        <!--End Logo icon -->
-                        <!-- Logo text -->
-                        <span><img src="images/logo-text.png" alt="homepage" class="dark-logo" /></span>
-                    </a>
-                </div>
-                <!-- End Logo -->
-                <div class="navbar-collapse">
-                    <!-- toggle and nav items -->
-                    <ul class="navbar-nav mr-auto mt-md-0">
-                        <!-- This is  -->
-                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
-                        <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                     
-                       
-                    </ul>
-                    <!-- User profile and search -->
-                    <ul class="navbar-nav my-lg-0">
-
-                        <!-- Search -->
-                        <li class="nav-item hidden-sm-down search-box"> <a class="nav-link hidden-sm-down text-muted  " href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <form class="app-search">
-                                <input type="text" class="form-control" placeholder="Search here"> <a class="srh-btn"><i class="ti-close"></i></a> </form>
-                        </li>
-                        <!-- Comment -->
-                        <li class="nav-item dropdown">
-                           
-                            <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn">
-                                <ul>
-                                    <li>
-                                        <div class="drop-title">Notifications</div>
-                                    </li>
-                                    
-                                    <li>
-                                        <a class="nav-link text-center" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <!-- End Comment -->
-                      
-                        <!-- Profile -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/users/5.jpg" alt="user" class="profile-pic" /></a>
-                            <div class="dropdown-menu dropdown-menu-right animated zoomIn">
-                                <ul class="dropdown-user">
-                                    <li><a href="logout.php"><i class="fa fa-power-off"></i> Logout</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-        <!-- End header header -->
-        <!-- Left Sidebar  -->
-        <div class="left-sidebar">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                   <ul id="sidebarnav">
-                        <li class="nav-devider"></li>
-                        <li class="nav-label">Home</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="dashboard.php">Dashboard</a></li>
-                                
-                            </ul>
-                        </li>
-                        <li class="nav-label">Log</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false">  <span><i class="fa fa-user f-s-20 "></i></span><span class="hide-menu">Users</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="allusers.php">All Users</a></li>
-								<li><a href="add_users.php">Add Users</a></li>
-								
-                               
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-archive f-s-20 color-warning"></i><span class="hide-menu">Store</span></a>
-                            <ul aria-expanded="false" class="collapse">
-								<li><a href="allrestraunt.php">All Stores</a></li>
-								<li><a href="add_category.php">Add Category</a></li>
-                                <li><a href="add_restraunt.php">Add Restaurant</a></li>
-                                
-                            </ul>
-                        </li>
-                      <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-cutlery" aria-hidden="true"></i><span class="hide-menu">Menu</span></a>
-                            <ul aria-expanded="false" class="collapse">
-								<li><a href="all_menu.php">All Menues</a></li>
-								<li><a href="add_menu.php">Add Menu</a></li>
-                              
-                                
-                            </ul>
-                        </li>
-						 <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="hide-menu">Orders</span></a>
-                            <ul aria-expanded="false" class="collapse">
-								<li><a href="all_orders.php">All Orders</a></li>
-								  
-                            </ul>
-                        </li>
-                         
-                    </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </div>
+        <?php include 'header.php'?>
+        <?php include 'left_sidebar.php'?>
         <!-- End Left Sidebar  -->
         <!-- Page wrapper  -->
         <div class="page-wrapper">
@@ -167,75 +55,89 @@ session_start();
                 <!-- Start Page Content -->
                 <div class="row">
                     <div class="col-12">
-                        
-                       
-                      
-                       
-						
-						
-						     <div class="card">
+						<div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">All Menu data</h4>
-                                <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+                                <h4 class="card-title">Dữ liệu sách</h4>
+                                <h6 class="card-subtitle">Xuất dữ liệu ra Copy, CSV, Excel, PDF & Print</h6>
 								
                                 <div class="table-responsive m-t-40">
                                     <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-											 <th>Restaurant</th>
-                                                <th>Dish-Name</th>
-                                                <th>Slogan</th>
-                                                <th>Price</th>
-                                                <th>Image</th>
-                                               <th>Action</th>
-												  
+                                                <th>Thứ tự</th>
+											    <th>Mã sản phẩm</th>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Code</th>
+                                                <th>Hình ảnh</th>
+                                               <th>Giảm giá (%)</th>
+                                               <th>Giá gốc</th>
+                                               <th>Tác giả</th>
+                                               <th>Dịch giả</th>
+                                               <th>Số trang</th>
+                                               <th>Chất liệu bìa</th>
+                                               <th>Kích thước</th>
+                                               <th>Khối lượng</th>
+                                               <th>Nhà xuất bản</th>
+                                               <th>Năm xuất bản</th>
+                                               <th>Ngày tạo</th>
+                                               <th>Ngày cập nhật</th>
+                                               <th>Sửa/xóa</th>
                                             </tr>
                                         </thead>
-                                        <tfoot>
+                                        <!-- <tfoot>
                                             <tr>
-											 <th>Restaurant</th>
-                                                <th>Dish-Name</th>
-                                                <th>Slogan</th>
-                                                <th>Price</th>
-                                                <th>Image</th>
-                                               <th>Action</th>
+                                            <th>Tên sách</th>
+                                                <th>Giá</th>
+                                                <th>Hình ảnh</th>
+                                               <th>Hoạt động</th>
                                             </tr>
-                                        </tfoot>
+                                        </tfoot> -->
                                         <tbody>
 										
                                            
                                                	<?php
-												$sql="SELECT * FROM dishes order by d_id desc";
+                                                
+												$sql="SELECT * FROM products";
 												$query=mysqli_query($db,$sql);
 												
 													if(!mysqli_num_rows($query) > 0 )
 														{
-															echo '<td colspan="11"><center>No Dish-Data!</center></td>';
+															echo '<td colspan="13"><center>Không có dữ liệu</center></td>';
 														}
+                                                        
 													else
 														{				
 																	while($rows=mysqli_fetch_array($query))
 																		{
-																				$mql="select * from restaurant where rs_id='".$rows['rs_id']."'";
+																				$mql="select * from products where id=$rows[id]";
 																				$newquery=mysqli_query($db,$mql);
 																				$fetch=mysqli_fetch_array($newquery);
 																				
 																				
-																					echo '<tr><td>'.$fetch['title'].'</td>
+																					echo '
 																					
-																								<td>'.$rows['title'].'</td>
-																								<td>'.$rows['slogan'].'</td>
-																								<td>$'.$rows['price'].'</td>
-																								
-																								
-																								<td><div class="col-md-3 col-lg-8 m-b-10">
-																								<center><img src="Res_img/dishes/'.$rows['img'].'" class="img-responsive  radius" style="max-height:100px;max-width:150px;" /></center>
-																								</div></td>
-																								
-																							
-																									 <td><a href="delete_menu.php?menu_del='.$rows['d_id'].'" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
-																									 <a href="update_menu.php?menu_upd='.$rows['d_id'].'" class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5"><i class="ti-settings"></i></a>
-																									</td></tr>';
+																								<td>'.$rows['id'].'</td>
+																								<td>'.$rows['category_id'].'</td>
+                                                                                                <td>'.$rows['name'].'</td>
+                                                                                                <td>'.$rows['code'].'</td>
+                                                                                                <td>
+																								<center><img src="'.$rows['image_url'].'" class="img-responsive  radius" style="max-height:300px;max-width:150px;" /></center>
+																								</td>
+                                                                                                <td>'.$rows['discount'].'</td>
+                                                                								<td>đ.'.$rows['price'].'</td>
+                                                                                                <td>'.$rows['author'].'</td>
+                                                                                                <td>'.$rows['translator'].'</td>
+                                                                                                <td>'.$rows['page_num'].'</td>
+                                                                                                <td>'.$rows['cover'].'</td>
+                                                                                                <td>'.$rows['dimension'].'</td>
+                                                                                                <td>'.$rows['weight'].'</td>
+                                                                                                <td>'.$rows['publisher'].'</td>
+                                                                                                <td>'.$rows['publication_year'].'</td>
+                                                                                                <td>'.$rows['created_at'].'</td>
+                                                                                                <td>'.$rows['updated_at'].'</td>
+																							<td><a href="delete_menu.php?menu_del='.$rows['id'].'" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
+																							<a href="update_menu.php?menu_upd='.$rows['id'].'" class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5"><i class="ti-settings"></i></a>
+																							</td></tr>';
 																					 
 																						
 																						
@@ -243,36 +145,13 @@ session_start();
 														}
 												
 											
-											?>
-                                            
-                                           
-                                 
-                                                        
-                                                            
-                                                           
+											?>             
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						 </div>
+					</div>
                       
                             </div>
                         </div>
@@ -282,7 +161,7 @@ session_start();
             </div>
             <!-- End Container fluid  -->
             <!-- footer -->
-            <footer class="footer"> © 2018 All rights reserved. </footer>
+            <footer class="footer"> © 2022 All rights reserved. </footer>
             <!-- End footer -->
         </div>
         <!-- End Page wrapper  -->

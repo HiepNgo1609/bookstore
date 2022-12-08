@@ -9,16 +9,21 @@ include("../connection/connect.php");
 
 if(isset($_POST['submit'] ))
 {
-    if(empty($_POST['uname']) ||
-   	    empty($_POST['fname'])|| 
-		empty($_POST['lname']) ||  
+    if(empty($_POST['username'])||
+        empty($_POST['firstname'])|| 
+		empty($_POST['lastname']) ||  
 		empty($_POST['email'])||
 		empty($_POST['password'])||
-		empty($_POST['phone']))
+        empty($_POST['district_id'])||
+        empty($_POST['ward_id'])||
+        empty($_POST['role'])||
+		empty($_POST['phone_number']))
+        
 		{
+            
 			$error = '<div class="alert alert-danger alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																<strong>All fields Required!</strong>
+																<strong>Bạn phải điền vào tất cả các ô!</strong>
 															</div>';
 		}
 	else
@@ -31,33 +36,35 @@ if(isset($_POST['submit'] ))
     {
        	$error = '<div class="alert alert-danger alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																<strong>invalid email!</strong>
+																<strong>Email không hợp lệ!</strong>
 															</div>';
     }
-	elseif(strlen($_POST['password']) < 6)
+	else if(strlen($_POST['password']) < 6)
 	{
 		$error = '<div class="alert alert-danger alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																<strong>Password must be >=6!</strong>
+																<strong>Mật khẩu phải có nhiều hơn 5 ký tự!</strong>
 															</div>';
 	}
 	
-	elseif(strlen($_POST['phone']) < 10)
+	else if(strlen($_POST['phone_number']) > 10)
 	{
 		$error = '<div class="alert alert-danger alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																<strong>invalid phone!</strong>
+																<strong>Số điện thoại không hợp lệ!</strong>
 															</div>';
 	}
 	
 	else{
        
 	
-	$mql = "update users set username='$_POST[uname]', f_name='$_POST[fname]', l_name='$_POST[lname]',email='$_POST[email]',phone='$_POST[phone]',password='".md5($_POST[password])."' where u_id='$_GET[user_upd]' ";
+	$mql = "update users set username = '$_POST[username]', firstname='$_POST[firstname]', lastname='$_POST[lastname]',email='$_POST[email]',
+    phone_number='$_POST[phone_number]',password='$_POST[password]',ward_id='$_POST[ward_id]',
+    district_id='$_POST[district_id]', role='$_POST[role]' where id='$_GET[user_upd]' ";
 	mysqli_query($db, $mql);
 			$success = 	'<div class="alert alert-success alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																<strong>User Updated!</strong></div>';
+																<strong>Tài khoản cập nhật thành công</strong></div>';
 	
     }
 	}
@@ -73,8 +80,8 @@ if(isset($_POST['submit'] ))
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
-    <title>Ela - Bootstrap Admin Dashboard Template</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon1.png">
+    <title>Admin Dashboard</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -96,123 +103,13 @@ if(isset($_POST['submit'] ))
     </div>
     <!-- Main wrapper  -->
     <div id="main-wrapper">
-        <!-- header header  -->
-         <div class="header">
-            <nav class="navbar top-navbar navbar-expand-md navbar-light">
-                <!-- Logo -->
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">
-                        <!-- Logo icon -->
-                        <b><img src="images/logo.png" alt="homepage" class="dark-logo" /></b>
-                        <!--End Logo icon -->
-                        <!-- Logo text -->
-                        <span><img src="images/logo-text.png" alt="homepage" class="dark-logo" /></span>
-                    </a>
-                </div>
-                <!-- End Logo -->
-                <div class="navbar-collapse">
-                    <!-- toggle and nav items -->
-                    <ul class="navbar-nav mr-auto mt-md-0">
-                        <!-- This is  -->
-                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
-                        <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                     
-                       
-                    </ul>
-                    <!-- User profile and search -->
-                    <ul class="navbar-nav my-lg-0">
 
-                        <!-- Search -->
-                        <li class="nav-item hidden-sm-down search-box"> <a class="nav-link hidden-sm-down text-muted  " href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <form class="app-search">
-                                <input type="text" class="form-control" placeholder="Search here"> <a class="srh-btn"><i class="ti-close"></i></a> </form>
-                        </li>
-                        <!-- Comment -->
-                        <li class="nav-item dropdown">
-                           
-                            <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn">
-                                <ul>
-                                    <li>
-                                        <div class="drop-title">Notifications</div>
-                                    </li>
-                                    
-                                    <li>
-                                        <a class="nav-link text-center" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <!-- End Comment -->
-                      
-                        <!-- Profile -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/users/5.jpg" alt="user" class="profile-pic" /></a>
-                            <div class="dropdown-menu dropdown-menu-right animated zoomIn">
-                                <ul class="dropdown-user">
-                                    <li><a href="logout.php"><i class="fa fa-power-off"></i> Logout</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-        <!-- End header header -->
-        <!-- Left Sidebar  -->
-        <div class="left-sidebar">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="nav-devider"></li>
-                        <li class="nav-label">Home</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="dashboard.php">Dashboard</a></li>
-                                
-                            </ul>
-                        </li>
-                        <li class="nav-label">Log</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false">  <span><i class="fa fa-user f-s-20 "></i></span><span class="hide-menu">Users</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="allusers.php">All Users</a></li>
-								<li><a href="add_users.php">Add Users</a></li>
-								
-                               
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-archive f-s-20 color-warning"></i><span class="hide-menu">Store</span></a>
-                            <ul aria-expanded="false" class="collapse">
-								<li><a href="allrestraunt.php">All Stores</a></li>
-								<li><a href="add_category.php">Add Category</a></li>
-                                <li><a href="add_restraunt.php">Add Restaurant</a></li>
-                                
-                            </ul>
-                        </li>
-                      <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-cutlery" aria-hidden="true"></i><span class="hide-menu">Menu</span></a>
-                            <ul aria-expanded="false" class="collapse">
-								<li><a href="all_menu.php">All Menues</a></li>
-								<li><a href="add_menu.php">Add Menu</a></li>
-                              
-                                
-                            </ul>
-                        </li>
-						 <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="hide-menu">Orders</span></a>
-                            <ul aria-expanded="false" class="collapse">
-								<li><a href="all_orders.php">All Orders</a></li>
-								  
-                            </ul>
-                        </li>
-						
-                         
-                    </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </div>
-        <!-- End Left Sidebar  -->
+
+        <!-- header header  -->
+        <?php include 'header.php'?>
+        <?php include 'left_sidebar.php'?>
+
+
         <!-- Page wrapper  -->
         <div class="page-wrapper" style="height:1200px;">
             <!-- Bread crumb -->
@@ -231,44 +128,37 @@ if(isset($_POST['submit'] ))
 					
 					 <div class="container-fluid">
                 <!-- Start Page Content -->
-                  
-									
+							
 									<?php  
 									        echo $error;
 									        echo $success; 
 											
-											echo var_dump($_POST);
 											
-											?>
-									
-									
-								
-								
+											?>	
 					    <div class="col-lg-12">
                         <div class="card card-outline-primary">
                             <div class="card-header">
-                                <h4 class="m-b-0 text-white">Update Users</h4>
+                                <h4 class="m-b-0 text-white">Cập nhật tài khoản</h4>
                             </div>
                             <div class="card-body">
-							  <?php $ssql ="select * from users where u_id='$_GET[user_upd]'";
+							  <?php $ssql ="select * from users where id='$_GET[user_upd]'";
 													$res=mysqli_query($db, $ssql); 
 													$newrow=mysqli_fetch_array($res);?>
                                 <form action='' method='post'  >
                                     <div class="form-body">
-                                      
-                                        <hr>
-                                        <div class="row p-t-20">
+                                    <hr>
+                                        <div class="row p-t-15">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="control-label">Username</label>
-                                                    <input type="text" name="uname" class="form-control" value="<?php  echo $newrow['username']; ?>" placeholder="username">
+                                                    <label class="control-label">Tên đăng nhập</label>
+                                                    <input type="text" name="username" class="form-control" value="<?php  echo $newrow['username']; ?>" placeholder="username">
                                                    </div>
                                             </div>
                                             <!--/span-->
                                             <div class="col-md-6">
                                                 <div class="form-group has-danger">
-                                                    <label class="control-label">First-Name</label>
-                                                    <input type="text" name="fname" class="form-control form-control-danger"  value="<?php  echo $newrow['f_name'];  ?>" placeholder="jon">
+                                                    <label class="control-label">Họ và tên lót</label>
+                                                    <input type="text" name="firstname" class="form-control form-control-danger"  value="<?php  echo $newrow['firstname'];  ?>" placeholder="jon">
                                                     </div>
                                             </div>
                                             <!--/span-->
@@ -277,8 +167,8 @@ if(isset($_POST['submit'] ))
                                         <div class="row p-t-20">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="control-label">Last-Name </label>
-                                                    <input type="text" name="lname" class="form-control" placeholder="doe"  value="<?php  echo $newrow['l_name']; ?>">
+                                                    <label class="control-label">Tên</label>
+                                                    <input type="text" name="lastname" class="form-control" placeholder="doe"  value="<?php  echo $newrow['lastname']; ?>">
                                                    </div>
                                             </div>
                                             <!--/span-->
@@ -294,50 +184,67 @@ if(isset($_POST['submit'] ))
 										 <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="control-label">Password</label>
-                                                    <input type="text" name="password" class="form-control form-control-danger"   value="<?php  echo $newrow['password'];  ?>" placeholder="password">
+                                                    <label class="control-label">Mật khẩu</label>
+                                                    <input type="text" name="password" class="form-control form-control-danger"   value="<?php  echo $newrow['password'];  ?>" placeholder="Mật khẩu">
                                                     </div>
                                                 </div>
                                         
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="control-label">Phone</label>
-                                                    <input type="text" name="phone" class="form-control form-control-danger"   value="<?php  echo $newrow['phone'];  ?>" placeholder="phone">
+                                                    <label class="control-label">Địa chỉ</label>
+                                                    <input type="text" name="phone_number" class="form-control form-control-danger"   value="<?php  echo $newrow['phone_number'];  ?>" placeholder="Số điện thoại">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!--/span-->
-                                            
-                                      
-                                            <!--/span-->
+                                            <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Phường/xã</label>
+                                                    <input type="text" name="ward_id" class="form-control form-control-danger"   value="<?php  echo $newrow['ward_id'];  ?>" placeholder="Phường/xã">
+                                                    </div>
+                                                </div>
+                                        
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Quận/huyện</label>
+                                                    <input type="text" name="district_id" class="form-control form-control-danger"   value="<?php  echo $newrow['district_id'];  ?>" placeholder="Quận/huyện">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class= row>
+                                            <div class="col-md-6">
+                                                <!-- <div class="form-group">
+                                                    <label class="control-label">Vai trò</label>
+                                                    <input type="text" name="role" class="form-control form-control-danger" value="<?php  echo $newrow['role'];  ?>" placeholder="Vai trò">
+                                                    
+                                                </div> -->
+                                              
+                                                <div class="form-group">
+                                                    <label class="control-label">Vai trò</label><br>
+                                                    <select style="font-size:medium; padding: 5px; border:1px solid rgb(232,232,232); color:rgb(80,80,80)" name = "role" aria-label="select example">
+                                                        <option value="Quản trị viên">Quản trị viên</option>
+                                                        <option value="Khách hàng" selected>Khách hàng</option>
+                                                    </select>
+                                                </div>
+                                                
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-actions">
-                                        <input type="submit" name="submit" class="btn btn-success" value="save"> 
-                                        <a href="dashboard.php" class="btn btn-inverse">Cancel</a>
+                                        <input type="submit" name="submit" class="btn btn-success" value="Lưu"> 
+                                        <a href="dashboard.php" class="btn btn-inverse">Hủy</a>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
                 </div>
                 <!-- End PAge Content -->
             </div>
             <!-- End Container fluid  -->
             <!-- footer -->
-            <footer class="footer"> © 2018 All rights reserved. </footer>
+            <footer class="footer"> © 2022 All rights reserved. </footer>
             <!-- End footer -->
         </div>
         <!-- End Page wrapper  -->
@@ -356,6 +263,7 @@ if(isset($_POST['submit'] ))
     <script src="js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <!--Custom JavaScript -->
     <script src="js/custom.min.js"></script>
+    
 
 </body>
 
