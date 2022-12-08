@@ -109,8 +109,7 @@ session_start();
     <script src="js/lib/jquery/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="js/lib/bootstrap/js/popper.min.js"></script>
-    <!-- <script src="js/lib/bootstrap/js/bootstrap.min.js"></script> -->
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="js/lib/bootstrap/js/bootstrap.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="js/jquery.slimscroll.js"></script>
     <!--Menu sidebar -->

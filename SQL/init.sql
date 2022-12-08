@@ -98,21 +98,13 @@ CREATE TABLE `carts` (
 `id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
 `user_id` int NOT NULL,
 `status` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+`product_id` int NOT NULL,
+`quantity` int NOT NULL,
 `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
 `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 -- --------------------------------------------------------
 
---
--- Table structure for table `cart-items`
---
-CREATE TABLE `cart-items` (
-`id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-`cart_id` int NOT NULL,
-`product_id` int NOT NULL,
-`quantity` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
--- --------------------------------------------------------
 
 --
 -- Add Foreign Key for table `products`
@@ -149,14 +141,7 @@ ADD FOREIGN KEY (`product_id`) REFERENCES `products`(`id`);
 -- Add Foreign Key for table `carts`
 --
 ALTER TABLE `carts`
-ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);
--- -------------------------------------------------------- 
-
---
--- Add Foreign Key for table `cart-items`
---
-ALTER TABLE `cart-items`
-ADD FOREIGN KEY (`cart_id`) REFERENCES `carts`(`id`),
+ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`),
 ADD FOREIGN KEY (`product_id`) REFERENCES `products`(`id`);
 -- -------------------------------------------------------- 
 
@@ -225,11 +210,11 @@ VALUES (NULL, 1, 1, 5, 'REVIEW ngắn gọn “Cho tôi xin một vé đi tuổi
 --
 -- Add Data for table `orders`
 --
-INSERT INTO `orders` (`id`,`user_id`,`discount`,`invoice`,`status`,`created_at`,`updated_at`) 
-VALUES (NULL, 2, '', 156000, 'Processing', current_timestamp(), current_timestamp()),
-(NULL, 3, '', 139000, 'Accepted', current_timestamp(), current_timestamp()),
-(NULL, 1, '', 122000, 'Cancelled', current_timestamp(), current_timestamp()),
-(NULL, 5, '', 280000, 'Processing', current_timestamp(), current_timestamp());
+INSERT INTO `orders` (`id`,`code`,`user_id`,`discount`,`invoice`,`status`,`created_at`,`updated_at`) 
+VALUES (NULL, '6571AS001', 2, '', 156000, 'Processing', current_timestamp(), current_timestamp()),
+(NULL, '6571AS002', 3, '', 139000, 'Accepted', current_timestamp(), current_timestamp()),
+(NULL, '6571AS003', 1, '', 122000, 'Cancelled', current_timestamp(), current_timestamp()),
+(NULL, '6571AS004', 5, '', 280000, 'Processing', current_timestamp(), current_timestamp());
 -- -------------------------------------------------------- 
 
 --
@@ -249,13 +234,10 @@ VALUES (NULL, 1, 4, 2),
 --
 -- Add Data for table `carts` - status: "Empty", "Occupied"
 --
-INSERT INTO `carts` (`id`,`user_id`,`status`,`created_at`,`updated_at`) 
-VALUES (NULL, 1, 'Occupied', current_timestamp(), current_timestamp());
--- -------------------------------------------------------- 
-
---
--- Add Data for table `cart-items`
---
-INSERT INTO `cart-items` (`id`,`cart_id`,`product_id`,`quantity`) 
-VALUES (NULL, 1, 2, 1);
+INSERT INTO `carts` (`id`,`user_id`,`status`,`product_id`,`quantity`,`created_at`,`updated_at`) 
+VALUES (NULL, 1, 'Cart', 1, 1, current_timestamp(), current_timestamp()),
+(NULL, 1, 'Cart', 2, 1, current_timestamp(), current_timestamp()),
+(NULL, 3, 'Cart', 5, 1, current_timestamp(), current_timestamp()),
+(NULL, 3, 'Cart', 6, 1, current_timestamp(), current_timestamp()),
+(NULL, 5, 'Cart', 4, 1, current_timestamp(), current_timestamp());
 -- -------------------------------------------------------- 
