@@ -2,8 +2,7 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
-Access-Control-Allow-Methods, Authorization, X-Requested-With');
+header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 include_once '../config/Database.php';
 include_once '../models/OrderItems.php';
@@ -39,8 +38,8 @@ $order->invoice = $data["invoice"];
 $order->status = $data["status"];
 $items = $data["items"];
 $order->code = $order->genCode();
-
-if ($order->addOrder()) {
+$orderId = $order->addOrder();
+if ($orderId) {
     $result = $order->getOrderIdByCode($order->code);
     $data = $result->fetch(PDO::FETCH_ASSOC);
     $id = $data['id'];
@@ -54,14 +53,15 @@ if ($order->addOrder()) {
                 continue;
             } else {
                 echo json_encode(
-                    array('message' => 'Order Items Not Created!')
+                    array(
+                        'message' => 'Order Items Not Created!','id' => $orderId)
                 );
                 break;
             }
         }
     }
     echo json_encode(
-        array('message' => 'Order Created!')
+        array('message' => 'Order Created!','id' => $orderId)
     );
 } else {
     echo json_encode(

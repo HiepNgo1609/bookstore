@@ -3,6 +3,7 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
 include_once '../config/Database.php';
+include_once '../models/Order.php';
 include_once '../models/OrderItems.php';
 
 $database = new Database();
@@ -17,29 +18,21 @@ $result = $orderItems->getOrderDetailByOrderId($id);
 $numRows = $result->rowCount();
 
 if ($numRows > 0) {
-    $orderItems_arr = array();
-    $orderItems_arr['data'] = array();
-
+    $sum = 0;
     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-        extract($row);
-
-        $orderItem = array(
-            'id' => $id,
-            'product_id' => $product_id,
-            'code' => $code,
-            'name' => $name,
-            'img' => $image_url,
-            'publisher' => $publisher,
-            'author' => $author,
-            'current_price' => ceil($price/1000*(100-$discount)/100)*1000,
-            'quantity' => $quantity
-        );
-
-        array_push($orderItems_arr['data'], $orderItem);
+        $current_price = ceil($row['price']/1000*(100-$row['discount'])/100)*1000;
+        $sum += $row['quantity'] * $current_price;
     }
-
-    echo json_encode($orderItems_arr);
-
+    $order = new Order($db);
+    if ($order->updatePrice($id, $sum)) {
+        echo json_encode(
+            array('message' => 'Order Updated!', 'sum' => $sum)
+        );
+    } else {
+        echo json_encode(
+            array('message' => 'Error When Update Order Invoice!')
+        );
+    }
 } else {
     echo json_encode(
         array('message' => 'No Order Items Found!')

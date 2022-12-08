@@ -63,8 +63,9 @@ session_start();
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">All user Orders</h4>
-                                <div class="table-responsive m-t-40">
+                                <h4 class="card-title">Danh sách đơn hàng</h4>
+                                <a class="btn btn-warning" type="button" href="addOrder.php">Tạo đơn hàng</a>
+                                <div class="table-responsive m-t-10">
                                     <table id="orderTable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
@@ -108,8 +109,7 @@ session_start();
     <script src="js/lib/jquery/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="js/lib/bootstrap/js/popper.min.js"></script>
-    <!-- <script src="js/lib/bootstrap/js/bootstrap.min.js"></script> -->
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="js/lib/bootstrap/js/bootstrap.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="js/jquery.slimscroll.js"></script>
     <!--Menu sidebar -->
@@ -118,6 +118,7 @@ session_start();
     <script src="js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <!--Custom JavaScript -->
     <script src="js/custom.min.js"></script>
+    <script src="js/order.js"></script>
 
 
     <script src="js/lib/datatables/datatables.min.js"></script>
@@ -129,77 +130,6 @@ session_start();
     <script src="js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
     <script src="js/lib/datatables/datatables-init.js"></script>
-    <script>
-        $(document).ready(function() {
-            const URL = "http://localhost/bookstore/admin/api/"
-            let orderTable = $("#orderTable").DataTable({
-                columns: [{
-                        data: "username"
-                    },
-                    {
-                        data: "code"
-                    },
-                    {
-                        data: "discount"
-                    },
-                    {
-                        data: "invoice"
-                    },
-                    {
-                        data: "status"
-                    },
-                    {
-                        data: "Action"
-                    }
-                ],
-                columnDefs: [{
-                        targets: 0,
-                        width: "15%"
-                    },
-                    {
-                        targets: 2,
-                        width: "15%"
-                    },
-                    {
-                        targets: 3,
-                        width: "15%"
-                    },
-                    {
-                        targets: 4,
-                        width: "15%"
-                    },
-                    {
-                        targets: 5,
-                        defaultContent: "<button data-toggle='modal' data-target='#modalItems' type='button' class='btn btn-success'><i class='fa fa-search'></i> Items</button>" + "    " +
-                            "<button class='btn btn-warning'><i class='fa fa-edit'> Edit</i></button>"
-                    }
-                ]
-            })
-
-            $.ajax({
-                url: URL + "orders.php",
-                type: "get",
-                dataType: "json",
-                success: function(res) {
-                    loadOrderTable(res.data)
-                    // console.log(res[0]["image"])
-                },
-                error: function(error) {
-                    console.log(error.responseText)
-                }
-            })
-            $(".close").click(function() {
-                $("#modalItems").modal("hide")
-                // console.log("Button")
-            })
-
-            function loadOrderTable(object) {
-                orderTable.clear()
-                orderTable.rows.add(object)
-                orderTable.draw()
-            }
-        })
-    </script>
 </body>
 
 </html>

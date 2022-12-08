@@ -72,6 +72,27 @@ class Order
         return $stmt;
     }
 
+    public function getOrderIdById($id)
+    {
+        $query = '
+            SELECT u.username,
+                u.id,
+                u.lastname,
+                u.phone_number,
+                u.address,
+                o.code,
+                o.discount,
+                o.invoice,
+                o.status
+            FROM ' . $this->table . ' o
+            LEFT JOIN users u ON o.user_id = u.id
+            WHERE o.id=:id';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt;
+    }
+
     public function addOrder()
     {
         $query = '
@@ -96,7 +117,7 @@ class Order
         $stmt->bindParam(':status', $this->status);
 
         if ($stmt->execute()) {
-            return true;
+            return $this->conn->lastInsertId();
         } else {
             printf("Error: %s.\n", $stmt->error);
             return false;
@@ -129,6 +150,23 @@ class Order
         $stmt->bindParam(':status', $this->status);
         $stmt->bindParam(':id', $this->id);
 
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            printf("Error: %s.\n", $stmt->error);
+            return false;
+        }
+    }
+
+    public function updatePrice($id, $invoice) {
+        $query = '
+                UPDATE ' . $this->table . '
+                SET invoice= :invoice
+                WHERE id= :id
+        ';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':invoice', $invoice);
         if ($stmt->execute()) {
             return true;
         } else {

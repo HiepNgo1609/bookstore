@@ -2111,9 +2111,9 @@ textarea {
   stroke-linejoin: round;
   stroke-linecap: round;
   stroke-dasharray: 500%;
-  stroke-dasharray: 0 /;
+  stroke-dasharray: 0 ;
   /* fixes IE prob */
-  stroke-dashoffset: 0 /;
+  stroke-dashoffset: 0 ;
   /* fixes IE prob */
   -webkit-animation: am-draw 40s;
   animation: am-draw 40s;
@@ -6712,6 +6712,15 @@ tbody tr td:last-child {
   line-height: 210px;
   color: #444c67;
 }
+
+/* span.check_success {
+  color: #3bcd3b;
+  position: absolute;
+  top: 9px;
+  right: 25px;
+} */
+
+
 /*
 /* Version: 1.0
 */
