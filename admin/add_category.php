@@ -55,7 +55,7 @@ if(isset($_POST['submit'] ))
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon1.png">
-    <title>Admin Dashboard</title>
+    <title>Thêm loại sách</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -180,7 +180,7 @@ if(isset($_POST['submit'] ))
 																				
 																				
 																					echo ' <tr><td>'.$rows['id'].'</td>
-																								<td>'.$rows['name'].'</td>
+																								<td style="text-transform: uppercase;">'.$rows['name'].'</td>
 																								<td>'.$rows['created_at'].'</td>
                                                                                                 <td>'.$rows['updated_at'].'</td>
 																								

@@ -2,7 +2,7 @@
 <html lang="en">
 <?php
 
-
+$message = $success1="";
 session_start();
 error_reporting(0);
 include("../connection/connect.php");
@@ -11,17 +11,12 @@ if(isset($_POST['check'])){
     $check_username2= mysqli_query($db, "SELECT username FROM users where username = '".$_POST['username']."' ");
        if(mysqli_num_rows($check_username2) > 0) //check username
        {
-        
-        echo '<script type ="text/JavaScript">';  
-        echo 'alert("Tên đăng nhập đã tồn tại")';
-        echo '</script>'; 
+        $message="Tên đăng nhập đã tồn tại";
        }
           
        
        else {
-        echo '<script type ="text/JavaScript">';  
-        echo 'alert("Tên đăng nhập hợp lệ")';
-        echo '</script>';  
+        $success1 = "Tên đăng nhập hợp lệ";
        }
     }
 else if(isset($_POST['submit'] ))
@@ -32,24 +27,20 @@ else if(isset($_POST['submit'] ))
 		empty($_POST['email'])||
 		empty($_POST['password'])||
 		empty($_POST['phone_number']) ||
-        empty($_POST['district_id']) ||
-        empty($_POST['role']) ||
-		empty($_POST['ward_id']))
+       
+        empty($_POST['role']))
+		
 		{
 			$error = '<div class="alert alert-danger alert-dismissible fade show">
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<strong>Bạn phải điền vào tất cả các ô!</strong>
-			/div>';
+			</div>';
 		}
 	else
 	{
-       
-	$check_username= mysqli_query($db, "SELECT username FROM users where username = '$_POST[username]' ");
-    
+           
 	$check_email = mysqli_query($db, "SELECT email FROM users where email = '$_POST[email]' ");
-	
-    
-	
+    $check_username = mysqli_query($db, "SELECT username FROM users where username = '$_POST[username]' ");
 	
     if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) // Validate email address
     {
@@ -73,13 +64,14 @@ else if(isset($_POST['submit'] ))
 																<strong>Số điện thoại không hợp lệ</strong>
 															</div>';
 	}
-	elseif(mysqli_num_rows($check_username) > 0)
+    elseif(mysqli_num_rows($check_username) > 0)
      {
     	$error = '<div class="alert alert-danger alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																<strong>Tên đăng nhập đã tồn tại</strong>
+																<strong>Tên đăng nhập này đã tồn tại</strong>
 															</div>';
      }
+	
 	elseif(mysqli_num_rows($check_email) > 0)
      {
     	$error = '<div class="alert alert-danger alert-dismissible fade show">
@@ -90,12 +82,12 @@ else if(isset($_POST['submit'] ))
 	else {
        
 	
-	$mql = "INSERT INTO users(username,firstname,lastname,email,phone_number,password,address,ward_id,district_id,role) VALUES('".$_POST['username']."','".$_POST['firstname']."','".$_POST['lastname']."',
-    '".$_POST['email']."','".$_POST['phone_number']."','".md5($_POST['password'])."','".$_POST['address']."','".($_POST['ward_id'])."','".($_POST['district_id'])."','".($_POST['role'])."')";
+	$mql = "INSERT INTO users(username,firstname,lastname,email,phone_number,password,address,role) VALUES('".$_POST['username']."','".$_POST['firstname']."','".$_POST['lastname']."',
+    '".$_POST['email']."','".$_POST['phone_number']."','".md5($_POST['password'])."','".$_POST['address']."','".($_POST['role'])."')";
 	mysqli_query($db, $mql);
 			$success = 	'<div class="alert alert-success alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																<strong>Congrass!</strong> Tài khoản được tạo thành công.</br></div>';
+																<strong>Chúc mừng!</strong> Tài khoản được tạo thành công.</br></div>';
 	
     }
     
@@ -114,7 +106,7 @@ else if(isset($_POST['submit'] ))
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon1.png">
-    <title>Admin Dashboard</title>
+    <title>Thêm tài khoản</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -165,7 +157,8 @@ else if(isset($_POST['submit'] ))
 
 									<?php  //echo var_dump($_POST);
 									        echo $error;
-									        echo $success; ?>
+                                            echo $success;
+									        ?>
 	
 					    <div class="col-lg-12">
                         <div class="card card-outline-primary">
@@ -183,9 +176,11 @@ else if(isset($_POST['submit'] ))
                                                     <label class="control-label">Tên đăng nhập</label>
                                                     <input id="username" value="<?php echo $_POST['username']?>"type="text" name="username" class="form-control" placeholder="Nhập tên đăng nhập">
                                                    </div>
+                                                   <p style="color:red; font-weight:600"><?php echo $message?></p>
+                                                   <p style="color:green; font-weight:600"><?php echo $success1?></p>
                                                    <p> <input type="submit" name="check" value="Kiểm tra" class="btn theme-btn"></input>
-                                                    <p id="alert"></p>
-                                            </div>
+                                                   
+                                                </div>
                                             
                                             <!--/span-->
                                             <div class="col-md-6">
@@ -219,7 +214,7 @@ else if(isset($_POST['submit'] ))
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Mật khẩu</label>
-                                                    <input type="text" name="password" class="form-control form-control-danger" placeholder="Nhập mật khẩu">
+                                                    <input type="password" name="password" class="form-control form-control-danger" placeholder="Nhập mật khẩu">
                                                     </div>
                                                 </div>
                                         

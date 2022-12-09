@@ -32,6 +32,7 @@ if (isset($_POST['submit'])) {
 
 <head>
 	<meta charset="UTF-8">
+	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon1.png">
 	<title>Form Đăng nhập</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 	<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900'>
@@ -46,16 +47,18 @@ if (isset($_POST['submit'])) {
 
 	<div class="container">
 		<div class="info">
-			<h1 style="font-weight:600; color:cornflowerblue">Administrator</h1><span style="color:red; font-size:medium">Hãy rời đi nếu bạn không được cấp quyền truy cập!</span>
+			<h1 style="font-weight:600; color:blue">ADMINISTRATOR</h1><span style="color:red; font-weight:600; 
+			font-size:medium">Hãy rời đi nếu bạn không được cấp quyền truy cập!</span>
 		</div>
 	</div>
 	<div class="form">
 		<div class="thumbnail"><img src="images/manager.png" /></div>
 		
-		<span>Tên đăng nhập:admin</span>&nbsp;<span>Mật khẩu:123456</span>
+		<!--span>Tên đăng nhập:admin</span>&nbsp;<span>Mật khẩu:123456</span-->
+		
 		<div style="color:red;"><?php echo $message; ?></div>
 		<span style="color:green;"><?php echo $success; ?></span>
-		<br>
+		<br><br>
 		<form class="login-form" action="index.php" method="post">
 			<input type="text" placeholder="Nhập tên đăng nhập" name="username" />
 			<input type="password" placeholder="Nhập mật khẩu" name="password" />

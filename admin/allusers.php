@@ -15,7 +15,7 @@ session_start();
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon1.png">
-    <title>Bootstrap Admin</title>
+    <title>Người dùng</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -128,7 +128,7 @@ session_start();
             </div>
             <!-- End Container fluid  -->	
             <!-- footer -->
-            <footer class="footer"> © 2022 All rights reserved. Template designed by <a href="https://colorlib.com">Colorlib</a></footer>
+            <footer class="footer"> © 2022 All rights reserved. Template designed by <a href="https://colorlib.com">Team bàn cuối</a></footer>
             <!-- End footer -->
         </div>
         <!-- End Page wrapper  -->

@@ -101,7 +101,7 @@ if(isset($_POST['submit']))           //if upload btn is pressed
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon1.png">
-    <title>Ela - Bootstrap Admin Dashboard Template</title>
+    <title>Thêm dữ liệu sách</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->

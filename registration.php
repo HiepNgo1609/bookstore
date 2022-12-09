@@ -37,11 +37,9 @@ include("connection/connect.php"); // connection
 		//cheching username & email if already present
 	//$check_username= mysqli_query($db, "SELECT username FROM users where username = '".$_POST['username']."' ");
 	$check_email = mysqli_query($db, "SELECT email FROM users where email = '".$_POST['email']."' ");
-		
-   
-	
+
 	if($_POST['password'] != $_POST['cpassword']){  //matching passwords
-       	$message = "Password not match";
+       	$message = "Mật khẩu không đúng! Vui lòng nhập lại mật khẩu";
     }
 	elseif(strlen($_POST['password']) < 6)  //cal password length
 	{
@@ -67,9 +65,11 @@ include("connection/connect.php"); // connection
 	else{
        
 	 //inserting values into db
-	$mql = "INSERT INTO users(username,firstname,lastname,email,phone_number,password,address) VALUES('".$_POST['username']."','".$_POST['firstname']."','".$_POST['lastname']."','".$_POST['email']."','".$_POST['phone_number']."','".md5($_POST['password'])."','".$_POST['address']."')";
+	$mql = "INSERT INTO users(username,firstname,lastname,email,phone_number,password,address,role) 
+   VALUES('".$_POST['username']."','".$_POST['firstname']."','".$_POST['lastname']."',
+   '".$_POST['email']."','".$_POST['phone_number']."','".md5($_POST['password'])."','".$_POST['address']."','customer')";
 	mysqli_query($db, $mql);
-		$success = "Tài khoản được tạo thành công! <p>You will be redirected in <span id='counter'>5</span> second(s).</p>
+		$success = "Tài khoản được tạo thành công! <p>Quay trở lại trang Đăng nhập sau <span id='counter'>5</span> giây.</p>
 														<script type='text/javascript'>
 														function countdown() {
 															var i = document.getElementById('counter');
@@ -95,6 +95,8 @@ include("connection/connect.php"); // connection
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link rel="icon" type="image/png" sizes="16x16" href="admin/images/favicon1.png">
+
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="#">
@@ -186,11 +188,11 @@ include("connection/connect.php"); // connection
                                     </div>
                                     <div class="form-group col-sm-6">
                                        <label for="exampleInputEmail1">Địa chỉ Email</label>
-                                       <input value="<?php echo $_POST['email'] ?>" type="text" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ email"> <small id="emailHelp" class="form-text text-muted">We"ll never share your email with anyone else.</small> 
+                                       <input value="<?php echo $_POST['email'] ?>" type="text" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ email"> <small id="emailHelp" class="form-text text-muted">Chúng tôi cam kết không chia sẻ email cho bất cứ cá nhân, tổ chức nào khác.</small> 
                                     </div>
                                     <div class="form-group col-sm-6">
                                        <label for="exampleInputEmail1">Số điện thoại</label>
-                                       <input value="<?php echo $_POST['phone_number'] ?>" class="form-control" type="text" name="phone_number" id="example-tel-input-3" placeholder="Nhập số điện thoại"> <small class="form-text text-muted">Chúng tôi cam kết không chia sẻ email cho bất cứ cá nhân, tổ chức nào khác.</small> 
+                                       <input value="<?php echo $_POST['phone_number'] ?>" class="form-control" type="text" name="phone_number" id="example-tel-input-3" placeholder="Nhập số điện thoại"> <small class="form-text text-muted">Chúng tôi cam kết không chia sẻ số điện thoại cho bất cứ cá nhân, tổ chức nào khác.</small> 
                                     </div>
                                     <div class="form-group col-sm-6">
                                        <label for="exampleInputPassword1">Mật khẩu</label>

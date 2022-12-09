@@ -3,7 +3,8 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Đăng nhập</title>
+	<title>ĐĂNG NHẬP</title>
+	<link rel="icon" type="image/png" sizes="16x16" href="admin/images/favicon1.png">
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
@@ -21,7 +22,8 @@
 
 </head>
 
-<body>
+<body style="background-image:url('images/Background_Book.jpg');">
+	
 	<?php
 	include("connection/connect.php"); //INCLUDE CONNECTION
 	error_reporting(0); // hide undefine index errors
@@ -64,18 +66,22 @@
 	<!-- Input Mixin-->
 	<!-- Button Mixin-->
 	<!-- Pen Title-->
-	<div class="pen-title" style="color:#f30">
-		<h1 style="font-weight:600">Chào mừng đến với Tủ sách Tri thức Việt</h1>
+	<div class="pen-title" style="color:yellowgreen">
+	
+		<!--h1 style="font-weight:600">Chào mừng đến với Tủ sách Tri thức Việt</h1-->
 	</div>
+	
 	<!-- Form Module-->
 	<div class="module form-module">
 		<div class="toggle">
 
 		</div>
+		
 		<div class="form">
-			<h2>Đăng nhập</h2>
+			<h2 style="color:seagreen">ĐĂNG NHẬP</h2>
 			<span style="color:red;"><?php echo $message; ?></span>
 			<span style="color:green;"><?php echo $success; ?></span>
+			<br><br>
 			<form action="" method="post">
 				<input type="text" placeholder="Nhập tên đăng nhập" name="username" />
 				<input type="password" placeholder="Nhập mật khẩu" name="password" />
@@ -86,6 +92,8 @@
 		<div class="cta">Bạn chưa có tài khoản?<a href="registration.php" style="color:#f30;"> Tạo tài khoản</a></div>
 	</div>
 	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<canvas id="canvas">Canvas không hổ trợ trình duyệt của bạn.</canvas>
+	<script type="text/javascript" src="welcome.js"> </script>
 </body>
 
 </html>
