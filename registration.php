@@ -5,56 +5,71 @@
 session_start(); //temp session
 error_reporting(0); // hide undefine index
 include("connection/connect.php"); // connection
-if(isset($_POST['submit'] )) //if submit btn is pressed
-{
-     if(empty($_POST['firstname']) ||  //fetching and find if its empty
-   	    empty($_POST['lastname'])|| 
-		empty($_POST['email']) ||  
-		empty($_POST['phone'])||
-		empty($_POST['password'])||
-		empty($_POST['cpassword']) ||
-		empty($_POST['cpassword']))
+
+   if(isset($_POST['check'])){
+   $check_username1= mysqli_query($db, "SELECT username FROM users where username = '".$_POST['username']."' ");
+      if(mysqli_num_rows($check_username1) > 0) //check username
+      {
+         $message = 'Tên đăng nhập đã tồn tại';
+      }
+      else {
+         $success ='Tên đăng nhập hợp lệ';
+      }
+   }
+   elseif(isset($_POST['submit'] )) //if submit btn is pressed
+   {
+         
+      }
+     if(  //fetching and find if its empty
+            empty($_POST['username'])|| 
+            empty($_POST['firstname'])|| 
+   	      empty($_POST['lastname'])|| 
+            empty($_POST['email']) ||  
+            empty($_POST['phone_number'])||
+            empty($_POST['password'])||
+            empty($_POST['cpassword']) ||
+            empty($_POST['cpassword']))
 		{
-			$message = "All fields must be Required!";
+			//$message = "Bạn phải điền vào tất cả các ô!";
 		}
 	else
 	{
 		//cheching username & email if already present
-	$check_username= mysqli_query($db, "SELECT username FROM users where username = '".$_POST['username']."' ");
+	//$check_username= mysqli_query($db, "SELECT username FROM users where username = '".$_POST['username']."' ");
 	$check_email = mysqli_query($db, "SELECT email FROM users where email = '".$_POST['email']."' ");
 		
-
+   
 	
 	if($_POST['password'] != $_POST['cpassword']){  //matching passwords
        	$message = "Password not match";
     }
 	elseif(strlen($_POST['password']) < 6)  //cal password length
 	{
-		$message = "Password Must be >=6";
+		$message = "Mật khẩu phải nhiều hơn 5 ký tự";
 	}
-	elseif(strlen($_POST['phone']) < 10)  //cal phone length
+	elseif(strlen($_POST['phone_number']) != 10)  //cal phone length
 	{
-		$message = "invalid phone number!";
+		$message = "Số điện thoại không hợp lệ";
 	}
 
     elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) // Validate email address
     {
-       	$message = "Invalid email address please type a valid email!";
+       	$message = "Địa chỉ email không hợp lệ";
     }
-	elseif(mysqli_num_rows($check_username) > 0)  //check username
+	  /* elseif(mysqli_num_rows($check_username) > 0)  //check username
      {
-    	$message = 'username Already exists!';
-     }
+    	$message = 'Tên đăng nhập đã tồn tại';
+     }*/
 	elseif(mysqli_num_rows($check_email) > 0) //check email
      {
-    	$message = 'Email Already exists!';
+    	$message = 'Địa chỉ email đã tồn tại';
      }
 	else{
        
 	 //inserting values into db
-	$mql = "INSERT INTO users(username,f_name,l_name,email,phone,password,address) VALUES('".$_POST['username']."','".$_POST['firstname']."','".$_POST['lastname']."','".$_POST['email']."','".$_POST['phone']."','".md5($_POST['password'])."','".$_POST['address']."')";
+	$mql = "INSERT INTO users(username,firstname,lastname,email,phone_number,password,address) VALUES('".$_POST['username']."','".$_POST['firstname']."','".$_POST['lastname']."','".$_POST['email']."','".$_POST['phone_number']."','".md5($_POST['password'])."','".$_POST['address']."')";
 	mysqli_query($db, $mql);
-		$success = "Account Created successfully! <p>You will be redirected in <span id='counter'>5</span> second(s).</p>
+		$success = "Tài khoản được tạo thành công! <p>You will be redirected in <span id='counter'>5</span> second(s).</p>
 														<script type='text/javascript'>
 														function countdown() {
 															var i = document.getElementById('counter');
@@ -73,12 +88,8 @@ if(isset($_POST['submit'] )) //if submit btn is pressed
     }
 	}
 
-}
-
 
 ?>
-
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -87,7 +98,7 @@ if(isset($_POST['submit'] )) //if submit btn is pressed
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="#">
-    <title>vamos</title>
+    <title>Đăng ký tài khoản</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -103,15 +114,13 @@ if(isset($_POST['submit'] )) //if submit btn is pressed
             <nav class="navbar navbar-dark">
 
                <div class="container">
-               <a class="navbar-brand" href="index.php"> <h5 style="color:whitesmoke; font-family: Brush Script MT,cursive;">Kết nối tri thức Việt</h5> </a>
+               <a class="navbar-brand" href="login.php"> <h5 style="color:whitesmoke; font-family: Brush Script MT,cursive;">Kết nối tri thức Việt</h5> </a>
 
                   <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#mainNavbarCollapse">&#9776;</button>
                   <a class="navbar-brand" href="index.php"> <img class="img-rounded" src="images/food-picky-logo.png" alt=""> </a>
                   <div class="collapse navbar-toggleable-md  float-lg-right" id="mainNavbarCollapse">
                      <ul class="nav navbar-nav">
-							<li class="nav-item"> <a class="nav-link active" href="index.php">Trang chủ <span class="sr-only">(current)</span></a> </li>
-                            <li class="nav-item"> <a class="nav-link active" href="ListBook.php">Kho sách<span class="sr-only"></span></a> </li>
-                            
+							
 							<?php
 						if(empty($_SESSION["user_id"]))
 							{
@@ -120,9 +129,8 @@ if(isset($_POST['submit'] )) //if submit btn is pressed
 							}
 						else
 							{
-									
-									
-										echo  '<li class="nav-item"><a href="your_orders.php" class="nav-link active">Đơn hàng của bạn</a> </li>';
+
+									echo  '<li class="nav-item"><a href="your_orders.php" class="nav-link active">Đơn hàng của bạn</a> </li>';
 									echo  '<li class="nav-item"><a href="logout.php" class="nav-link active">Đăng xuất</a> </li>';
 							}
 
@@ -153,42 +161,47 @@ if(isset($_POST['submit'] )) //if submit btn is pressed
                <div class="container">
                   <div class="row">
                      <!-- REGISTER -->
-                     <div class="col-md-8">
+                     <div class="col-md-9">
                         <div class="widget">
                            <div class="widget-body">
                               
 							  <form action="" method="post">
-                                 <div class="row">
-								  <div class="form-group col-sm-12">
-                                       <label for="exampleInputEmail1">User-Name</label>
-                                       <input class="form-control" type="text" name="username" id="example-text-input" placeholder="UserName"> 
+                           <div class="row">
+								      <div class="form-group col-sm-12">
+                                       <label for="exampleInputEmail1">Tên đăng nhập</label>
+                                       <input value="<?php echo $_POST['username'] ?>" class="form-control" type="text" name="username" id="example-text-input" placeholder="Nhập tên đăng nhập"> 
+                                       
+                                 </div>
+                                    <div class="form-group col-sm-12">
+                                          <p> <input type="submit" name="check" value="Kiểm tra" class="btn theme-btn"></input>
+                                    </div>
+
+                                    <div class="form-group col-sm-6">
+                                       <label for="exampleInputEmail1">Họ và tên lót</label>
+                                       <input value="<?php echo $_POST['firstname'] ?>" class="form-control" type="text" name="firstname" id="example-text-input" placeholder="Nhập họ và tên lót"> 
                                     </div>
                                     <div class="form-group col-sm-6">
-                                       <label for="exampleInputEmail1">First Name</label>
-                                       <input class="form-control" type="text" name="firstname" id="example-text-input" placeholder="First Name"> 
+                                       <label for="exampleInputEmail1">Tên</label>
+                                       <input value="<?php echo $_POST['lastname'] ?>" class="form-control" type="text" name="lastname" id="example-text-input-2" placeholder="Nhập tên"> 
                                     </div>
                                     <div class="form-group col-sm-6">
-                                       <label for="exampleInputEmail1">Last Name</label>
-                                       <input class="form-control" type="text" name="lastname" id="example-text-input-2" placeholder="Last Name"> 
+                                       <label for="exampleInputEmail1">Địa chỉ Email</label>
+                                       <input value="<?php echo $_POST['email'] ?>" type="text" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ email"> <small id="emailHelp" class="form-text text-muted">We"ll never share your email with anyone else.</small> 
                                     </div>
                                     <div class="form-group col-sm-6">
-                                       <label for="exampleInputEmail1">Email address</label>
-                                       <input type="text" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"> <small id="emailHelp" class="form-text text-muted">We"ll never share your email with anyone else.</small> 
+                                       <label for="exampleInputEmail1">Số điện thoại</label>
+                                       <input value="<?php echo $_POST['phone_number'] ?>" class="form-control" type="text" name="phone_number" id="example-tel-input-3" placeholder="Nhập số điện thoại"> <small class="form-text text-muted">Chúng tôi cam kết không chia sẻ email cho bất cứ cá nhân, tổ chức nào khác.</small> 
                                     </div>
                                     <div class="form-group col-sm-6">
-                                       <label for="exampleInputEmail1">Phone number</label>
-                                       <input class="form-control" type="text" name="phone" id="example-tel-input-3" placeholder="Phone"> <small class="form-text text-muted">We"ll never share your email with anyone else.</small> 
+                                       <label for="exampleInputPassword1">Mật khẩu</label>
+                                       <input value="<?php echo $_POST['password'] ?>" type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Nhập mật khẩu"> 
                                     </div>
                                     <div class="form-group col-sm-6">
-                                       <label for="exampleInputPassword1">Password</label>
-                                       <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password"> 
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                       <label for="exampleInputPassword1">Repeat password</label>
-                                       <input type="password" class="form-control" name="cpassword" id="exampleInputPassword2" placeholder="Password"> 
+                                       <label for="exampleInputPassword1">Nhập lại mật khẩu</label>
+                                       <input value="<?php echo $_POST['cpassword'] ?>" type="password" class="form-control" name="cpassword" id="exampleInputPassword2" placeholder="Nhập mật khẩu"> 
                                     </div>
 									 <div class="form-group col-sm-12">
-                                       <label for="exampleTextarea">Delivery Address</label>
+                                       <label for="exampleTextarea">Địa chỉ</label>
                                        <textarea class="form-control" id="exampleTextarea"  name="address" rows="3"></textarea>
                                     </div>
                                    
@@ -196,7 +209,7 @@ if(isset($_POST['submit'] )) //if submit btn is pressed
                                 
                                  <div class="row">
                                     <div class="col-sm-4">
-                                       <p> <input type="submit" value="Register" name="submit" class="btn theme-btn"> </p>
+                                       <p> <input type="submit" value="Đăng ký" name="submit" class="btn theme-btn"> </p>
                                     </div>
                                  </div>
                               </form>
@@ -207,33 +220,20 @@ if(isset($_POST['submit'] )) //if submit btn is pressed
                         <!-- /REGISTER -->
                      </div>
                      <!-- WHY? -->
-                     <div class="col-md-4">
-                        <h4>Registration is fast, easy, and free.</h4>
-                        <p>Once you"re registered, you can:</p>
+                     <div class="col-md-3">
+                        <h4 style="font-family: 'Dancing Script' cursive;font-weight:600;color:darkturquoise">Hãy đến với chúng tôi để có những trải nghiệm tuyệt vời</h4>
+                        <p style="font-style:italic">Đăng ký tài khoản nhanh chóng và miễn phí</p>
                         <hr>
                         <img src="http://placehold.it/400x300" alt="" class="img-fluid">
                         <p></p>
-                        <div class="panel">
-                           <div class="panel-heading">
-                              <h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" class="panel-toggle collapsed" href="#faq1" aria-expanded="false"><i class="ti-info-alt" aria-hidden="true"></i>Can I viverra sit amet quam eget lacinia?</a></h4>
-                           </div>
-                           <div class="panel-collapse collapse" id="faq1" aria-expanded="false" role="article" style="height: 0px;">
-                              <div class="panel-body"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam rutrum ut erat a ultricies. Phasellus non auctor nisi, id aliquet lectus. Vestibulum libero eros, aliquet at tempus ut, scelerisque sit amet nunc. Vivamus id porta neque, in pulvinar ipsum. Vestibulum sit amet quam sem. Pellentesque accumsan consequat venenatis. Pellentesque sit amet justo dictum, interdum odio non, dictum nisi. Fusce sit amet turpis eget nibh elementum sagittis. Nunc consequat lacinia purus, in consequat neque consequat id. </div>
-                           </div>
-                        </div>
+                       
                         <!-- end:panel -->
-                        <div class="panel">
-                           <div class="panel-heading">
-                              <h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" class="panel-toggle" href="#faq2" aria-expanded="true"><i class="ti-info-alt" aria-hidden="true"></i>Can I viverra sit amet quam eget lacinia?</a></h4>
-                           </div>
-                           <div class="panel-collapse collapse" id="faq2" aria-expanded="true" role="article">
-                              <div class="panel-body"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam rutrum ut erat a ultricies. Phasellus non auctor nisi, id aliquet lectus. Vestibulum libero eros, aliquet at tempus ut, scelerisque sit amet nunc. Vivamus id porta neque, in pulvinar ipsum. Vestibulum sit amet quam sem. Pellentesque accumsan consequat venenatis. Pellentesque sit amet justo dictum, interdum odio non, dictum nisi. Fusce sit amet turpis eget nibh elementum sagittis. Nunc consequat lacinia purus, in consequat neque consequat id. </div>
-                           </div>
-                        </div>
+                        
                         <!-- end:Panel -->
-                        <h4 class="m-t-20">Contact Customer Support</h4>
-                        <p> If you"re looking for more help or have a question to ask, please </p>
-                        <p> <a href="contact.html" class="btn theme-btn m-t-15">contact us</a> </p>
+                        
+                        <h4 class="m-t-20">Dịch vụ hỗ trợ khách hàng</h4>
+                        <p> Liên hệ với chúng tối nếu bạn cần sự tư vấn và giúp đỡ.</p>
+                        <p style="color: red; font-size:medium; font-weight:600">Hotline: 1800.9869</p>
                      </div>
                      <!-- /WHY? -->
                   </div>

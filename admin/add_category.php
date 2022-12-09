@@ -125,7 +125,7 @@ if(isset($_POST['submit'] ))
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label class="control-label">Loại sách</label>
-                                                    <input type="text" name="name" class="form-control" placeholder="Nhập tên loại sách">
+                                                    <input style="text-transform: uppercase;" type="text" name="name" class="form-control" placeholder="Nhập tên loại sách">
                                                    </div>
                                             </div>
                                             <!--/span-->

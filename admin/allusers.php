@@ -66,8 +66,7 @@ session_start();
                                                 <th>Email</th>
                                                 <th>Số điện thoại</th>
 												<th>Địa chỉ</th>												
-												<th>Phường/xã</th>
-												<th>Quận/huyện</th>
+												
                                                 <th>Vai trò</th>
                                                 <th>Ngày tạo</th>
                                                 <th>Ngày cập nhật</th>
@@ -101,8 +100,7 @@ session_start();
 																								<td>'.$rows['email'].'</td>
 																								<td>'.$rows['phone_number'].'</td>
 																								<td style="text-transform:capitalize">'.$rows['address'].'</td>	
-                                                                                                <td style="text-transform:capitalize">'.$rows['ward_id'].'</td>
-                                                                                                <td style="text-transform:capitalize">'.$rows['district_id'].'</td>
+                                                                                                
                                                                                                 <td>'.$rows['role'].'</td>	
                                                                                                 <td>'.$rows['created_at'].'</td>	
                                                                                                 <td>'.$rows['updated_at'].'</td>																					

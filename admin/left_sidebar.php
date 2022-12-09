@@ -3,17 +3,19 @@
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
+                
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="nav-devider"></li>
+                       <br>
                         <li class="nav-label">Trang chủ</li>
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Điều hướng</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="dashboard.php">Điều hướng</a></li>
+                                <li><a href="dashboard.php">Thông kê</a></li>
                                 
                             </ul>
                         </li>
-                        <li class="nav-label">LOG</li>
+                        <li class="nav-label">Danh mục</li>
                         <li> <a class="has-arrow  " href="#" aria-expanded="false">  <span><i class="fa fa-user f-s-20 "></i></span><span class="hide-menu">Người dùng</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="allusers.php">Tất cả người dùng</a></li>

@@ -7,7 +7,24 @@ session_start();
 error_reporting(0);
 include("../connection/connect.php");
 
-if(isset($_POST['submit'] ))
+if(isset($_POST['check'])){
+    $check_username2= mysqli_query($db, "SELECT username FROM users where username = '".$_POST['username']."' ");
+       if(mysqli_num_rows($check_username2) > 0) //check username
+       {
+        
+        echo '<script type ="text/JavaScript">';  
+        echo 'alert("Tên đăng nhập đã tồn tại")';
+        echo '</script>'; 
+       }
+          
+       
+       else {
+        echo '<script type ="text/JavaScript">';  
+        echo 'alert("Tên đăng nhập hợp lệ")';
+        echo '</script>';  
+       }
+    }
+else if(isset($_POST['submit'] ))
 {
     if(empty($_POST['username']) ||
    	    empty($_POST['firstname'])|| 
@@ -103,6 +120,12 @@ if(isset($_POST['submit'] ))
     <!-- Custom CSS -->
     <link href="css/helper.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animsition.min.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
     <!--[if lt IE 9]>
@@ -139,15 +162,11 @@ if(isset($_POST['submit'] ))
 					
 					 <div class="container-fluid">
                 <!-- Start Page Content -->
-                  
-									
+
 									<?php  //echo var_dump($_POST);
 									        echo $error;
 									        echo $success; ?>
-									
-									
-								
-								
+	
 					    <div class="col-lg-12">
                         <div class="card card-outline-primary">
                             <div class="card-header">
@@ -162,24 +181,28 @@ if(isset($_POST['submit'] ))
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Tên đăng nhập</label>
-                                                    <input type="text" name="username" class="form-control" placeholder="Tên đăng nhập">
+                                                    <input id="username" value="<?php echo $_POST['username']?>"type="text" name="username" class="form-control" placeholder="Nhập tên đăng nhập">
                                                    </div>
+                                                   <p> <input type="submit" name="check" value="Kiểm tra" class="btn theme-btn"></input>
+                                                    <p id="alert"></p>
                                             </div>
+                                            
                                             <!--/span-->
                                             <div class="col-md-6">
                                                 <div class="form-group has-danger">
                                                     <label class="control-label">Họ và tên lót</label>
-                                                    <input type="text" name="firstname" class="form-control form-control-danger" placeholder="Họ và tên lót">
+                                                    <input type="text" style="text-transform: capitalize;" name="firstname" class="form-control form-control-danger" placeholder="Nhập họ và tên lót">
                                                     </div>
                                             </div>
                                             <!--/span-->
                                         </div>
+                                        
                                         <!--/row-->
                                         <div class="row p-t-20">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Tên</label>
-                                                    <input type="text" name="lastname" class="form-control" placeholder="tên">
+                                                    <input style="text-transform: capitalize;" type="text" name="lastname" class="form-control" placeholder="Nhập tên">
                                                    </div>
                                             </div>
                                             <!--/span-->
@@ -196,41 +219,22 @@ if(isset($_POST['submit'] ))
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Mật khẩu</label>
-                                                    <input type="text" name="password" class="form-control form-control-danger" placeholder="Mật khẩu">
+                                                    <input type="text" name="password" class="form-control form-control-danger" placeholder="Nhập mật khẩu">
                                                     </div>
                                                 </div>
                                         
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Số điện thoại</label>
-                                                    <input type="text" name="phone_number" class="form-control form-control-danger" placeholder="Số điện thoại">
+                                                    <input type="text" name="phone_number" class="form-control form-control-danger" placeholder="Nhập số điện thoại">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <label class="control-label">Số nhà</label>
-                                                    <input type="text" name="address" class="form-control form-control-danger" placeholder="Nhập số nhà">
+                                                    <label class="control-label">Địa chỉ</label>
+                                                    <input style="text-transform: capitalize;" type="text" name="address" class="form-control form-control-danger" placeholder="Nhập địa chỉ">
                                                     </div>
-                                               
-                                            
-                                            
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Phường/xã</label>
-                                                    <input type="text" name="ward_id" class="form-control form-control-danger" placeholder="Nhập phường/xã">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        
-                                            <div class = "row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Quận/huyện</label>
-                                                    <input type="text" name="district_id" class="form-control form-control-danger" placeholder="Quận/huyện">
-                                                    </div>
-                                                </div>
-
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Vai trò</label><br>
@@ -280,6 +284,16 @@ if(isset($_POST['submit'] ))
     <script src="js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <!--Custom JavaScript -->
     <script src="js/custom.min.js"></script>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/animsition.min.js"></script>
+    <script src="js/bootstrap-slider.min.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/headroom.js"></script>
+    <script src="js/foodpicky.min.js"></script>
+    
 
 </body>
 

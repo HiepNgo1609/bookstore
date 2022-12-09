@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>login</title>
+	<title>Đăng nhập</title>
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
@@ -47,13 +47,14 @@
 			// 	$message = "Invalid Username or Password!"; // throw error
 			// }
 			if (is_array($row)) {
-				if (password_verify($password,$row['password'])) {
-					$message = "Login Successful";
+				if ($row['password']==md5($password)) {
+					header("refresh:1;url=index.php");
 				} else {
-					$message = "Password is not match!";
+					
+					$message = "Tên đăng nhập hoặc mật khẩu không chính xác!";
 				} 
 			} else {
-				$message = "Invalid Username!";
+				$message = "Tên đăng nhập hoặc mật khẩu không chính xác!";
 			}
 		}
 	}
@@ -63,8 +64,8 @@
 	<!-- Input Mixin-->
 	<!-- Button Mixin-->
 	<!-- Pen Title-->
-	<div class="pen-title">
-		<h1>Login Form</h1>
+	<div class="pen-title" style="color:#f30">
+		<h1 style="font-weight:600">Chào mừng đến với Tủ sách Tri thức Việt</h1>
 	</div>
 	<!-- Form Module-->
 	<div class="module form-module">
@@ -72,26 +73,19 @@
 
 		</div>
 		<div class="form">
-			<h2>Login to your account</h2>
+			<h2>Đăng nhập</h2>
 			<span style="color:red;"><?php echo $message; ?></span>
 			<span style="color:green;"><?php echo $success; ?></span>
 			<form action="" method="post">
-				<input type="text" placeholder="Username" name="username" />
-				<input type="password" placeholder="Password" name="password" />
-				<input type="submit" id="buttn" name="submit" value="login" />
+				<input type="text" placeholder="Nhập tên đăng nhập" name="username" />
+				<input type="password" placeholder="Nhập mật khẩu" name="password" />
+				<input type="submit" id="buttn" name="submit" value="Đăng nhập" />
 			</form>
 		</div>
 
-		<div class="cta">Not registered?<a href="registration.php" style="color:#f30;"> Create an account</a></div>
+		<div class="cta">Bạn chưa có tài khoản?<a href="registration.php" style="color:#f30;"> Tạo tài khoản</a></div>
 	</div>
 	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-
-
-
-
-
-
-
 </body>
 
 </html>

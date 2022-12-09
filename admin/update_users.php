@@ -190,33 +190,20 @@ if(isset($_POST['submit'] ))
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Địa chỉ</label>
-                                                    <input type="text" name="phone_number" class="form-control form-control-danger"   value="<?php  echo $newrow['phone_number'];  ?>" placeholder="Số điện thoại">
+                                                    <input type="text" name="phone_number" class="form-control form-control-danger"   value="<?php  echo $newrow['address'];  ?>" placeholder="Số điện thoại">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Phường/xã</label>
-                                                    <input type="text" name="ward_id" class="form-control form-control-danger"   value="<?php  echo $newrow['ward_id'];  ?>" placeholder="Phường/xã">
-                                                    </div>
-                                                </div>
-                                        
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Quận/huyện</label>
-                                                    <input type="text" name="district_id" class="form-control form-control-danger"   value="<?php  echo $newrow['district_id'];  ?>" placeholder="Quận/huyện">
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                             <div class= row>
                                             <div class="col-md-6">
-                                                <!-- <div class="form-group">
-                                                    <label class="control-label">Vai trò</label>
-                                                    <input type="text" name="role" class="form-control form-control-danger" value="<?php  echo $newrow['role'];  ?>" placeholder="Vai trò">
+                                                <div class="form-group">
+                                                    <label class="control-label">Số điện thoại</label>
+                                                    <input type="text" name="phone_number" class="form-control form-control-danger" value="<?php  echo $newrow['phone_number'];  ?>" placeholder="Số điện thoại">
                                                     
-                                                </div> -->
-                                              
+                                                </div> 
+                                            </div>
+                                                <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Vai trò</label><br>
                                                     <select style="font-size:medium; padding: 5px; border:1px solid rgb(232,232,232); color:rgb(80,80,80)" name = "role" aria-label="select example">
@@ -226,7 +213,7 @@ if(isset($_POST['submit'] ))
                                                 </div>
                                                 
                                                 </div>
-                                            </div>
+                                           
                                         </div>
                                     </div>
                                     <div class="form-actions">

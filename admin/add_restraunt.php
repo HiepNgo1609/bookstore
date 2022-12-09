@@ -97,14 +97,6 @@ if(isset($_POST['submit']))           //if upload btn is pressed
 	
 
 }
-
-
-
-
-
-
-
-
 ?>
 <head>
     <meta charset="utf-8">
