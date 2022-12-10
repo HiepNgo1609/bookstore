@@ -149,10 +149,7 @@ include("connection/connect.php"); // connection
                <div class="container">
                   <ul>
                      <li><a href="#" class="active">
-					  <span style="color:red;"><?php echo $message; ?></span>
-					   <span style="color:green;">
-								<?php echo $success; ?>
-										</span>
+					 
 					   
 					</a></li>
                     
@@ -172,8 +169,10 @@ include("connection/connect.php"); // connection
 								      <div class="form-group col-sm-12">
                                        <label for="exampleInputEmail1">Tên đăng nhập</label>
                                        <input value="<?php echo $_POST['username'] ?>" class="form-control" type="text" name="username" id="example-text-input" placeholder="Nhập tên đăng nhập"> 
-                                       
+                                       <span style="color: blue; font-weight:600"><?php echo $success?></span>
+                                       <span style="color: red; font-weight:600"><?php echo $message?></span>
                                  </div>
+                                 
                                     <div class="form-group col-sm-12">
                                           <p> <input type="submit" name="check" value="Kiểm tra" class="btn theme-btn"></input>
                                     </div>
@@ -224,7 +223,7 @@ include("connection/connect.php"); // connection
                      <!-- WHY? -->
                      <div class="col-md-3">
                         <h4 style="font-family: 'Dancing Script' cursive;font-weight:600;color:darkturquoise">Hãy đến với chúng tôi để có những trải nghiệm tuyệt vời</h4>
-                        <p style="font-style:italic">Đăng ký tài khoản nhanh chóng và miễn phí</p>
+                        <p style="font-style:italic">Đăng ký tài khoản nhanh chóng và hoàn toàn miễn phí</p>
                         <hr>
                         <img src="http://placehold.it/400x300" alt="" class="img-fluid">
                         <p></p>

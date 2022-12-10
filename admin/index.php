@@ -57,7 +57,7 @@ if (isset($_POST['submit'])) {
 		<!--span>Tên đăng nhập:admin</span>&nbsp;<span>Mật khẩu:123456</span-->
 		
 		<div style="color:red;"><?php echo $message; ?></div>
-		<span style="color:green;"><?php echo $success; ?></span>
+		<span style="color:green; font-weight:600"><?php echo $success;?></span>
 		<br><br>
 		<form class="login-form" action="index.php" method="post">
 			<input type="text" placeholder="Nhập tên đăng nhập" name="username" />

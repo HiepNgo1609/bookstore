@@ -178,7 +178,7 @@ else if(isset($_POST['submit'] ))
                                                    </div>
                                                    <p style="color:red; font-weight:600"><?php echo $message?></p>
                                                    <p style="color:green; font-weight:600"><?php echo $success1?></p>
-                                                   <p> <input type="submit" name="check" value="Kiểm tra" class="btn theme-btn"></input>
+                                                   <p> <input type="submit" name="check" value="Kiểm tra" class="btn btn-danger"></input>
                                                    
                                                 </div>
                                             
@@ -248,7 +248,7 @@ else if(isset($_POST['submit'] ))
                                         </div>
                                     </div>
                                     <div class="form-actions">
-                                        <input type="submit" name="submit" class="btn btn-success" value="Lưu"> 
+                                        <input type="submit" name="submit" class="btn btn-primary" value="Lưu"> 
                                         <a href="dashboard.php" class="btn btn-inverse">Hủy</a>
                                     </div>
                                 </form>
