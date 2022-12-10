@@ -50,6 +50,7 @@
 			// }
 			if (is_array($row)) {
 				if ($row['password']==md5($password)) {
+					$_SESSION['pass'] = "vamos espana";
 					header("refresh:1;url=index.php");
 				} else {
 					

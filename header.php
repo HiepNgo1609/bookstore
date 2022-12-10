@@ -25,7 +25,7 @@ session_start();
                     <li class="nav-item"> <a class="nav-link active" href="index.php">Trang chủ <span class="sr-only">(current)</span></a> </li>
                     <li class="nav-item"> <a class="nav-link active" href="category.php">Kho sách<span class="sr-only"></span></a> </li>
                     <?php
-                    if (empty($_SESSION["user_id"])) // if user is not login
+                    if (empty($_SESSION["pass"])) // if user is not login
                     {
                         echo '<li class="nav-item"><a href="login.php" class="nav-link active">Đăng nhập</a> </li>
 							  <li class="nav-item"><a href="registration.php" class="nav-link active">Đăng ký tài khoản</a> </li>';
