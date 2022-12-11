@@ -138,6 +138,8 @@ session_start();
                                             <select id="status" class="form-control">
                                                 <option value="Processing">Processing</option>
                                                 <option value="Accepted">Accepted</option>
+                                                <option value="Accepted">Rejected</option>
+                                                <option value="Accepted">Received</option>
                                                 <option value="Cancelled">Cancelled</option>
                                             </select>
                                         </div>
