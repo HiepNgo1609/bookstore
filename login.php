@@ -78,7 +78,7 @@
 
 		</div>
 		
-		<div class="form">
+		<div class="form" style="opacity:100%">
 			<h2 style="color:seagreen">ĐĂNG NHẬP</h2>
 			<span style="color:red;"><?php echo $message; ?></span>
 			<span style="color:green;"><?php echo $success; ?></span>

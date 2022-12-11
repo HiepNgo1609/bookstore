@@ -6,6 +6,6 @@ session_start();
 
 // sending query
 mysqli_query($db,"DELETE FROM products WHERE id = '".$_GET['menu_del']."'");
-header("location:all_menu.php");  
+header("location:add_category.php");  
 
 ?>
