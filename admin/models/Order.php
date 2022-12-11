@@ -41,6 +41,15 @@ class Order
         return $stmt;
     }
 
+    public function getOrdersNum() {
+        $query = '
+            SELECT COUNT(id) AS NUM FROM ' . $this->table . '
+        ';
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
+    }
+
     public function getOrdersOnProcessing()
     {
         $query = "
@@ -167,6 +176,27 @@ class Order
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':invoice', $invoice);
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            printf("Error: %s.\n", $stmt->error);
+            return false;
+        }
+    }
+
+    public function updateStatus() {
+        $query = '
+                UPDATE ' . $this->table . '
+                SET status= :status
+                WHERE id= :id
+        ';
+        $stmt = $this->conn->prepare($query);
+
+        $this->status = htmlspecialchars(strip_tags($this->status));
+
+        $stmt->bindParam(':status', $this->status);
+        $stmt->bindParam(':id', $this->id);
+
         if ($stmt->execute()) {
             return true;
         } else {

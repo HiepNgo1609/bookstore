@@ -15,8 +15,10 @@ session_start();
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
-    <title>Ela - Bootstrap Admin Dashboard Template</title>
+    <!-- <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png"> -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon1.png">
+
+    <title>Thêm đơn hàng</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <!-- <link href="../css/bootstrap.min.css" rel="stylesheet"> -->
@@ -42,10 +44,10 @@ session_start();
     <!-- Main wrapper  -->
     <div id="main-wrapper">
         <!-- header header  -->
-        <?php include_once './adminHeader.php'; ?>
+        <?php include_once './header.php'; ?>
         <!-- End header header -->
         <!-- Left Sidebar  -->
-        <?php include_once './adminLeftSidebar.php'; ?>
+        <?php include_once './left_sidebar.php'; ?>
         <!-- End Left Sidebar  -->
         <!-- Page wrapper  -->
         <div class="page-wrapper">

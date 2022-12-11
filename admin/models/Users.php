@@ -22,4 +22,13 @@ class Users {
         $stmt->execute();
         return $stmt;
     }
+
+    public function getUsersNum() {
+        $query = '
+            SELECT COUNT(id) AS NUM FROM ' . $this->table . '
+        ';
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
+    }
 }

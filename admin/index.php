@@ -7,22 +7,22 @@ session_start();
 if (isset($_POST['submit'])) {
 	$username = $_POST['username'];
 	$password = $_POST['password'];
-
+	$pwd = password_hash($password, PASSWORD_BCRYPT);
 	if (!empty($_POST["submit"])) {
 		$loginquery = "SELECT * FROM users WHERE username='$username'";
 		$result = mysqli_query($db, $loginquery);
 		$row = mysqli_fetch_array($result);
 
 		if (is_array($row)) {
-			if ($row['password']==md5($password) && $row['role'] == "admin") {
+			if (password_verify($password, $row['password']) && $row['role'] == "admin") {
 				$_SESSION["adm_id"] = $row['id'];
 				$success = "Đăng nhập thành công";
 				header("refresh:1;url=dashboard.php");
 			}
-		 else {
-			$message = "Mật khẩu không chính xác!";
+			else {
+				$message = "Mật khẩu không chính xác!";
+			}
 		}
-	}
 	else {
 		$message = "Tên đăng nhập không chính xác hoặc bạn không được cấp quyền đăng nhập!";
 	}
