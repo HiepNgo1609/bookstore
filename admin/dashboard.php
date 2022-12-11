@@ -81,7 +81,7 @@ if (empty($_SESSION["adm_id"])) {
                                         <span><i class="fa fa-book f-s-40" aria-hidden="true"></i></span>
                                     </div>
                                     <div class="media-body media-text-right">
-                                        <a href="all_menu.php">
+                                        <a href="all_book.php">
 
                                             <h2 id="book"></h2>
                                         </a>
