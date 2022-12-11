@@ -34,8 +34,8 @@
                         </li> -->
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-book" aria-hidden="true"></i><span class="hide-menu">Quản lý sách</span></a>
                             <ul aria-expanded="false" class="collapse">
-								<li><a href="all_menu.php">Tất cả sách</a></li>
-								<li><a href="add_menu.php">Thêm sách</a></li>
+								<li><a href="all_book.php">Tất cả sách</a></li>
+								<li><a href="add_book.php">Thêm sách</a></li>
                                 <li><a href="add_category.php">Thêm loại sách</a></li>
                                 
                             </ul>

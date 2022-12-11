@@ -50,6 +50,7 @@
 			// }
 			if (is_array($row)) {
 				if ($row['password']==md5($password)) {
+					$_SESSION['pass'] = "vamos espana";
 					header("refresh:1;url=index.php");
 				} else {
 					
@@ -77,7 +78,7 @@
 
 		</div>
 		
-		<div class="form">
+		<div class="form" style="opacity:100%">
 			<h2 style="color:seagreen">ĐĂNG NHẬP</h2>
 			<span style="color:red;"><?php echo $message; ?></span>
 			<span style="color:green;"><?php echo $success; ?></span>
