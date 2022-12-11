@@ -5,6 +5,23 @@ include("connection/connect.php");
 error_reporting(0);
 session_start();
 ?>
+<?php
+$user_id = (isset($_SESSION['user_id'])) ? $_SESSION['id'] : '';
+
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+
+    $query = "SELECT *
+              FROM (products
+              INNER JOIN (SELECT id AS c_id, name AS c_name FROM category) AS c ON products.category_id = c.c_id)
+              WHERE products.id =" . $id;
+
+    $result = mysqli_query($db, $query);
+
+    $product = mysqli_fetch_assoc($result);
+
+}
+?>
 
 <head>
     <meta charset="utf-8">
@@ -14,7 +31,7 @@ session_start();
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="#">
-    <title>Starter Template for Bootstrap</title>
+    <title></title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -22,19 +39,20 @@ session_start();
     <link href="css/animate.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
-    <link href="./product.css" rel="stylesheet">
+    <link href="css/product.css" rel="stylesheet">
 </head>
 
 <body>
     <!--header starts-->
     <?php require_once "./header.php" ?>
-
+    <input id="userId" type="number" value="<?php echo $user_id; ?>" style="display:none">
     <div class="page-wrapper">
         <!-- top Links -->
         <div class="top-links">
             <div class="container">
                 <ul class="row links">
-                    <li class="col-xs-12 col-sm-4 link-item active"><span>1</span><a href="restaurants.php">Choose Book</a></li>
+                    <li class="col-xs-12 col-sm-4 link-item active"><span>1</span><a href="restaurants.php">Choose
+                            Book</a></li>
                     <li class="col-xs-12 col-sm-4 link-item"><span>2</span><a href="#">Check out</a></li>
                     <li class="col-xs-12 col-sm-4 link-item"><span>3</span><a href="#">Payment</a></li>
                 </ul>
@@ -48,13 +66,14 @@ session_start();
             <nav class="container" aria-label="breadcrumb">
                 <ol class="row breadcrumb">
                     <li class="d-inline-block breadcrumb-item">
-                        <a href="#" class="link-item">FOREIGN BOOKS</a>
-                    </li>
-                    <li class="d-inline-block breadcrumb-item">
-                        <a href="#" class="link-item">PERSONAL DEVELOPMENT</a>
+                        <a href="category.php" class="link-item">
+                            <?php echo strtoupper($product['c_name']); ?>
+                        </a>
                     </li>
                     <li class="d-inline-block breadcrumb-item" aria-current="page">
-                        <a href="#" class="link-item">POPULAR PSYCHOLOGY</a>
+                        <a href="#" class="link-item">
+                            <?php echo strtoupper($product['name']); ?>
+                        </a>
                     </li>
                 </ol>
             </nav>
@@ -65,52 +84,58 @@ session_start();
                 <div class="product__information">
                     <div class="row">
                         <!-- Product Image -->
-                        <div class="col-xs-5">
+                        <div class="col-xl-5">
                             <div class="product-img__block">
-                                <img src="./images/logoBook.png" alt="" class="product-img">
+                                <img src="<?php echo $product['image_url']; ?>" alt="" class="product-img">
                             </div>
 
                             <div class="row">
-                                <div class="col-xs-6">
-                                    <a href="#" class="btn border-primary" style="width:100%;">
+                                <div class=" col-xs-12 col-xl-6 mb-1">
+                                    <div class="btn border-primary" style="width:100%; color:#f30" class="addToCart">
                                         <i class="fa fa-shopping-cart mr-1" aria-hidden="true"></i>
                                         Thêm vào giỏ hàng
-                                    </a>
+                                    </div>
                                 </div>
 
-                                <div class="col-xs-6">
-                                    <a href="order.php" class="btn bg-primary-color btn-primary border-primary text-secondary-color" style="width:100%;">
+                                <div class="col-xs-12 col-xl-6">
+                                    <a href="order.php"
+                                        class="btn bg-primary-color btn-primary border-primary text-secondary-color"
+                                        style="width:100%;" class="addToCart">
                                         Mua ngay
                                     </a>
                                 </div>
+                                <div class="cartMessage col-xs-12"></div>
                             </div>
 
                         </div>
                         <!-- End Product Image -->
 
                         <!-- Product Description -->
-                        <div class="col-xs-7">
+                        <div class="col-xl-7">
                             <div class="product__description">
                                 <h2 class="product__name">
-                                    Nhà Giả Kim (Tái Bản 2020)
+                                    <?php echo $product['name']; ?>
+
                                 </h2>
 
                                 <!-- Product Attribute -->
                                 <div class="product__list">
                                     <div class="row">
-                                        <h5 class="product__publisher product__list-item col-xs-6">
-                                            <span style="margin-right: 8px">Nhà cung cấp: </span>
-                                            <a href="#">Nhã Nam</a>
+                                        <h5 class="product__publisher product__list-item col-xl-6 col-lg-6">
+                                            <span style="margin-left: 8px">Nhà cung cấp: </span>
+                                            <a href="#">
+                                                <?php echo $product['publisher']; ?>
+                                            </a>
                                         </h5>
 
-                                        <h5 class="product__author product__list-item col-xs-6">
-                                            <span style="margin-right: 8px">Tác giả: </span>
-                                            Paulo Coelho
+                                        <h5 class="product__author product__list-item col-xl-6 col-lg-6">
+                                            <span style="margin-left: 8px">Tác giả: </span>
+                                            <?php echo $product['author']; ?>
                                         </h5>
 
-                                        <h5 class="product__cover product__list-item col-xs-6">
-                                            <span style="margin-right: 8px">Hình thức bìa: </span>
-                                            Bìa Mềm
+                                        <h5 class="product__cover product__list-item col-xl-12">
+                                            <span style="margin-left: 8px">Hình thức bìa: </span>
+                                            <?php echo $product['cover']; ?>
                                         </h5>
                                     </div>
                                 </div>
@@ -120,30 +145,28 @@ session_start();
                                 <!-- Price -->
                                 <div class="price mb-1">
                                     <span class="current-price">
-                                        55.000 đ
+                                        <?php echo number_format($product['price'] * (100 - $product['discount']) / 100, 0, '.', ','); ?>
+
                                     </span>
 
                                     <span class="original-price line-through">
-                                        79.000
+                                        <?php echo number_format($product['price'], 0, '.', ','); ?>
+
                                     </span>
 
                                     <span class="discount">
-                                        -30%
+                                        <span>-</span>
+                                        <?php echo number_format($product['discount'], 0); ?><span>%</span>
                                     </span>
                                 </div>
                                 <!-- End Price -->
 
                                 <!-- Rating -->
                                 <div class="ratings">
-                                    <a href="#">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <span>(37)</span>
-                                    </a>
-
+                                    <div class="ratings-box">
+                                        <div class="ratings-star" style="width: 0%"></div>
+                                    </div>
+                                    <span>(<span class="review_nums">0</span>)</span>
                                 </div>
                                 <!-- End Rating -->
 
@@ -152,9 +175,10 @@ session_start();
                                     <span>Số lượng: </span>
 
                                     <div class="quantity-control">
-                                        <a href="#" class="d-inline-block px-1" id="subQty" onclick="subQty()">-</a>
-                                        <input type="text" minvalue="1" maxvalue="999" value="1" class="quantity" id="Qty" onkeypress="validateNumber(event)">
-                                        <a href="#" class="d-inline-block px-1" id="plusQty" onclick="plusQty()">+</a>
+                                        <div class="d-inline-block px-1" id="subQty" onclick="subQty()">-</div>
+                                        <input type="text" minvalue="1" maxvalue="999" value="1" class="quantity"
+                                            id="Qty" onkeypress="validateNumber(event)">
+                                        <div class="d-inline-block px-1" id="plusQty" onclick="plusQty()">+</div>
                                     </div>
                                 </div>
                                 <!-- End Quantity -->
@@ -167,278 +191,30 @@ session_start();
             </div>
             <!-- End Product Information -->
 
-            <!-- Recommand & Relation -->
-            <!-- Relation -->
+            <!-- Newest & Favorite -->
+            <!-- Newest -->
             <div class="container card">
-                <div class="relation">
-                    <div class="top-links pb-0">
-                        <h5>Cùng tác giả</h5>
+                <div class="newest">
+                    <div class="top-links pb-0 mb-2">
+                        <h5>MỚI NHẤT</h5>
                     </div>
 
-                    <ul class="row product-list">
-                        <a href="">
-                            <li class="col-xs-3">
-                                <div class="list-item">
-                                    <img src="images/logoBook.png" alt="" class="list-item-img">
-                                    <div class="list-item-description">
-                                        <h5 class="list-item-name">
-                                            Combo Sách Nhà Giả Kim + Hành Trình Về Phương Đông (Bộ 2 Cuốn)
-                                        </h5>
-
-                                        <div class="price">
-                                            <span class="current-price">130.000 đ</span>
-                                            <span class="original-price line-through">130.000 đ</span>
-
-                                        </div>
-
-                                        <div class="ratings">
-                                            <a href="#">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <span>(37)</span>
-                                            </a>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-
-                        <a href="">
-                            <li class="col-xs-3">
-                                <div class="list-item">
-                                    <img src="images/logoBook.png" alt="" class="list-item-img">
-                                    <div class="list-item-description">
-                                        <h5 class="list-item-name">
-                                            Combo Sách Nhà Giả Kim + Hành Trình Về Phương Đông (Bộ 2 Cuốn)
-                                        </h5>
-
-                                        <div class="price">
-                                            <span class="current-price">130.000 đ</span>
-                                            <span class="original-price line-through">130.000 đ</span>
-
-                                        </div>
-
-                                        <div class="ratings">
-                                            <a href="#">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <span>(37)</span>
-                                            </a>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-
-                        <a href="">
-                            <li class="col-xs-3">
-                                <div class="list-item">
-                                    <img src="images/logoBook.png" alt="" class="list-item-img">
-                                    <div class="list-item-description">
-                                        <h5 class="list-item-name">
-                                            Combo Sách Nhà Giả Kim + Hành Trình Về Phương Đông (Bộ 2 Cuốn)
-                                        </h5>
-
-                                        <div class="price">
-                                            <span class="current-price">130.000 đ</span>
-                                            <span class="original-price line-through">130.000 đ</span>
-
-                                        </div>
-
-                                        <div class="ratings">
-                                            <a href="#">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <span>(37)</span>
-                                            </a>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-
-                        <a href="">
-                            <li class="col-xs-3">
-                                <div class="list-item">
-                                    <img src="images/logoBook.png" alt="" class="list-item-img">
-                                    <div class="list-item-description">
-                                        <h5 class="list-item-name">
-                                            Combo Sách Nhà Giả Kim + Hành Trình Về Phương Đông (Bộ 2 Cuốn)
-                                        </h5>
-
-                                        <div class="price">
-                                            <span class="current-price">130.000 đ</span>
-                                            <span class="original-price line-through">130.000 đ</span>
-
-                                        </div>
-
-                                        <div class="ratings">
-                                            <a href="#">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <span>(37)</span>
-                                            </a>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-                    </ul>
+                    <ul class="row product-list"></ul>
                 </div>
             </div>
-            <!-- End Relation -->
+            <!-- End Newest -->
 
-            <!-- Recommand -->
+            <!-- Favorite -->
             <div class="container card">
-                <div class="recommand">
-                    <div class="top-links pb-0">
-                        <h5>BOOKSTORE GIỚI THIỆU</h5>
+                <div class="favorite">
+                    <div class="top-links pb-0 mb-2">
+                        <h5>YÊU THÍCH NHẤT</h5>
                     </div>
 
-                    <ul class="row product-list">
-                        <a href="">
-                            <li class="col-xs-3">
-                                <div class="list-item">
-                                    <img src="images/logoBook.png" alt="" class="list-item-img">
-                                    <div class="list-item-description">
-                                        <h5 class="list-item-name">
-                                            Combo Sách Nhà Giả Kim + Hành Trình Về Phương Đông (Bộ 2 Cuốn)
-                                        </h5>
-
-                                        <div class="price">
-                                            <span class="current-price">130.000 đ</span>
-                                            <span class="original-price line-through">130.000 đ</span>
-
-                                        </div>
-
-                                        <div class="ratings">
-                                            <a href="#">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <span>(37)</span>
-                                            </a>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-
-                        <a href="">
-                            <li class="col-xs-3">
-                                <div class="list-item">
-                                    <img src="images/logoBook.png" alt="" class="list-item-img">
-                                    <div class="list-item-description">
-                                        <h5 class="list-item-name">
-                                            Combo Sách Nhà Giả Kim + Hành Trình Về Phương Đông (Bộ 2 Cuốn)
-                                        </h5>
-
-                                        <div class="price">
-                                            <span class="current-price">130.000 đ</span>
-                                            <span class="original-price line-through">130.000 đ</span>
-
-                                        </div>
-
-                                        <div class="ratings">
-                                            <a href="#">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <span>(37)</span>
-                                            </a>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-
-                        <a href="">
-                            <li class="col-xs-3">
-                                <div class="list-item">
-                                    <img src="images/logoBook.png" alt="" class="list-item-img">
-                                    <div class="list-item-description">
-                                        <h5 class="list-item-name">
-                                            Combo Sách Nhà Giả Kim + Hành Trình Về Phương Đông (Bộ 2 Cuốn)
-                                        </h5>
-
-                                        <div class="price">
-                                            <span class="current-price">130.000 đ</span>
-                                            <span class="original-price line-through">130.000 đ</span>
-
-                                        </div>
-
-                                        <div class="ratings">
-                                            <a href="#">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <span>(37)</span>
-                                            </a>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-
-                        <a href="">
-                            <li class="col-xs-3">
-                                <div class="list-item">
-                                    <img src="images/logoBook.png" alt="" class="list-item-img">
-                                    <div class="list-item-description">
-                                        <h5 class="list-item-name">
-                                            Combo Sách Nhà Giả Kim + Hành Trình Về Phương Đông (Bộ 2 Cuốn)
-                                        </h5>
-
-                                        <div class="price">
-                                            <span class="current-price">130.000 đ</span>
-                                            <span class="original-price line-through">130.000 đ</span>
-
-                                        </div>
-
-                                        <div class="ratings">
-                                            <a href="#">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <span>(37)</span>
-                                            </a>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-                    </ul>
+                    <ul class="row product-list"></ul>
                 </div>
             </div>
-            <!-- End Recommand -->
+            <!-- End Favorite -->
 
 
             <!-- Product Detail Information -->
@@ -451,45 +227,57 @@ session_start();
                             <tbody>
                                 <tr>
                                     <td>Mã hàng</td>
-                                    <td>12345567894198</td>
-                                </tr>
-                                <tr>
-                                    <td>Tên Nhà Cung Cấp</td>
                                     <td>
-                                        <a href="#">Nhã Nam</a>
+                                        <?php echo $product['code']; ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Tác giả</td>
-                                    <td>Paulo Coelho</td>
+                                    <td>
+                                        <?php echo $product['author']; ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Người Dịch</td>
-                                    <td>Lê Chu Cầu</td>
+                                    <td>
+                                        <?php echo $product['translator']; ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>NXB</td>
-                                    <td>NXB Hội Nhà Văn</td>
+                                    <td>
+                                        <?php echo $product['publisher']; ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Năm XB</td>
-                                    <td>2020</td>
+                                    <td>
+                                        <?php echo $product['publication_year']; ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Trọng lượng (gr)</td>
-                                    <td>220</td>
+                                    <td>
+                                        <?php echo $product['weight']; ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Kích Thước Bao Bì</td>
-                                    <td>20.5 x 13 cm</td>
+                                    <td>
+                                        <?php echo $product['dimension']; ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Số trang</td>
-                                    <td>227</td>
+                                    <td>
+                                        <?php echo $product['page_num']; ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Hình thức</td>
-                                    <td>Bìa Mềm</td>
+                                    <td>
+                                        <?php echo $product['cover']; ?>
+                                    </td>
                                 </tr>
 
                             </tbody>
@@ -507,170 +295,132 @@ session_start();
                     <h4 class="title">Đánh giá sản phẩm</h4>
 
                     <div class="row ratings__container">
-                        <div class="ratings__block col-xs-2">
+                        <div class="ratings__block col-xs-3">
                             <div class="ratings-point">
-                                <span class="current-point">4.9</span>
+                                <span class="current-point">0</span>
                                 <span>/</span>
                                 <span class="max-point">5</span>
                             </div>
 
                             <div class="ratings mb-1">
-                                <a href="#">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </a>
+                                <div class="ratings-box">
+                                    <div class="ratings-star" style="width: 0%"></div>
+                                </div>
                             </div>
 
-                            <span>(110 đánh giá)</span>
+                            <span>(<span class="review_nums">0</span> đánh giá)</span>
 
                         </div>
 
-                        <div class="ratings-bar col-xs-4">
+                        <div class="ratings-bar col-xs-6">
                             <div class="row">
                                 <div class="col">
                                     <span>5 sao</span>
-                                    <div class="bar"></div>
+                                    <div class="bar">
+                                        <div class="bar-active" style="width:0%;"></div>
+                                    </div>
                                     <span>0%</span>
                                 </div>
                                 <div class="col">
                                     <span>4 sao</span>
-                                    <div class="bar"></div>
+                                    <div class="bar">
+                                        <div class="bar-active" style="width:0%;"></div>
+                                    </div>
                                     <span>0%</span>
                                 </div>
                                 <div class="col">
                                     <span>3 sao</span>
-                                    <div class="bar"></div>
+                                    <div class="bar">
+                                        <div class="bar-active" style="width:0%;"></div>
+                                    </div>
                                     <span>0%</span>
                                 </div>
                                 <div class="col">
                                     <span>2 sao</span>
-                                    <div class="bar"></div>
+                                    <div class="bar">
+                                        <div class="bar-active" style="width:0%;"></div>
+                                    </div>
                                     <span>0%</span>
                                 </div>
                                 <div class="col">
                                     <span>1 sao</span>
-                                    <div class="bar"></div>
+                                    <div class="bar">
+                                        <div class="bar-active" style="width:0%;"></div>
+                                    </div>
                                     <span>0%</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="comment-rule col-xs-6">
-                            <span>
-                                Chỉ có thành viên mới có thể viết nhận xét. Vui lòng <a href="login.php">đăng nhập</a> hoặc <a href="registration.php">đăng ký</a>.
+                        <div class="comment-rule col-xs-3">
+                            <span style="display:<?php echo isset($_SESSION['user_id']) ? "none" : "block"; ?>">
+                                Chỉ có thành viên mới có thể viết nhận xét. Vui lòng <a href="login.php">đăng nhập</a>
+                                hoặc <a href="registration.php">đăng ký</a>.
                             </span>
+                            <a href="" style="display:<?php echo isset($_SESSION['user_id']) ? "block" : "none"; ?>"
+                                class="btn border-primary px-3" data-toggle="modal" data-target="#comment-modal">Viết
+                                Đánh Giá</a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="comment-modal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header"
+                                            style="display: flex; justify-content: space-between;">
+                                            <h5 class="modal-title" id="modal-label">VIẾT ĐÁNH GIÁ SẢN PHÂM</h5>
+                                            <div class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </div>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form__info">
+                                                <div class="rating">
+                                                    <span class="rating-star"></span>
+                                                    <span class="rating-star"></span>
+                                                    <span class="rating-star"></span>
+                                                    <span class="rating-star"></span>
+                                                    <span class="rating-star"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form__info">
+                                                <textarea class="form-control" name="content" id="reviewContent"
+                                                    placeholder="Nội Dung (giới hạn 1000 ký tự)" style="height: 300px"
+                                                    maxlength="1000"></textarea>
+                                                <div class="validate-msg"></div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" id="closeReview" class="btn border-secondary"
+                                                data-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button type="button" id="submitReview"
+                                                class="btn border-primary bg-primary-color text-secondary-color">
+                                                Gửi nhận xét
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
 
                     <div class="top-links pb-0">
                         <ul class="row links">
-                            <li class="link-item d-inline-block px-2">
+                            <!-- <li class="link-item d-inline-block px-2">
                                 <a href="#" style="font-size:1.2rem;">Mới nhất</a>
-                            </li>
-                            <li class="link-item active d-inline-block px-2">
-                                <a href="#" style="font-size:1.2rem;">Yêu thích nhất</a>
+                            </li> -->
+                            <li class="link-item active d-inline-block mx-1 px-1">
+                                <a href="#" style="font-size:1.2rem;">Đánh giá</a>
                             </li>
                         </ul>
                     </div>
 
                     <!-- Comment -->
-                    <div class="comment-list">
-                        <div class="comment-block">
-                            <div class="row">
-                                <div class="col-xs-2">
-                                    <div class="name">Name</div>
-                                    <div class="comment-date">24/11/2022</div>
-                                </div>
-                                <div class="col-xs-10">
-                                    <div class="ratings mb-1">
-                                        <a href="#">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </a>
-                                    </div>
+                    <div class="comment-list"></div>
 
-                                    <div class="comment">
-                                        Một trong những tác phẩm kinh điển, bestseller nên đọc. Sách kể về câu chuyện của một cậu bé chăn cừu trên con đường đi tìm kiếm kho báu khổng lồ. Câu chuyện đem đến cho bản thân em nhiều suy nghĩ và liên tưởng về cuộc sống này. Con đường cậu đi, những ngôi làng, những sa mạc, những con người cùng những cuộc gặp gỡ. Cuộc sống chính được tạo nên từ những điều như thế. Trong hành trình tiến về phía trước luôn có những khó khăn, vất vả, những mất mát hay cả những thất bại. Nhưng chúng ta nhất định phải bản lĩnh và kiên cường. Tuyệt đối không bị gục ngã trước nghịch cảnh. Và định nghĩa về những điều quý giá, chúng vẫn luôn hiện hữu xung quanh chúng ta, là tình thân, tình bạn, tình yêu,...
-                                    </div>
-
-                                    <div class="like-report-block">
-                                        <div class="like-block d-inline-block mr-1">
-                                            <a href="#">
-                                                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                                                <span>Thích </span>
-                                                <span>(12)</span>
-                                            </a>
-                                        </div>
-
-                                        <div class="report-block d-inline-block mr-1">
-                                            <a href="#">
-                                                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                                                <span>Báo cáo</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="comment-block">
-                            <div class="row">
-                                <div class="col-xs-2">
-                                    <div class="name">Name</div>
-                                    <div class="comment-date">24/11/2022</div>
-                                </div>
-                                <div class="col-xs-10">
-                                    <div class="ratings mb-1">
-                                        <a href="#">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </a>
-                                    </div>
-
-                                    <div class="comment">
-                                        Một trong những tác phẩm kinh điển, bestseller nên đọc. Sách kể về câu chuyện của một cậu bé chăn cừu trên con đường đi tìm kiếm kho báu khổng lồ. Câu chuyện đem đến cho bản thân em nhiều suy nghĩ và liên tưởng về cuộc sống này. Con đường cậu đi, những ngôi làng, những sa mạc, những con người cùng những cuộc gặp gỡ. Cuộc sống chính được tạo nên từ những điều như thế. Trong hành trình tiến về phía trước luôn có những khó khăn, vất vả, những mất mát hay cả những thất bại. Nhưng chúng ta nhất định phải bản lĩnh và kiên cường. Tuyệt đối không bị gục ngã trước nghịch cảnh. Và định nghĩa về những điều quý giá, chúng vẫn luôn hiện hữu xung quanh chúng ta, là tình thân, tình bạn, tình yêu,...
-                                    </div>
-
-                                    <div class="like-report-block my-1">
-                                        <div class="like-block d-inline-block mr-1">
-                                            <a href="#">
-                                                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                                                <span>Thích </span>
-                                                <span>(12)</span>
-                                            </a>
-                                        </div>
-
-                                        <div class="report-block d-inline-block mr-1">
-                                            <a href="#">
-                                                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                                                <span>Báo cáo</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="pages">
-                            <a href="" class="btn bg-primary-color current-page">1</a>
-                            <a href="" class="btn">2</a>
-                            <a href="" class="btn">3</a>
-                            <a href="" class="btn">4</a>
-                            <a href="" class="btn"><i class="fa fa-chevron-right"></i></a>
-                        </div>
-                    </div>
+                    <div class="pages" id="pages"></div>
                     <!-- End Comment -->
                 </div>
             </div>
@@ -696,7 +446,7 @@ session_start();
     <script src="js/jquery.isotope.min.js"></script>
     <script src="js/headroom.js"></script>
     <script src="js/foodpicky.min.js"></script>
+    <script src="js/pagination.js"></script>
     <script src="js/product.js"></script>
+    <script src="js/search.js"></script>
 </body>
-
-</html>

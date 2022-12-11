@@ -1,207 +1,359 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+a:focus {
+  text-decoration: none;
+  color: rgb(255, 51, 0);
+}
+
+hr:last-child {
+  display: none;
+}
 
 .bg-primary-color {
-    background-color: #f30;
+  background-color: #f30;
 }
 
 .text-secondary-color {
-    color: #fff;
+  color: #fff;
 }
 
 a.btn.bg-primary-color:hover,
 a.btn.bg-primary-color:focus {
-    background-color: #f30;
-    border: 2px solid #f30;
-    opacity: 0.8;
+  background-color: #f30;
+  border: 2px solid #f30;
+  opacity: 0.8;
 }
 
 .border-primary {
-    border: 2px solid #f30;
-    border-radius: 8px;
+  border: 2px solid #f30;
+  border-radius: 8px;
+}
+
+.border-secondary {
+  border: 2px solid rgba(252, 251, 249, 0.68);
+  border-radius: 8px;
+}
+
+.modal-header::after {
+  content: none;
 }
 
 .title {
-    margin: 1.5rem 0rem;
+  margin: 1.5rem 0rem;
 }
 
 .line-through {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 /* Product information */
 .product__information {
-    margin: 1rem 0rem 4rem;
+  margin: 1rem 0rem 4rem;
 }
 
 .product-img__block {
-    text-align: center;
-    margin-bottom: 2rem;
-    padding: 2rem 0rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 2rem 0rem;
+}
+
+.product-img {
+  max-width: 100%;
+}
+
+.product__description {
+  margin-top: 16px;
 }
 
 .product__name {
-    margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .product__list-item {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 /* Price */
 .price {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .current-price {
-    font-size: 2.0rem;
-    font-weight: 700;
-    color: #C92127;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #c92127;
 }
 
-.original-price ,
+.original-price,
 .discount {
-    margin-left: 12px;
-    font-size: 1rem;
+  margin-left: 12px;
+  font-size: 1rem;
 }
 
 .discount {
-    color: #fff;
-    background-color: #C92127;
-    padding: 2px;
-    border-radius: 4px;
+  color: #fff;
+  background-color: #c92127;
+  padding: 2px;
+  border-radius: 4px;
 }
 /* Quantity */
-.quantity_container span{
-    font-size: 1.2rem;
-    margin-right: 3rem;
+.quantity_container span {
+  font-size: 1.2rem;
+  margin-right: 3rem;
 }
 
 .quantity-control {
-    display: inline-flex;
-    margin-top: 1rem;
-    font-size: 1.4rem;
-    align-items: center;
-    
-    border: 1px solid #c1c1c1;
-    border-radius: 4px;
+  display: inline-flex;
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  align-items: center;
+
+  border: 1px solid #c1c1c1;
+  border-radius: 4px;
 }
 
 .quantity-control a:focus {
-    color:#c1c1c1;
-    text-decoration: none;
+  color: #c1c1c1;
+  text-decoration: none;
 }
 
 .quantity {
-    overflow: visible;
-    text-align: center;
-    width: 3rem;
-    border: none;
-    outline: none;
+  overflow: visible;
+  text-align: center;
+  width: 3rem;
+  border: none;
+  outline: none;
+}
+
+#subQty,
+#plusQty {
+  cursor: pointer;
 }
 
 /* Detail table */
 .product__detail-information {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .product__detail-table {
-    width: 100%;
+  width: 100%;
 }
 
-.product__detail-table ul{
-    margin-bottom: 0;
+.product__detail-table ul {
+  margin-bottom: 0;
 }
 
-.product__detail-table li{
-    margin: 8px 0px;
+.product__detail-table li {
+  margin: 8px 0px;
 }
 
-.product__detail-table td{
-    padding: 4px;
+.product__detail-table td {
+  padding: 4px;
 }
 
 /* Comment */
 
 .comment-rule {
-    font-size: 0.8rem; 
-    text-align: center;
+  font-size: 0.8rem;
+  text-align: center;
 }
 
 .comment-list {
-    margin: 1rem;
+  margin: 1rem;
 }
 
 .comment-block {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
+}
+
+.comment {
+  min-height: 150px;
 }
 
 .like-report-block {
-    margin: 1rem 0rem;
+  margin: 1rem 0rem;
 }
 
 .pages {
-    margin-top: 64px;
-    display: flex;
-    justify-content: center;
+  margin-top: 64px;
+  /* display: flex;
+justify-content: center; */
+}
+
+.paginationjs-pages ul {
+  display: flex;
+  justify-content: center;
+}
+
+.paginationjs-prev,
+.paginationjs-next,
+.paginationjs-page {
+  color: #000;
+  border-radius: 4px;
+}
+
+.paginationjs-page.active {
+  color: #fff;
+  background-color: #f30;
 }
 
 .pages a {
-    color:#000;
-    border-radius: 4px;
+  color: #000;
+  border-radius: 4px;
 }
 
 .pages a:hover {
-    background-color: #FCDAB0;
+  background-color: #fcdab0;
 }
 
 .pages .current-page {
-    color: #fff;
+  color: #fff;
 }
 
-
 /* Recommand & Relation */
+
+.list-item-link {
+  display: flex;
+  justify-content: center;
+}
+
+.list-item.card {
+  height: 450px;
+  max-width: 270px;
+  display: flex;
+  padding: 16px;
+  flex-direction: column;
+}
+
+.img-container {
+  display: flex;
+  justify-content: center;
+}
+
+.list-item-img {
+  height: 250px;
+  margin-bottom: 1rem;
+}
+
+.list-item-name {
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.list-item-description {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .list-item-description .price {
-    flex-direction: column;
-    align-items: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .list-item-description .current-price {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 
 .list-item-description .original-price {
-    font-size: 1rem;
-    margin: 4px 0px;
+  font-size: 1rem;
+  margin: 4px 0px;
 }
 
 .link-item.active {
-    border-bottom: 1px solid #f30;
+  border-bottom: 1px solid #f30;
 }
 
-.link-item.active a{
-    color:#f30;
+.link-item.active a {
+  color: #f30;
 }
 
 /* Rating */
+
+.form__info {
+  margin-bottom: 16px;
+}
+
+.rating-star {
+  display: inline-block;
+  background: url("https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/ico_star_gray.svg")
+    0 0 / 24px 24px repeat;
+  color: #e3e5e5;
+  height: 24px;
+  width: 24px;
+  margin-right: 4px;
+}
+
+.rating-star.active {
+  background: url("https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/ico_star_yellow.svg")
+    0 0 / 24px 24px repeat;
+}
+
+.ratings-box {
+  display: inline-block;
+  background: url("https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/ico_star_gray.svg")
+    0 0 / 18px 18px repeat;
+  color: #e3e5e5;
+  height: 18px;
+  width: 90px;
+  margin-right: 4px;
+}
+
+.ratings-star {
+  display: inline-block;
+  background: url("https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/ico_star_yellow.svg")
+    0 0 / 18px 18px repeat;
+  color: #e3e5e5;
+  height: 18px;
+  width: 90px;
+  margin-right: 4px;
+}
+
+.ratings {
+  display: flex;
+  align-items: center;
+}
+
 .ratings__container {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .ratings__block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .current-point {
-    font-size: 4rem;
+  font-size: 4rem;
 }
 
 /* Rating Bar */
 .bar {
-    display: inline-flex;
-    width: 80%;
-    height: 4px;
-    background: #ccc;
-    border-radius: 4px;
+  display: inline-flex;
+  width: 80%;
+  height: 4px;
+  background: #ccc;
+  border-radius: 4px;
 }
+
+.bar-active {
+  display: inline-flex;
+  height: 4px;
+  background: #f6a500;
+  border-radius: 4px;
+}
+
+/* Search */
