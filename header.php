@@ -37,11 +37,21 @@ session_start();
                     {
                         echo '<li class="nav-item"><a href="login.php" class="nav-link active">Đăng nhập</a> </li>
 							  <li class="nav-item"><a href="registration.php" class="nav-link active">Đăng ký tài khoản</a> </li>';
+                        
                     } else {
                         //if user is login
-
+                       
                         echo  '<li class="nav-item"><a href="your_orders.php" class="nav-link active">Giỏ hàng </a> </li>';
-                        echo  '<li class="nav-item"><a href="logout.php" class="nav-link active">Đăng xuất</a> </li>';
+                        echo '<li class="nav-item dropdown">
+                        <a style="color: red; font-weight:600" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Hello '.$_SESSION["username"].' !
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="#">Thông tin cá nhân</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="logout.php">Đăng xuất</a>
+                        </div>
+                      </li>';
                     }
 
                     ?>
