@@ -27,7 +27,7 @@
 	<?php
 	include("connection/connect.php"); //INCLUDE CONNECTION
 	error_reporting(0); // hide undefine index errors
-	session_start(); // temp sessions
+	// session_start(); // temp sessions
 	if (isset($_POST['submit']))   // if button is submit
 	{
 		$username = $_POST['username'];  //fetch records from login form
@@ -38,23 +38,16 @@
 			$loginquery = "SELECT * FROM users WHERE username='$username'"; //selecting matching records
 			$result = mysqli_query($db, $loginquery); //executing
 			$row = mysqli_fetch_array($result);
-			
+			echo $row;
 
-			// if (is_array($row))  // if matching records in the array & if everything is right
-			// {
-			// 	$_SESSION["user_id"] = $row['u_id']; // put user id into temp session
-			// 	header("refresh:1;url=index.php"); // redirect to index.php page
-			// } else {
-			// 	print_r($row);
-			// 	$message = "Invalid Username or Password!"; // throw error
-			// }
 			if (is_array($row)) {
-				if ($row['password']==md5($password)) {
-					$_SESSION['pass'] = "vamos espana";
-					header("refresh:1;url=index.php");
+				if (password_verify($password, $row['password'])) {
+					setcookie("user_id", $row['id'], time() + (86400*30), "/");
+					$success = "Đăng nhập thành công!";
+					header("refresh:1;url=cart.php");
 				} else {
 					
-					$message = "Tên đăng nhập hoặc mật khẩu không chính xác!";
+					$message = $row['password'];
 				} 
 			} else {
 				$message = "Tên đăng nhập hoặc mật khẩu không chính xác!";

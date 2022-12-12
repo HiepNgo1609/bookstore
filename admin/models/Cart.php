@@ -43,9 +43,12 @@ class Cart {
     public function getCartInfo($user_id) {
         $query = '
             SELECT  c.status,
+                    c.id,
                     c.quantity, 
-                    p.product_id,
+                    p.id,
                     p.name,
+                    p.author,
+                    p.publisher,
                     p.code,
                     p.image_url,
                     p.discount,
@@ -64,12 +67,11 @@ class Cart {
         $query = '
             UPDATE ' . $this->table . '
             SET quantity= :qty
-            WHERE user_id= :user_id AND product_id= :product_id
+            WHERE id=:id
         ';
 
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':user_id', $this->user_id);
-        $stmt->bindParam(':product_id', $this->product_id);
+        $stmt->bindParam(':id', $this->id);
         $stmt->bindParam(':qty', $this->qty);
         if ($stmt->execute()) {
             return true;
@@ -82,11 +84,25 @@ class Cart {
     public function removeProductInCart() {
         $query = '
             DELETE FROM ' . $this->table . '
-            WHERE user_id= :user_id AND product_id= :product_id
+            WHERE id=:id
+        ';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $this->id);
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            printf("Error: %s.\n", $stmt->error);
+            return false;
+        }
+    }
+
+    public function removeProductInCartByUserId() {
+        $query = '
+            DELETE FROM ' . $this->table . '
+            WHERE user_id= :user_id
         ';
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':user_id', $this->user_id);
-        $stmt->bindParam(':product_id', $this->product_id);
         if ($stmt->execute()) {
             return true;
         } else {

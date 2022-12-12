@@ -1,166 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Giỏ hàng</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="16x16" href="./admin/images/favicon1.png">
+    <title>Giỏ hàng</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animsition.min.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/cart.css">
 </head>
 
 <body>
-  <section class="h-100 h-custom" style="background-color: #eee;">
-    <div class="container py-5 h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col">
-          <div class="card">
-            <div class="card-body p-4">
-  
-              <div class="row">
-  
-                <div class="col-lg-7">
-                  <h5 class="mb-3"><a href="#!" class="text-body"><i class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</a></h5>
-                  <hr>
-  
-                  <div class="d-flex justify-content-between align-items-center mb-4">
-                    <div>
-                      <p class="mb-1">
-                      <h2>Giỏ hàng</h2>
-                      </p>
-  
-                      <table class="table ">
-                        <tr>
-                          <th>Name</th>
-                          <th>Quantity</th>
-                          <th>Price</th>
-                          <th></th>
-                          <th></th>
-                        </tr>
-  
-                        <?php
-                        if (isset($_GET['id'])) {
-                          $user_id = $_GET['id'];
-  
-                          $conn = mysqli_connect('localhost', 'root', '') or die(mysqli_error($conn));
-                          $db_select = mysqli_select_db($conn, 'init') or die(mysqli_error($conn));
-                          $sql = "SELECT cart_items.id, products.name, cart_items.quantity, products.price
-              FROM products JOIN cart_items ON products.id = cart_items.product_id
-              WHERE cart_items.cart_id = (SELECT carts.id
-                                          FROM carts, users
-                                          WHERE users.id = $user_id)";
-                          $res = mysqli_query($conn, $sql);
-                          if ($res == true) {
-                            $count_rows = mysqli_num_rows($res);
-                            if ($count_rows > 0) {
-                              while ($rows = mysqli_fetch_assoc($res)) {
-                                $id = $rows['id'];
-                                $name = $rows['name'];
-                                $quantity = $rows['quantity'];
-                                $price = $rows['price'];
-                        ?>
-  
-                                <tr>
-                                  <td><?php echo $name; ?></td>
-                                  <td><?php echo $quantity; ?></td>
-                                  <td><?php echo $price; ?></td>
-                                  <td><button type="button" class=" btn btn-danger "> <a href="delete.php?id=<?php echo $id . '&user_id=' . $user_id; ?>">Delete</a> </button></td>
-                                  <td><button type="button" class=" btn btn-success "> <a href="add.php?id=<?php echo $id . '&user_id=' . $user_id; ?>">Add</a> </button></td>
-                                </tr>
-  
-                        <?php
-                              }
-                            }
-                          }
-                        }
-                        ?>
-                      </table>
-  
+    <!-- Header Start -->
+    <?php require_once "./header.php" ?>
+    <!-- Header End -->
+    <div class="page-wrapper">
+        <!-- <div class="container">
+            <div class="row ">
+                <div class="card cart">
+                    <h4 class="card-title">Giỏ hàng (0) sản phẩm</h4>
+                    <div class="card-body cart-body">
+                        <img src="https://cdn0.fahasa.com/skin//frontend/ma_vanese/fahasa/images/checkout_cart/ico_emptycart.svg" alt="Giỏ hàng trống">
+                        <p>Chưa có sản phẩm nào trong giỏ hàng của bạn.</p>
+                        <button class="btn shopping_btn">Mua Sắm Ngay</button>
                     </div>
-  
-                  </div>
-  
-  
                 </div>
-                <div class="col-lg-5">
-  
-                  <div class="card bg-primary text-white rounded-3">
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between align-items-center mb-4">
-  
-                      </div>
-  
-  
-                      <?php
-                      if (isset($_GET['id'])) {
-                        $user_id = $_GET['id'];
-                        $tong = 0;
-                        $conn = mysqli_connect('localhost', 'root', '') or die(mysqli_error($conn));
-                        $db_select = mysqli_select_db($conn, 'init') or die(mysqli_error($conn));
-                        $sql = "SELECT cart_items.id, products.name, cart_items.quantity, products.price
-              FROM products JOIN cart_items ON products.id = cart_items.product_id
-              WHERE cart_items.cart_id = (SELECT carts.id
-                                          FROM carts, users
-                                          WHERE users.id = $user_id)";
-                        $res = mysqli_query($conn, $sql);
-                        if ($res == true) {
-                          $count_rows = mysqli_num_rows($res);
-                          if ($count_rows > 0) {
-                            while ($rows = mysqli_fetch_assoc($res)) {
-                              $id = $rows['id'];
-                              $name = $rows['name'];
-                              $quantity = $rows['quantity'];
-                              $price = $rows['price'];
-  
-  
-                              $tong = $tong + $quantity * $price;
-                            }
-                          }
-                        }
-                      }
-                      ?>
-  
-  
-  
-                      <hr class="my-4">
-  
-                      <div class="d-flex justify-content-between">
-                        <p class="mb-2">Subtotal</p>
-                        <p class="mb-2"><?php echo $tong; ?></p>
-                      </div>
-  
-                      <div class="d-flex justify-content-between">
-                        <p class="mb-2">Shipping</p>
-                        <p class="mb-2">Free</p>
-                      </div>
-  
-                      <div class="d-flex justify-content-between mb-4">
-                        <p class="mb-2">Total</p>
-                        <p class="mb-2"><?php echo $tong; ?></p>
-                      </div>
-  
-  
-  
-                      <button type="button" class="btn btn-info btn-block btn-lg">
-                        <div class="d-flex justify-content-between">
-                          <span><?php echo $tong; ?></span>
-                          <span><a href="checkout.php" style="color:blue">Checkout</a> <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
-  
-                        </div>
-  
-                      </button>
-  
-                    </div>
-                  </div>
-  
-                </div>
-  
-              </div>
-  
             </div>
-          </div>
-        </div>
-      </div>
+        </div> -->
+        <!-- <div class="container">
+            <h3 style="margin-top: 30px;">Giỏ hàng (1) sản phẩm</h3>
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="card">
+                        <div class="card-body" style="padding: 20px;">
+                            <div class="row">
+                                <div class="col-sm-1 col-md-1 ml-5">
+                                    <strong>STT</strong>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <strong>Thông tin sản phẩm</strong>
+                                </div>
+                                <div class="col-sm-2 col-md-2">
+                                    <strong>Đơn giá</strong>
+                                </div>
+                                <div class="col-sm-2 col-md-3">
+                                    <strong>Số lượng</strong>
+                                </div>
+                            </div>
+
+                            <div class="orderItemList" style="margin-top: 25px;">
+                                <div class="row my-1 order_item">
+                                    <div class="col-sm-1 col-md-1 my-3">
+                                        <span>1</span>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 my-1">
+                                        <div class="row">
+                                            <div class="col-sm-4 ">
+                                                <img src="https://cdn0.fahasa.com/media/catalog/product//i/m/image_195509_1_36793.jpg" alt="" style="width: 120%;">
+
+                                            </div>
+                                            <div class="col-sm-8 item_info">
+                                                <h4>Nhà Giả Kim</h4>
+                                                <p><strong>Author:</strong> Paulo Coelho</p>
+                                                <p><strong>NXB:</strong> NXB Hội Nhà Văn</p>
+                                                <p><strong>Code:</strong> 188236712</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2 col-md-2 my-3">
+                                        <h5 class="item_price">53.500VND</h5>
+                                    </div>
+                                    <div class="col-sm-2 col-md-3">
+                                        <input data-id="" data-uprice="" type="number" class="form-control qty" style="width: 50%; margin-top: 40px;" value="1" min="0">
+                                        <a href="#" class="remove_item">
+
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body" style="padding: 20px;">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <label for="discount_code" class="col-form-label">Khuyến mãi: </label>
+                                </div>
+                                <div class="col-sm-7">
+                                    <input class="form-control" type="text" id="discount_code">
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-sm-5">
+                                    <label for="#">Thành tiền:</label>
+                                </div>
+                                <div class="col-sm-7" style="text-align: end;">
+                                    <span>53,500 VND</span>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <hr class="dash">
+                                <div class="col-sm-7">
+                                    <h4>Tổng Số Tiền (VAT): </h4>
+                                </div>
+                                <div class="col-sm-5" style="text-align: end;">
+                                    <strong class="invoice">53,500 VND</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
     </div>
-  </section>
+    <!-- <div class="page-wrapper">
+        
+    </div> -->
+    <!-- Footer Start -->
+    <?php require_once "./footer.php" ?>
+    <!-- Footer End -->
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/animsition.min.js"></script>
+    <script src="js/bootstrap-slider.min.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/headroom.js"></script>
+    <script src="js/foodpicky.min.js"></script>
+    <script src="js/cart.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,147 @@
+.cart {
+    margin: 50px 0px!important;
+    height: 400px;
+    padding: 20px;
+}
+
+.cart-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-body img {
+    width: 15%;
+    margin: 0px auto;
+}
+
+.cart-body p {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 20px auto;
+}
+
+.cart-body button {
+    width: 30%;
+    margin: 0px auto;
+}
+
+.shopping_btn {
+    background-color: #C92127;
+    color: white;
+    border-radius: 10px;
+}
+
+.remove_item {
+    font-size: 1.5rem;
+    color: rgb(101, 104, 107);
+    position: absolute;
+    top: 37px;
+    right: 40px;
+}
+
+.invoice {
+    color: #C92127;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.item_price {
+    font-weight: 500;
+    color: #C92127;
+}
+
+.checkout_btn {
+    background-color: #C92127;
+    color: white;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.backtobuy {
+    color: black;
+}
+
+.backtobuy:hover {
+    color: rgb(1, 1, 185);
+}
+
+@media only screen and (min-width: 320px) {
+    .cart {
+        margin: 50px 0px!important;
+        height: 300px;
+        padding: 20px;
+    }
+
+    .cart-body img {
+        width: 35%;
+        margin: 0px auto;
+    }
+
+    .cart-body p {
+        font-size: 0.9rem;
+        font-weight: 500;
+        justify-content: center;
+    }
+
+    .cart-body button {
+        width: 70%;
+        margin: 0px auto;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .cart {
+        margin: 50px 0px!important;
+        height: 400px;
+        padding: 20px;
+    }
+
+    .cart-body img {
+        width: 30%;
+        margin: 0px auto;
+    }
+
+    .col-md-2 {
+        font-size: 0.9rem;
+    }
+
+    .item_info {
+        font-size: 0.8rem;
+    }
+
+    .item_info h4 {
+        font-size: 0.9rem;
+        font-weight: 700;
+    }
+
+    .item_price {
+        font-size: 1rem;
+    }
+
+    .cart-body p {
+        font-size: 1rem;
+        font-weight: 500;
+        justify-content: center;
+    }
+
+    .cart-body button {
+        width: 50%;
+        margin: 0px auto;
+    }
+
+    .remove_item {
+        right: 20px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .cart-body img {
+        width: 17%;
+        margin: 0px auto;
+    }
+
+    .cart-body button {
+        width: 25%;
+        margin: 0px auto;
+    }
+}
