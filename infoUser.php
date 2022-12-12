@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-
-
 session_start();
 error_reporting(0);
-include("../connection/connect.php");
+include("connection/connect.php");
 
 if(isset($_POST['submit'] ))
 {
@@ -15,7 +13,6 @@ if(isset($_POST['submit'] ))
 		empty($_POST['email'])||
 		empty($_POST['password'])||
         empty($_POST['address'])||
-        empty($_POST['role'])||
 		empty($_POST['phone_number']))
         
 		{
@@ -27,9 +24,8 @@ if(isset($_POST['submit'] ))
 		}
 	else
 	{
-    $check_username = mysqli_query($db, "SELECT username FROM users where username = '$_POST[username]' ");
+		
 
-    
 	
 	
     if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) // Validate email address
@@ -54,14 +50,12 @@ if(isset($_POST['submit'] ))
 																<strong>Số điện thoại không hợp lệ!</strong>
 															</div>';
 	}
-    
 	
 	else{
        
 	
-	$mql = "update users set firstname='$_POST[firstname]', lastname='$_POST[lastname]',email='$_POST[email]',
-    phone_number='$_POST[phone_number]',password='$_POST[password]',address='$_POST[address]',
-     role='$_POST[role]' where id='$_GET[user_upd]' ";
+	$mql = "update users set username = '$_POST[username]', firstname='$_POST[firstname]', lastname='$_POST[lastname]',email='$_POST[email]',
+    phone_number='$_POST[phone_number]',password='$_POST[password]',address='$_POST[address]', role='$_POST[role]' where username='$_SESSION[username]' ";
 	mysqli_query($db, $mql);
 			$success = 	'<div class="alert alert-success alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -81,13 +75,13 @@ if(isset($_POST['submit'] ))
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon1.png">
-    <title>Cập nhật tài khoản</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="admin/images/favicon1.png">
+    <title>Thông tin tài khoản</title>
     <!-- Bootstrap Core CSS -->
-    <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="admin/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="css/helper.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="admin/css/helper.css" rel="stylesheet">
+    <link href="admin/css/style.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
     <!--[if lt IE 9]>
@@ -107,8 +101,7 @@ if(isset($_POST['submit'] ))
 
 
         <!-- header header  -->
-        <?php include 'header.php'?>
-        <?php include 'left_sidebar.php'?>
+        
 
 
         <!-- Page wrapper  -->
@@ -116,7 +109,7 @@ if(isset($_POST['submit'] ))
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">Dashboard</h3> </div>
+                    <h3 class="text-primary"><a href="index.php" style="color:blue">Trang chủ</a></h3> </div>
                
             </div>
             <!-- End Bread crumb -->
@@ -124,9 +117,6 @@ if(isset($_POST['submit'] ))
             <div class="container-fluid">
                 <!-- Start Page Content -->
                      <div class="row">
-                   
-                   
-					
 					 <div class="container-fluid">
                 <!-- Start Page Content -->
 							
@@ -140,17 +130,17 @@ if(isset($_POST['submit'] ))
                                 <h4 class="m-b-0 text-white">Cập nhật tài khoản</h4>
                             </div>
                             <div class="card-body">
-							  <?php $ssql ="select * from users where id='$_GET[user_upd]'";
+							  <?php $ssql ="select * from users where username='$_SESSION[username]'";
 													$res=mysqli_query($db, $ssql); 
 													$newrow=mysqli_fetch_array($res);?>
                                 <form action='' method='post'  >
                                     <div class="form-body">
                                     <hr>
-                                        <div class="row p-t-20">
+                                        <div class="row p-t-15">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Tên đăng nhập</label>
-                                                    <input disabled type="text" name="username" class="form-control" value="<?php  echo $newrow['username']; ?>">
+                                                    <input disabled type="text" name="username" class="form-control" value="<?php  echo $newrow['username']; ?>" placeholder="username">
                                                    </div>
                                             </div>
                                             <!--/span-->
@@ -184,14 +174,14 @@ if(isset($_POST['submit'] ))
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Mật khẩu</label>
-                                                    <input type="text" name="password" class="form-control form-control-danger"   value="<?php  echo $newrow['password'];  ?>" placeholder="Mật khẩu">
+                                                    <input type="password" name="password" class="form-control form-control-danger"  value="<?php  echo $newrow['password'];  ?>" placeholder="Mật khẩu">
                                                     </div>
                                                 </div>
                                         
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Địa chỉ</label>
-                                                    <input type="text" name="address" class="form-control form-control-danger"   value="<?php  echo $newrow['address'];  ?>" placeholder="Địa chỉ">
+                                                    <input type="text" name="address" class="form-control form-control-danger"  value="<?php  echo $newrow['address'];  ?>" placeholder="Địa chỉ">
                                                     </div>
                                                 </div>
                                             </div>
@@ -207,10 +197,23 @@ if(isset($_POST['submit'] ))
                                                 <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Vai trò</label><br>
-                                                    <select style="font-size:medium; padding: 5px; border:1px solid rgb(232,232,232); color:rgb(80,80,80)" name = "role" aria-label="select example">
-                                                        <option value="Quản trị viên">Quản trị viên</option>
-                                                        <option value="Khách hàng" selected>Khách hàng</option>
-                                                    </select>
+                                                    <select disabled name="role" class="form-control custom-select" data-placeholder="Chọn loại sách" tabindex="1">
+                                                        
+                                                    <?php $category ="select * from users";
+													$re=mysqli_query($db, $category); 
+                                                   
+                                                    
+													while($row1=mysqli_fetch_array($re))  
+													{
+                                                        if($_SESSION['username'] == $row1['username']){
+                                                            $selectStr = 'selected';                                                    
+                                                            echo' <option value="'.$row1['id'].'" '.$selectStr.' >'.$row1['role'].'</option>';
+                                                            break;
+                                                        }
+													}  
+                                                 
+													?> 
+													 </select>
                                                 </div>
                                                 
                                                 </div>
@@ -219,7 +222,7 @@ if(isset($_POST['submit'] ))
                                     </div>
                                     <div class="form-actions">
                                         <input type="submit" name="submit" class="btn btn-success" value="Lưu"> 
-                                        <a href="allusers.php" class="btn btn-inverse">Hủy</a>
+                                        <a href="index.php" class="btn btn-inverse">Hủy</a>
                                     </div>
                                 </form>
                             </div>
@@ -237,18 +240,20 @@ if(isset($_POST['submit'] ))
     </div>
     <!-- End Wrapper -->
     <!-- All Jquery -->
-    <script src="js/lib/jquery/jquery.min.js"></script>
+    <script src="admin/js/lib/jquery/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="js/lib/bootstrap/js/popper.min.js"></script>
-    <script src="js/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="admin/js/lib/bootstrap/js/popper.min.js"></script>
+    <script src="admin/js/lib/bootstrap/js/bootstrap.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="js/jquery.slimscroll.js"></script>
+    <script src="admin/js/jquery.slimscroll.js"></script>
     <!--Menu sidebar -->
-    <script src="js/sidebarmenu.js"></script>
+    <script src="admin/js/sidebarmenu.js"></script>
     <!--stickey kit -->
-    <script src="js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="admin/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <!--Custom JavaScript -->
-    <script src="js/custom.min.js"></script>
+    <script src="admin/js/custom.min.js"></script>
+    
+
 </body>
 
 </html>
