@@ -38,7 +38,6 @@
 			$loginquery = "SELECT * FROM users WHERE username='$username'"; //selecting matching records
 			$result = mysqli_query($db, $loginquery); //executing
 			$row = mysqli_fetch_array($result);
-			
 
 			// if (is_array($row))  // if matching records in the array & if everything is right
 			// {
@@ -50,7 +49,8 @@
 			// }
 			if (is_array($row)) {
 				if ($row['password']==md5($password)) {
-					$_SESSION['pass'] = "vamos espana";
+					$_SESSION['username'] = $username;
+					
 					header("refresh:1;url=index.php");
 				} else {
 					
