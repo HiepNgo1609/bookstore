@@ -4,10 +4,24 @@ $(document).ready(function() {
     const addOrderURL = "http://localhost/bookstore/admin/api/addOrder.php"
     const deleteCartURL = "http://localhost/bookstore/admin/api/deleteCartItemByUserId.php"
     const updateUserAddrURL = "http://localhost/bookstore/admin/api/updateUserAddress.php"
+    const checkDiscountCodeURL = "http://localhost/bookstore/admin/api/checkDiscountCode.php"
+    var discount = 0.0
     var invoice = 0
     var items = []
     const ORDER_STATUS_PROCESSING = "Processing"
-
+    
+    $.ajax({
+        url: checkDiscountCodeURL + "?discount_code=" + getCookie("discount_code"),
+        type: "GET",
+        dataType: 'json',
+        success: function(response) {
+            discount = parseFloat(response.discount)
+        },
+        error: function(response) {
+            console.error(response)
+        }
+    })
+    
     $.ajax({
         url: userInfoURL + getCookie("user_id"),
         type: 'GET',
@@ -35,6 +49,7 @@ $(document).ready(function() {
             console.error(e)
         }
     })
+
 
     function productInfoHandle(objectArr) {
         let sum = 0
@@ -88,7 +103,7 @@ $(document).ready(function() {
                 <h5 class="summary-title">Chiết khấu</h5>
                 </div>
                 <div class="col-sm-2">
-                <h4>0</h4>
+                <h4>${discount.toString()} %</h4>
                 </div>
             </div>
             <div class="row ">
@@ -96,7 +111,7 @@ $(document).ready(function() {
                 <h5 class="summary-title">TỔNG</h5>
                 </div>
                 <div class="col-sm-2">
-                <h4 class="red-color"><strong>${new Intl.NumberFormat('de-DE', {style: 'currency', currency: 'VND'}).format(sum)}</strong></h4>
+                <h4 class="red-color"><strong>${new Intl.NumberFormat('de-DE', {style: 'currency', currency: 'VND'}).format(Math.ceil(sum/1000 * (100 - discount)/100)*1000)}</strong></h4>
                 </div>
             </div>
         `

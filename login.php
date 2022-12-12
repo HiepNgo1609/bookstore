@@ -45,12 +45,12 @@
 				if (password_verify($password, $row['password'])) {
 					setcookie("user_id", $row['id'], time() + (86400*30), "/");
 					$success = "Đăng nhập thành công!";
-					header("refresh:1;url=cart.php");
+					header("refresh:1;url=index.php");
 				} else {
-					$message = $row['password'];
+					$message = "Mật khẩu không chính xác!";
 				} 
 			} else {
-				$message = "Tên đăng nhập hoặc mật khẩu không chính xác!";
+				$message = "Tên đăng nhập không chính xác!";
 			}
 		}
 	}

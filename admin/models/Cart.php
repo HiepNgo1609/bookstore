@@ -43,7 +43,7 @@ class Cart {
     public function getCartInfo($user_id) {
         $query = '
             SELECT  c.status,
-                    c.id,
+                    c.id AS cart_id,
                     c.quantity, 
                     p.id,
                     p.name,

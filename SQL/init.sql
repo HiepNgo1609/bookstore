@@ -105,6 +105,17 @@ CREATE TABLE `carts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 -- --------------------------------------------------------
 
+--
+-- Table structure for table `discounts`
+--
+CREATE TABLE `discounts` (
+`id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+`code` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+`discount` float(4,1) NOT NULL,
+`created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+`updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+-- --------------------------------------------------------
 
 --
 -- Add Foreign Key for table `products`
@@ -240,4 +251,13 @@ VALUES (NULL, 1, 'Cart', 1, 1, current_timestamp(), current_timestamp()),
 (NULL, 3, 'Cart', 5, 1, current_timestamp(), current_timestamp()),
 (NULL, 3, 'Cart', 6, 1, current_timestamp(), current_timestamp()),
 (NULL, 5, 'Cart', 4, 1, current_timestamp(), current_timestamp());
+-- -------------------------------------------------------- 
+
+--
+-- Add Data for table `discounts`
+--
+INSERT INTO `discounts` (`id`,`code`,`discount`,`created_at`,`updated_at`) 
+VALUES (NULL, "MAGIAMGIA10", 10.0, current_timestamp(), current_timestamp()),
+(NULL, "MAGIAMGIA05", 5.0, current_timestamp(), current_timestamp()),
+(NULL, "MAGIAMGIA15", 15.0, current_timestamp(), current_timestamp());
 -- -------------------------------------------------------- 

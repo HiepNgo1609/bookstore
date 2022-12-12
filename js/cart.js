@@ -3,7 +3,9 @@ $(document).ready(function() {
     const cartDetailURL = "http://localhost/bookstore/admin/api/getProductInCart.php"
     const rmCartItemURL = "http://localhost/bookstore/admin/api/deleteCartItem.php"
     const updateCartItemURL = "http://localhost/bookstore/admin/api/updateCart.php"
+    const checkDiscountCodeURL = "http://localhost/bookstore/admin/api/checkDiscountCode.php"
     var sumCart = 0
+    var discount_code = getCookie("discount_code")
 
     if (checkCookie("user_id")) {
         getCartInfo()
@@ -105,7 +107,7 @@ $(document).ready(function() {
                                         <label for="discount_code" class="col-form-label">Khuyến mãi: </label>
                                     </div>
                                     <div class="col-sm-7">
-                                        <input class="form-control" type="text" id="discount_code">
+                                        <input class="form-control" type="text" id="discount_code" value="${discount_code}">
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -208,6 +210,25 @@ $(document).ready(function() {
             },
             error: function(resErr) {
                 console.log(resErr)
+            }
+        })
+    })
+
+    $("body").on("change", "#discount_code", function() {
+        $.ajax({
+            url: checkDiscountCodeURL + "?discount_code=" + this.value,
+            type: "GET",
+            dataType: 'json',
+            success: function(response) {
+                if (response.discount) {
+                    console.log(response)
+                    setCookie("discount_code", response.code, 1)
+                } else {
+                    setCookie("discount_code", "", 0)
+                }
+            },
+            error: function(response) {
+                console.error(response)
             }
         })
     })

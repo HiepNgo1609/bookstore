@@ -19,7 +19,7 @@ if ($result->rowCount() > 0) {
     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
         $item = array(
             'status' => $row['status'],
-            'id' => $row['id'],
+            'id' => $row['cart_id'],
             'quantity' => $row['quantity'],
             'p_id' => $row['id'],
             'p_name' => $row['name'],
