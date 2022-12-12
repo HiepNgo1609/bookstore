@@ -51,9 +51,9 @@ if (isset($_GET['id'])) {
         <div class="top-links">
             <div class="container">
                 <ul class="row links">
-                    <li class="col-xs-12 col-sm-4 link-item active"><span>1</span><a href="restaurants.php">Choose
+                    <li class="col-xs-12 col-sm-4 link-item active"><span>1</span><a href="category.php">Choose
                             Book</a></li>
-                    <li class="col-xs-12 col-sm-4 link-item"><span>2</span><a href="#">Check out</a></li>
+                    <li class="col-xs-12 col-sm-4 link-item"><span>2</span><a href="checkout.php">Check out</a></li>
                     <li class="col-xs-12 col-sm-4 link-item"><span>3</span><a href="#">Payment</a></li>
                 </ul>
             </div>
@@ -449,4 +449,5 @@ if (isset($_GET['id'])) {
     <script src="js/pagination.js"></script>
     <script src="js/product.js"></script>
     <script src="js/search.js"></script>
+    <script src="js/cart.js"></script>
 </body>
