@@ -40,13 +40,13 @@
 			$row = mysqli_fetch_array($result);
 			echo $row;
 
+
 			if (is_array($row)) {
 				if (password_verify($password, $row['password'])) {
 					setcookie("user_id", $row['id'], time() + (86400*30), "/");
 					$success = "Đăng nhập thành công!";
 					header("refresh:1;url=cart.php");
 				} else {
-					
 					$message = $row['password'];
 				} 
 			} else {
