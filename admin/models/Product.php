@@ -19,6 +19,15 @@ class Product {
         return $stmt;
     }
 
+    public function getAllProductCount() {
+        $query = '
+            SELECT COUNT(id) AS NUM FROM ' . $this->table . '
+        ';
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
+    }
+
     public function getProductById($id) {
         $query = '
             SELECT * FROM ' . $this->table . '

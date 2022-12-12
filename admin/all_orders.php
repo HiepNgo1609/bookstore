@@ -16,7 +16,9 @@ session_start();
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon1.png">
-    <title>Tất cả đơn đặt hàng</title>
+
+    <title>Danh sách đơn hàng</title>
+
     <!-- Bootstrap Core CSS -->
     <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <!-- <link href="../css/bootstrap.min.css" rel="stylesheet"> -->

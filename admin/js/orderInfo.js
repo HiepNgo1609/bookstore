@@ -132,6 +132,10 @@ $(document).ready(function() {
         updateOrderHandle()
     })
 
+    $("#update_user_btn").on("click", function() {
+        updateUserHandle()
+    })
+
     $("body").on("change", ".qty", function() {
         qtyHandle(this)
     })
@@ -171,6 +175,14 @@ $(document).ready(function() {
                 location.reload()
             }
         })
+    }
+
+    function updateUserHandle() {
+        if (userId != "") {
+            location.href = "update_users.php?user_upd=" + userId
+        } else {
+            location.href = "add_users.php"
+        }
     }
 
     function qtyHandle(inputEle) {
@@ -219,37 +231,37 @@ $(document).ready(function() {
         })
     })
 
-    $("#update_order_btn").on("click", function() {
-        validateForm()
-    })
+    // $("#update_order_btn").on("click", function() {
+    //     validateForm()
+    // })
 
-    function validateForm() {
-        let code = $("#code").val().trim()
-        if (checkEmpty(code, "code") && userId != "") {
-            let discount = $("#discount").val().trim()
-            let invoice = $("#sum").val().trim()
-            let status = $("#status").val()
-            let data = {
-                "id": orderId,
-                "code": code,
-                "user_id": userId,
-                "discount": discount,
-                "invoice": invoice,
-                "status": status
-            }
-            $.ajax({
-                url: updateOrderURL,
-                type:"PUT",
-                data: JSON.stringify(data),
-                dataType: "json",
-                success: function(res) {
-                    console.log("Update Order")
-                    location.reload()
-                }
-            })
-        }
+    // function validateForm() {
+    //     let code = $("#code").val().trim()
+    //     if (checkEmpty(code, "code") && userId != "") {
+    //         let discount = $("#discount").val().trim()
+    //         let invoice = $("#sum").val().trim()
+    //         let status = $("#status").val()
+    //         let data = {
+    //             "id": orderId,
+    //             "code": code,
+    //             "user_id": userId,
+    //             "discount": discount,
+    //             "invoice": invoice,
+    //             "status": status
+    //         }
+    //         $.ajax({
+    //             url: updateOrderURL,
+    //             type:"PUT",
+    //             data: JSON.stringify(data),
+    //             dataType: "json",
+    //             success: function(res) {
+    //                 console.log("Update Order")
+    //                 location.reload()
+    //             }
+    //         })
+    //     }
 
-    }
+    // }
 
     function checkEmpty(string, field) {
         if (string == "") {

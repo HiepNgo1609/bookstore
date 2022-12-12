@@ -16,6 +16,7 @@ session_start();
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon1.png">
+
     <title>Chi tiết đơn hàng</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -123,7 +124,7 @@ session_start();
                             <div class="card-body">
                                 <div class="row mb-3">
                                     <h4 class="col-sm-9 card-title">Thông tin chung đơn hàng</h4>
-                                    <button id="update_order_btn" class="btn btn-info col mr-3" type="button">Chỉnh sửa thông tin</button>
+                                    <!-- <button id="update_order_btn" class="btn btn-info col mr-3" type="button">Chỉnh sửa thông tin</button> -->
                                 </div>
                                 <form action="">
                                     <div class="form-group row">
