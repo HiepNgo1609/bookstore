@@ -66,8 +66,11 @@ $(document).ready(function() {
                     $(".comment-list").append(message);
                 }
                 else
+                {
+                    clearReviews()
                     loadPagination(resReviews, 4, loadReview);
                     loadStarBar();
+                }
             },
             error: function(error) {
                 console.log(error.responseText);
@@ -259,7 +262,7 @@ $(document).ready(function() {
             async: false,
             success: function(resProducts) {
                 if (resProducts.message)
-                    console.log(Product.message)
+                    console.log(resProducts.message)
                 else
                 {
                     $.each(resProducts, (index, Product)=>{
@@ -474,6 +477,10 @@ function clearContentErrorMessage(){
 
 function clearCartMessage(){
     $(".cartMessage").find(".alert").remove()
+}
+
+function clearReviews(){
+    $(".comment-list").html("");
 }
 
 function getCookie(cname) {
