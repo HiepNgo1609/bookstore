@@ -93,7 +93,7 @@ if(isset($_POST['submit'] ))
 
 
         <!-- header header  -->
-        
+        <?php include_once "./header.php" ?>
 
 
         <!-- Page wrapper  -->

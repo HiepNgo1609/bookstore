@@ -53,7 +53,7 @@ session_start();
                         <a style="color: red" class="nav-link dropdown-toggle" data-toggle="dropdown" href="infoUser.php" aria-expanded="false"><span><i class="fa fa-user f-s-20 "></i></span><span class="hide-menu">  Xin chào ' . $_SESSION['username'] . ' !</span></a>
 
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" href="infoUser.php">Thông tin cá nhân</a>
+                          <a class="dropdown-item" href="userInfo.php">Thông tin cá nhân</a>
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item" href="logout.php">Đăng xuất</a>
                         </div>

@@ -21,6 +21,9 @@ if ($result->rowCount() > 0) {
     
     echo json_encode(array(
         "fullName" => $row['firstname'] . ' ' . $row['lastname'],
+        "firstName" => $row['firstname'],
+        "lastName" => $row['lastname'],
+        "username" => $row['username'],
         "email" => $row['email'],
         "phone" => $row['phone_number'],
         'address' => $row['address']

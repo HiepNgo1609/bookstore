@@ -1,0 +1,13 @@
+.user_info {
+    margin-top: 50px;
+}
+
+.user_update_btn {
+    margin-left: 15px;
+    border-radius: 5px;
+    width: 15%;
+}
+
+.red-color {
+    color: #C92127;
+}
