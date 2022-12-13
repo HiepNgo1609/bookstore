@@ -42,6 +42,12 @@ if(isset($_POST['submit'] ))
 																<strong>Số điện thoại không hợp lệ!</strong>
 															</div>';
 	}
+    else if($_POST['password'] != $_POST['cpassword']){  //matching passwords
+        $error = '<div class="alert alert-danger alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Mật khẩu chưa chính xác! Vui lòng nhập lại</strong>
+        </div>';
+    }
 	
 	else{
        
@@ -212,6 +218,20 @@ if(isset($_POST['submit'] ))
                                                 
                                                 </div>
                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Mật khẩu</label>
+                                                    <input type="password" name="password" class="form-control form-control-danger"   value="" placeholder="Nhập Mật khẩu">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Nhập lại Mật khẩu</label>
+                                                    <input type="password" name="cpassword" class="form-control form-control-danger"   value="" placeholder="Nhập lại Mật khẩu">
+                                                    </div>
+                                                </div>
                                         </div>
                                     </div>
                                     <div class="form-actions">
