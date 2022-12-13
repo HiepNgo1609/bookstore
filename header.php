@@ -5,7 +5,6 @@ session_start();
 
 ?>
 <!--header starts-->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <header id="header" class="header-scroll top-header headrom">
     <!-- .navbar -->
     <nav class="navbar navbar-dark" style="display:inline">
