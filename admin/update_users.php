@@ -207,9 +207,23 @@ if(isset($_POST['submit'] ))
                                                 <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Vai trò</label><br>
-                                                    <select style="font-size:medium; padding: 5px; border:1px solid rgb(232,232,232); color:rgb(80,80,80)" name = "role" aria-label="select example">
-                                                        <option value="Quản trị viên">Quản trị viên</option>
-                                                        <option value="Khách hàng" selected>Khách hàng</option>
+                                                    <select style="font-size:medium; padding: 8px; border:1px solid rgb(232,232,232); color:rgb(80,80,80)" name = "role" aria-label="select example">
+                                                    <?php $user ="select * from users";
+													$re=mysqli_query($db, $user); 
+                                                   
+                                                    
+													while($row1=mysqli_fetch_array($re))  
+													{
+                                                        if ($_GET['user_upd'] == $row1['id']){
+                                                            $selectStr = 'selected'; 
+                                                                                                         
+                                                            echo' <option '.$selectStr.' >'.$row1['role'].'</option>';
+                                                            if($row1['role']=='admin') echo' <option>customer</option>';
+                                                            else echo '<option>admin</option>';
+                                                        }
+													}  
+                                                 
+													?> 
                                                     </select>
                                                 </div>
                                                 

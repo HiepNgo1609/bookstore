@@ -83,7 +83,7 @@ else if(isset($_POST['submit'] ))
        
 	
 	$mql = "INSERT INTO users(username,firstname,lastname,email,phone_number,password,address,role) VALUES('".$_POST['username']."','".$_POST['firstname']."','".$_POST['lastname']."',
-    '".$_POST['email']."','".$_POST['phone_number']."','".md5($_POST['password'])."','".$_POST['address']."','".($_POST['role'])."')";
+    '".$_POST['email']."','".$_POST['phone_number']."','".password_hash("$_POST[password]", PASSWORD_BCRYPT)."','".$_POST['address']."','".($_POST['role'])."')";
 	mysqli_query($db, $mql);
 			$success = 	'<div class="alert alert-success alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -234,8 +234,8 @@ else if(isset($_POST['submit'] ))
                                                     <div class="form-group">
                                                         <label class="control-label">Vai trò</label><br>
                                                         <select style="font-size:medium; padding: 9px; border:1px solid rgb(232,232,232); color:rgb(80,80,80)" name = "role" aria-label="select example">
-                                                            <option value="Quản trị viên">Quản trị viên</option>
-                                                            <option value="Khách hàng" selected>Khách hàng</option>
+                                                            <option value="admin">admin</option>
+                                                            <option value="customer" selected>customer</option>
                                                         </select>
                                                     </div>
                                                 </div>

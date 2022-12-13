@@ -43,7 +43,7 @@
 
 			if (is_array($row)) {
 				if (password_verify($password, $row['password'])) {
-					//setcookie("user_id", $row['id'], time() + (86400*30), "/");
+					setcookie("user_id", $row['id'], time() + (86400*30), "/");
 					$_SESSION['username'] = $username;
 					$success = "Đăng nhập thành công!";
 					header("refresh:1;url=index.php");

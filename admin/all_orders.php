@@ -71,12 +71,12 @@ session_start();
                                     <table id="orderTable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Username</th>
-                                                <th>Code</th>
-                                                <th>Discount</th>
-                                                <th>Invoice</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
+                                                <th>Tên Đăng nhập</th>
+                                                <th>Mã</th>
+                                                <th>Giảm giá(%)</th>
+                                                <th>Hóa đơn</th>
+                                                <th>Trạng thái</th>
+                                                <th>Hành động</th>
                                             </tr>
                                         </thead>
                                         <tbody>
