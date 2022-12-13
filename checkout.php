@@ -15,7 +15,7 @@ if (empty($_COOKIE['user_id'])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="16x16" href="./admin/images/favicon1.png">
-  
+
   <title>Thanh toán</title>
   <!-- Bootstrap Core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -81,21 +81,21 @@ if (empty($_COOKIE['user_id'])) {
             </form>
           </div>
         </div>
-        <div class="card delivery_info my-2">
+        <div class="card delivery_info my-2 desktop">
           <h5 class="card-title">Danh Sách Sản Phẩm</h5>
           <hr class="dash">
           <div class="card-body">
-            <div class="row">
+            <div class="row product_list_title">
               <div class="col-sm-2 col-md-1 ml-5">
                 <strong class="ml-2">#</strong>
               </div>
-              <div class="col-sm-4 col-md-4">
+              <div class="col-sm-4 col-md-5">
                 <strong>Thông tin sản phẩm</strong>
               </div>
               <div class="col-sm-2 col-md-2">
                 <strong class="ml-2">Đơn giá</strong>
               </div>
-              <div class="col-sm-2 col-md-3">
+              <div class="col-sm-2 col-md-2">
                 <strong class="ml-2">Số lượng</strong>
               </div>
               <div class="col-sm-2 col-md-2">
@@ -104,7 +104,6 @@ if (empty($_COOKIE['user_id'])) {
             </div>
             <div class="product_list">
 
-              
               <!-- <div class="row">
                 <div class="col-sm-2 col-md-1 my-3">
                   <strong class="ml-2">1</strong>
@@ -163,16 +162,25 @@ if (empty($_COOKIE['user_id'])) {
 
           </div>
         </div>
+        <div class="card my-2 mobile">
+          <div class="mobile_product_list">
+            
+          </div>
+          <hr class="dash mb-2">
+          <div class="mobile_summary">
+            
+          </div>
+        </div>
         <div class="card p-2">
           <div class="direction">
             <div class="row">
-              <div class="col-sm-3">
+              <div class="col-sm-3 col-md-5 col-xs-6">
                 <a href="cart.php" class="back_link">
                   &#171; Quay lại giỏ hàng
                 </a>
               </div>
-              <div class="col-sm-6"></div>
-              <div class="col-sm-3">
+              <div class="col-sm-6 col-md-2"></div>
+              <div class="col-sm-3 col-md-5 col-xs-6">
                 <button type="button" class="btn checkout_btn">THANH TOÁN</button>
               </div>
             </div>

@@ -34,6 +34,7 @@ $(document).ready(function() {
     function cartInfoHandle(cartArray) {
         let invoice = 0;
         let cartItemList = []
+        let mobileCartItemList = []
         for (let i = 0; i < cartArray.length; i++) {
             invoice += Math.ceil(parseFloat(cartArray[i].p_price)/1000 * (100.0 - parseFloat(cartArray[i].p_discount)) / 100.0) * 1000 * cartArray[i].quantity
             let carItem = `
@@ -68,10 +69,29 @@ $(document).ready(function() {
                 </div>
             `
             cartItemList.push(carItem)
+            let mobileCartItem = `
+                <hr class="dash">
+                <div class="row product_info">
+                    <div class="col-xs-4">
+                        <img src="${cartArray[i].p_img}" alt="${cartArray[i].p_name}">
+                    </div>
+                    <div class="col-xs-6 ">
+                        <h4 class="product_name"><a style="color:black;" href="product.php?id=${cartArray[i].product_id}">${cartArray[i].p_name}</a></h4>
+                        <h5 class="item_price">${new Intl.NumberFormat('de-DE', {style: 'currency', currency: 'VND'}).format(Math.ceil(parseFloat(cartArray[i].p_price)/1000 * (100.0 - parseFloat(cartArray[i].p_discount)) / 100.0) * 1000)}</h5>
+                        <input data-id="${cartArray[i].id}" type="number" class="qty" value="${cartArray[i].quantity}" min="1">
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="#" class="remove_item" data-id="${cartArray[i].id}">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            `
+            mobileCartItemList.push(mobileCartItem)
         }
         sumCart = invoice
         let cart = `
-            <div class="container">
+            <div class="container desktop">
                 <h3 style="margin-top: 30px;">Giỏ hàng (${cartArray.length}) sản phẩm</h3>
                 <div class="row desktop">
                     <div class="col-sm-8">
@@ -106,7 +126,7 @@ $(document).ready(function() {
                                         <label for="discount_code" class="col-form-label">Khuyến mãi: </label>
                                     </div>
                                     <div class="col-sm-7">
-                                        <input class="form-control" type="text" id="discount_code" value="${discount_code}">
+                                        <input class="form-control discount_code" type="text" value="${discount_code}">
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -135,18 +155,52 @@ $(document).ready(function() {
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
+            <div class="container mobile">
+            <div class="row">
+                <div class="col-xs-8">
+                    <h3 class="cart-noti">Giỏ hàng (${cartArray.length}) sản phẩm</h3>
+                </div>
+                <div class="col-xs-4">
+                    <h3 class="cart-noti text_end"><a href="category.php">&#171; Trở lại</a></h3>
+                </div>
+            </div>
+                
+            <div class="product_list">
+                
+            </div>
+            <div class="summary">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <label for="discount_code" class="col-form-label">Khuyến mãi: </label>
+                    </div>
+                    <div class="col-xs-6">
+                        <input class="form-control discount_code" type="text"  value="${discount_code}">
+                    </div>
+                </div>
+                <div class="row">
+                    <hr class="dash">
+                    <div class="col-xs-6">
+                        <h4>Tổng: </h4>
+                        <strong class="invoice">${new Intl.NumberFormat('de-DE', {style: 'currency', currency: 'VND'}).format(invoice)}</strong>
+                    </div>
+                    <div class="col-xs-6 mt-1">
+                        <button type="button" class="btn checkout_btn" onclick="location.href='checkout.php'">THANH TOÁN</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         `
         $(".page-wrapper").append(cart)
-        displayCartByUserId(cartItemList)
+        displayCartByUserId(cartItemList, mobileCartItemList)
     }
 
-    function displayCartByUserId(cartArray) {
+    function displayCartByUserId(cartArray, mobileCartArr) {
         console.log("Load Cart Item")
         for (let i = 0; i < cartArray.length; i++) {
             $(".orderItemList").append(cartArray[i])
+            $(".product_list").append(mobileCartArr[i])
         }
     }
 
@@ -213,7 +267,7 @@ $(document).ready(function() {
         })
     })
 
-    $("body").on("change", "#discount_code", function() {
+    $("body").on("change", ".discount_code", function() {
         $.ajax({
             url: checkDiscountCodeURL + "?discount_code=" + this.value,
             type: "GET",

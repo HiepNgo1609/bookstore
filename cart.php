@@ -19,7 +19,8 @@
 
 <body>
     <!-- Header Start -->
-    <?php require_once "./header.php" ?>
+    <?php require_once "./header.php" 
+    ?>
     <!-- Header End -->
     <div class="page-wrapper">
         <!-- <div class="container">
@@ -34,7 +35,7 @@
                 </div>
             </div>
         </div> -->
-        <!-- <div class="container">
+        <!-- <div class="container desktop">
             <h3 style="margin-top: 30px;">Giỏ hàng (1) sản phẩm</h3>
             <div class="row">
                 <div class="col-sm-8">
@@ -119,7 +120,62 @@
                                     <strong class="invoice">53,500 VND</strong>
                                 </div>
                             </div>
+                            <div class="row mt-2">
+                                <button type="button" class="btn checkout_btn" onclick="location.href='checkout.php'">THANH TOÁN</button>
+
+                            </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container mobile">
+            <h3 class="cart-noti">Giỏ hàng (1) sản phẩm</h3>
+            <div class="product_list">
+                <div class="row product_info">
+                    <div class="col-xs-4">
+                        <img src="https://cdn0.fahasa.com/media/catalog/product//i/m/image_195509_1_36793.jpg" alt="">
+
+                    </div>
+                    <div class="col-xs-6 ">
+                        <p>Nhà Giả Kim</p>
+                        <h5 class="item_price">53.500VND</h5>
+                        <input data-id="" data-uprice="" type="number" class="qty" value="1" min="1">
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="#" class="remove_item">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </div>
+                </div>
+                <hr class="dash">
+                <div class="row product_info">
+                    <div class="col-xs-4">
+                        <img src="https://cdn0.fahasa.com/media/catalog/product//i/m/image_195509_1_36793.jpg" alt="">
+
+                    </div>
+                    <div class="col-xs-6 ">
+                        <p>Nhà Giả Kim</p>
+                        <h5 class="item_price">53.500VND</h5>
+                        <input data-id="" data-uprice="" type="number" class="qty" value="1" min="1">
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="#" class="remove_item">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="summary">
+                <div class="row">
+                    <hr class="dash">
+                    <div class="col-xs-6">
+                        <h4>Tổng: </h4>
+                        <strong class="invoice">53,500 VND</strong>
+                    </div>
+                    <div class="col-xs-6 mt-1">
+                        <button type="button" class="btn checkout_btn" onclick="location.href='checkout.php'">THANH TOÁN</button>
                     </div>
                 </div>
             </div>
@@ -132,7 +188,6 @@
     <?php require_once "./footer.php" ?>
     <!-- Footer End -->
 
-    <script src="js/jquery.min.js"></script>
     <script src="js/tether.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/animsition.min.js"></script>

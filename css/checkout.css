@@ -34,3 +34,65 @@ h5 {
     font-size: 1.2rem;
     color: black;
 }
+
+.mobile {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+    .item_info p {
+        display: none;
+    }
+
+    .item_info h4 {
+        font-size: 1.2rem;
+        margin-top: 14px;
+    }
+
+    .product_list_title strong {
+        font-size: 0.9rem;
+    }
+
+    h4 {
+        font-size: 1.3rem;
+    }
+}
+
+@media only screen and (max-width: 414px) {
+    .mobile .mobile_product_list strong {
+        display: block;
+    }
+
+    .mobile .mobile_product_list img {
+        width: 120%;
+    }
+
+    .direction .back_link {
+        font-size: 1.1rem;
+    }
+    .mobile_summary .text_align_end {
+        text-align: end;
+        padding-right: 30px;
+    }
+
+    .mobile_summary .text_align_end h4 {
+        font-weight: 600;
+    }
+
+    .mobile_summary .summary-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .desktop {
+        display: none;
+    }
+
+    .mobile {
+        display: block;
+    }
+
+    .footer {
+        display: none;
+    }
+}

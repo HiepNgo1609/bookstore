@@ -60,23 +60,23 @@ $(document).ready(function() {
                     <div class="col-sm-2 col-md-1 my-3">
                     <strong class="ml-2">${i + 1}</strong>
                     </div>
-                    <div class="col-sm-4 col-md-4">
-                    <div class="row">
-                        <div class="col-sm-4 ">
-                        <img src="${objectArr[i].p_img}" alt="${objectArr[i].p_name}" style="width: 120%;">
+                    <div class="col-sm-4 col-md-5">
+                        <div class="row">
+                            <div class="col-sm-5 ">
+                                <img src="${objectArr[i].p_img}" alt="${objectArr[i].p_name}" style="width: 120%;">
+                            </div>
+                            <div class="col-sm-7 item_info">
+                                <h4>${objectArr[i].p_name}</h4>
+                                <p><strong>Author:</strong> ${objectArr[i].p_author}</p>
+                                <p><strong>NXB:</strong> ${objectArr[i].p_publisher}</p>
+                                <p><strong>Code:</strong> ${objectArr[i].p_code}</p>
+                            </div>
                         </div>
-                        <div class="col-sm-8 item_info">
-                        <h4>${objectArr[i].p_name}</h4>
-                        <p><strong>Author:</strong> ${objectArr[i].p_author}</p>
-                        <p><strong>NXB:</strong> ${objectArr[i].p_publisher}</p>
-                        <p><strong>Code:</strong> ${objectArr[i].p_code}</p>
-                        </div>
-                    </div>
                     </div>
                     <div class="col-sm-2 col-md-2 my-3">
                     <strong class="ml-1 red-color">${new Intl.NumberFormat('de-DE', {style: 'currency', currency: 'VND'}).format(Math.ceil(parseFloat(objectArr[i].p_price)/1000 * (100.0 - parseFloat(objectArr[i].p_discount)) / 100.0) * 1000)}</strong>
                     </div>
-                    <div class="col-sm-2 col-md-3 my-3">
+                    <div class="col-sm-2 col-md-2 my-3">
                     <strong class="ml-3">${objectArr[i].quantity}</strong>
                     </div>
                     <div class="col-sm-2 col-md-2 my-3">
@@ -85,6 +85,19 @@ $(document).ready(function() {
                 </div>
             `
             $(".product_list").append(item)
+            let mobileItem = `
+                <div class="row p-2">
+                    <div class="col-xs-4">
+                        <img src="${objectArr[i].p_img}" alt="${objectArr[i].p_name}">
+                    </div>
+                    <div class="col-xs-8">
+                        <h4>${objectArr[i].p_name}</h4>
+                        <strong class="mt-1">Quantity: ${objectArr[i].quantity}</strong>
+                        <strong class="red-color mt-1">${new Intl.NumberFormat('de-DE', {style: 'currency', currency: 'VND'}).format(Math.ceil(parseFloat(objectArr[i].p_price)/1000 * (100.0 - parseFloat(objectArr[i].p_discount)) / 100.0) * 1000)}</strong>
+                    </div>
+                </div>
+            `
+            $(".mobile_product_list").append(mobileItem)
             items.push({"product_id": objectArr[i].p_id, "quantity": objectArr[i].quantity})
             sum += Math.ceil(parseFloat(objectArr[i].p_price)/1000 * (100.0 - parseFloat(objectArr[i].p_discount)) / 100.0) * 1000 * objectArr[i].quantity
         }
@@ -115,7 +128,34 @@ $(document).ready(function() {
                 </div>
             </div>
         `
+        let mobileSummary = `
+            <div class="row">
+                <div class="col-xs-6">
+                <h5 class="summary-title">Tạm tính</h5>
+                </div>
+                <div class="col-xs-6 text_align_end">
+                <h4 class="red-color">${new Intl.NumberFormat('de-DE', {style: 'currency', currency: 'VND'}).format(sum)}</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <h5 class="summary-title">Chiết khấu</h5>
+                </div>
+                <div class="col-xs-6 text_align_end">
+                    <h4>${discount.toString()}</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 ">
+                    <h5 class="summary-title">TỔNG</h5>
+                </div>
+                <div class="col-xs-6 text_align_end">
+                <h4 class="red-color">${new Intl.NumberFormat('de-DE', {style: 'currency', currency: 'VND'}).format(Math.ceil(sum/1000 * (100 - discount)/100)*1000)}</h4>
+                </div>
+            </div>
+        `
         $(".summary").append(summary)
+        $(".mobile_summary").append(mobileSummary)
     }
 
     function loadUserData(object) {
