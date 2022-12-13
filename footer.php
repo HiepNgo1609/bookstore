@@ -8,7 +8,8 @@ session_start();
         <!-- top footer statrs -->
         <div class="row top-footer">
             <div class="col-xs-12 col-sm-3 footer-logo-block color-gray">
-                <span style="font-family: Brush Script MT,cursive; font-size:large; color:red">Kết nối tri thức Việt</span>
+                <span style="font-family: Brush Script MT,cursive; font-size:large; color:red">Kết nối tri thức
+                    Việt</span>
             </div>
             <div class="col-xs-12 col-sm-3 about color-white">
                 <h5>Dịch vụ</h5>
@@ -71,10 +72,12 @@ session_start();
                 <div class="col-xs-12 col-sm-4 additional-info color-gray">
                     <h5>Thông tin thêm</h5>
                     <p>Chúng tôi nhận đặt hàng trực tuyến và giao hàng tận nơi.
-                        KHÔNG hỗ trợ đặt mua và nhận hàng trực tiếp tại văn phòng cũng như tất cả Hệ Thống Fahasa trên toàn quốc.</p>
+                        KHÔNG hỗ trợ đặt mua và nhận hàng trực tiếp tại văn phòng cũng như tất cả Hệ Thống Fahasa trên
+                        toàn quốc.</p>
                 </div>
             </div>
         </div>
         <!-- bottom footer ends -->
     </div>
 </footer>
+<script src="js/search.js"></script>
