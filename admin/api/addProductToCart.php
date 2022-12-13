@@ -24,12 +24,26 @@ $cart->user_id = $data['user_id'];
 $cart->product_id = $data['product_id'];
 $cart->qty = $data['quantity'];
 
-if ($cart->addProductToCart()) {
-    echo json_encode(
-        array('message' => 'Add Product To Cart Success!')
-    );
+$checkExistCartItem = $cart->checkExistCartItem();
+
+if ($checkExistCartItem->rowCount() > 0) {
+    $row = $checkExistCartItem->fetch(PDO::FETCH_ASSOC);
+    $cart->id = $row['id'];
+    $cart->qty = (int)$data['quantity'] + $row['quantity'];
+    if($cart->updateProductInCart()) {
+        echo json_encode(
+            array('message' => 'Update Product To Cart Success!')
+        );
+    }
 } else {
-    echo json_encode(
-        array('message' => 'Add Product To Cart Fail!')
-    );
-};
+    if ($cart->addProductToCart()) {
+        echo json_encode(
+            array('message' => 'Add Product To Cart Success!')
+        );
+    } else {
+        echo json_encode(
+            array('message' => 'Add Product To Cart Fail!')
+        );
+    };
+}
+

@@ -40,6 +40,19 @@ class Cart {
         }
     }
 
+    public function checkExistCartItem() {
+        $query = '
+            SELECT *
+            FROM ' . $this->table . ' 
+            WHERE user_id= :user_id AND product_id= :product_id
+        ';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':user_id', $this->user_id);
+        $stmt->bindParam(':product_id', $this->product_id);
+        $stmt->execute();
+        return $stmt;
+    }
+
     public function getCartInfo($user_id) {
         $query = '
             SELECT  c.status,

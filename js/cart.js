@@ -48,8 +48,8 @@ $(document).ready(function() {
 
                             </div>
                             <div class="col-sm-8 item_info">
-                                <h4>${cartArray[i].p_name}</h4>
-                                <p><strong>Author:</strong> ${cartArray[i].p_author}</p>
+                            <h4 ><a style="color:black;" href="product.php?id=${cartArray[i].product_id}">${cartArray[i].p_name}</a></h4>
+                            <p><strong>Author:</strong> ${cartArray[i].p_author}</p>
                                 <p><strong>NXB:</strong> ${cartArray[i].p_publisher}</p>
                                 <p><strong>Code:</strong> ${cartArray[i].p_code}</p>
                             </div>

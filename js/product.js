@@ -240,10 +240,12 @@ $(document).ready(function() {
 
         const product = getProductInCart();
 
-        if (Object.keys(product).length)
-            updateProductInCart(product);
-        else
-            addProductToCart();
+        addProductToCart()
+
+        // if (Object.keys(product).length)
+        //     addProductToCart();
+        // else
+        //     updateProductInCart(product);
     }
 
     function getProductInCart(){
@@ -301,6 +303,7 @@ $(document).ready(function() {
                                        `;
 
                 $(".cartMessage").append(successMessage)
+                console.log(successMessage)
             },
             error: function(error) {
                 console.log(error.responseText)
