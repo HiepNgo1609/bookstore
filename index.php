@@ -13,7 +13,7 @@ session_start(); //start temp session until logout/browser closed
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="#">
+    <link rel="icon" type="image/png" sizes="16x16" href="admin/images/favicon1.png">
     <title>Trang chủ</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
