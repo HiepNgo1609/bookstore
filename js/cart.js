@@ -44,14 +44,14 @@ $(document).ready(function() {
                     <div class="col-sm-6 col-md-6 my-1">
                         <div class="row">
                             <div class="col-sm-4 ">
-                                <img src="${cartArray[i].p_img}" alt="${cartArray[i].p_name}" style="width: 120%;">
+                                <img class="product_img" src="${cartArray[i].p_img}" alt="${cartArray[i].p_name}">
 
                             </div>
                             <div class="col-sm-8 item_info">
-                            <h4 ><a style="color:black;" href="product.php?id=${cartArray[i].product_id}">${cartArray[i].p_name}</a></h4>
-                            <p><strong>Author:</strong> ${cartArray[i].p_author}</p>
-                                <p><strong>NXB:</strong> ${cartArray[i].p_publisher}</p>
-                                <p><strong>Code:</strong> ${cartArray[i].p_code}</p>
+                            <h4 class="product_name"><a style="color:black;" href="product.php?id=${cartArray[i].product_id}">${cartArray[i].p_name}</a></h4>
+                            <p class="hide"><strong>Author:</strong> ${cartArray[i].p_author}</p>
+                            <p class="hide"><strong>NXB:</strong> ${cartArray[i].p_publisher}</p>
+                            <p class="hide"><strong>Code:</strong> ${cartArray[i].p_code}</p>
                             </div>
                         </div>
                     </div>
@@ -65,7 +65,6 @@ $(document).ready(function() {
                             <i class="fa fa-trash"></i>
                         </a>
                     </div>
-
                 </div>
             `
             cartItemList.push(carItem)
@@ -74,7 +73,7 @@ $(document).ready(function() {
         let cart = `
             <div class="container">
                 <h3 style="margin-top: 30px;">Giỏ hàng (${cartArray.length}) sản phẩm</h3>
-                <div class="row">
+                <div class="row desktop">
                     <div class="col-sm-8">
                         <div class="card">
                             <div class="card-body" style="padding: 20px;">
@@ -111,19 +110,19 @@ $(document).ready(function() {
                                     </div>
                                 </div>
                                 <div class="row mt-2">
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-7 col-md-6">
                                         <label for="#">Thành tiền:</label>
                                     </div>
-                                    <div class="col-sm-7" style="text-align: end; color: #C92127; font-weight: 500;">
+                                    <div class="col-sm-5 col-md-6" style="text-align: end; color: #C92127; font-weight: 500;">
                                         <span>${new Intl.NumberFormat('de-DE', {style: 'currency', currency: 'VND'}).format(invoice)}</span>
                                     </div>
                                 </div>
                                 <div class="row mt-2">
                                     <hr class="dash">
-                                    <div class="col-sm-7">
+                                    <div class="col-sm-7 col-md-6">
                                         <h4>Tổng Số Tiền (VAT): </h4>
                                     </div>
-                                    <div class="col-sm-5" style="text-align: end;">
+                                    <div class="col-sm-5 col-md-6" style="text-align: end;">
                                         <strong class="invoice">${new Intl.NumberFormat('de-DE', {style: 'currency', currency: 'VND'}).format(invoice)}</strong>
                                     </div>
                                 </div>
