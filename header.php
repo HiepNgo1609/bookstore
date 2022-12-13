@@ -43,8 +43,8 @@ session_start();
                        
                         echo  '<li class="nav-item"><a href="your_orders.php" class="nav-link active">Giỏ hàng </a> </li>';
                         echo '<li class="nav-item dropdown">
-                        <a style="color: red; font-weight:600" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Hello '.$_SESSION['username'].' !
+                        <a style="color: red; font-weight:600; font-style:italic" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Xin chào '.$_SESSION['username'].' !
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <a class="dropdown-item" href="infoUser.php">Thông tin cá nhân</a>
