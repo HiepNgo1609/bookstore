@@ -80,4 +80,5 @@ session_start();
         <!-- bottom footer ends -->
     </div>
 </footer>
+<script src="js/jquery.min.js"></script>
 <script src="js/search.js"></script>
