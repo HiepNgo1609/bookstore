@@ -104,9 +104,10 @@ session_start();
                                                                                                 <td>'.$rows['role'].'</td>	
                                                                                                 <td>'.$rows['created_at'].'</td>	
                                                                                                 <td>'.$rows['updated_at'].'</td>																					
-																									 <td><a href="delete_users.php?user_del='.$rows['id'].'" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
+																									 <td> 
 																									 <a href="update_users.php?user_upd='.$rows['id'].'" " class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5"><i class="ti-settings"></i></a>
-																									</td></tr>';
+                                                                                                     <a href="delete_users.php?user_del='.$rows['id'].'" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a>
+                                                                                                     </td></tr>';
 																					 
 																						
 																						
