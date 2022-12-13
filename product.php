@@ -453,7 +453,6 @@ if (isset($_GET['id'])) {
     <script src="js/pagination.js"></script>
     <script src="js/product.js"></script>
 
-    <script src="js/search.js"></script>
-    <script src="js/cart.js"></script>
 </body>
+
 </html>

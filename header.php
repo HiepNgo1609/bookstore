@@ -5,6 +5,7 @@ session_start();
 
 ?>
 <!--header starts-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <header id="header" class="header-scroll top-header headrom">
     <!-- .navbar -->
     <nav class="navbar navbar-dark" style="display:inline">
@@ -28,11 +29,11 @@ session_start();
             <!-- end Search nvar-->
             <div class="collapse navbar-toggleable-md  float-lg-right" id="mainNavbarCollapse" style="display:inline">
                 <ul class="nav navbar-nav">
-                    <div class="icon_cart_white" style="margin-right: 4px;">
+                    <div class="icon_cart_white" style="margin-right: 3%;">
 
                     </div>
                     <li class="nav-item"><a href="index.php"><i class="fa fa-home" aria-hidden="true"
-                                style="scale:110%; color: white; padding-right:10px">
+                                style="scale:110%; color: white; padding-left:-2%">
                                 <span> Trang chủ</span></i></a>
                     </li>
                     <li class="nav-item"> <a style="color: white" class="has-arrow" href="category.php"

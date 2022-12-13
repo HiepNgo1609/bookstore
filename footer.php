@@ -30,7 +30,7 @@ session_start();
                     <li><a href="#">Phương thức thanh toán và xuất hóa đơn</a> </li>
                 </ul>
             </div>
-            <div class="col-xs-12 col-sm-3 pages color-white">
+            <div class="col-xs-12 col-sm-3 how-it-works-links color-white">
                 <h5>Tài khoản của tôi</h5>
                 <ul>
                     <li><a href="#">Đăng nhập/tạo mới tài khoản</a> </li>
