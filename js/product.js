@@ -5,7 +5,7 @@ $(document).ready(function() {
     const queryStr = window.location.search;
     const urlParam = new URLSearchParams(queryStr);
     const productId = parseInt(urlParam.get('id'));
-    const userId = $("#userId").val();
+    const userId = parseInt(getCookie("userId"));
 
     let count_star =
         {
@@ -17,12 +17,22 @@ $(document).ready(function() {
             "nums_of_review": 0
         };
 
+    if (userId) {
+        $(".comment-rule>span").hide();
+        $(".comment-rule>a").show();
+    }
+
+    else {
+        $(".comment-rule>span").show();
+        $(".comment-rule>a").hide();
+    }
+
     loadNewestProducts();
     loadFavoriteProducts();
     loadReviewList();
 
     // Add To Cart handle
-    $(".addToCart").on("click", addProductToCart);
+    $(".addToCart").on("click", addProduct);
 
     // Review handle
     // Rate Star
@@ -36,6 +46,12 @@ $(document).ready(function() {
 
     // Submit Button
     $("#submitReview").on("click", addReview)
+
+    //
+    $(".breadcrumb li:first-child a").on('click', () => {
+        $(".breadcrumb li:first-child form").submit();
+    })
+
 
     function loadReviewList() {
         $.ajax({
@@ -96,11 +112,20 @@ $(document).ready(function() {
             data: { "filter-list": {"sort": type}},
             dataType: "json",
             success: function (resProducts) {
-                $.each(resProducts, function(index, product){
-                    if (index == numberOfProduct) return false;
+                if (resProducts.message)
+                {
+                    const message = `<span>Chưa có sản phẩm!</span>`;
 
-                    $(`.${type}`).find(".product-list").append(getProduct(product));
-                })
+                    $(`.${type}`).find(".product-list").append(message);
+                }
+                else
+                {
+                    $.each(resProducts, function(index, product){
+                        if (index == numberOfProduct) return false;
+
+                        $(`.${type}`).find(".product-list").append(getProduct(product));
+                    })
+                }
             },
             error: function(error) {
                 console.log(error.responseText)
@@ -128,7 +153,7 @@ $(document).ready(function() {
 
         const productItem =
             `<!-- Product Item -->
-                <li class="col-xl-3 col-lg-6">
+                <li class="col-xl-3 col-lg-6 col-md-6">
                     <a href="./product.php?id=${product['id']}" class="list-item-link">
                         <div class="list-item card">
                             <div class="img-container">
@@ -210,6 +235,47 @@ $(document).ready(function() {
         $(".review_nums").text(count_star.nums_of_review)
     }
 
+    function addProduct(){
+        clearCartMessage();
+
+        const product = getProductInCart();
+
+        if (Object.keys(product).length)
+            updateProductInCart(product);
+        else
+            addProductToCart();
+    }
+
+    function getProductInCart(){
+        let product = {};
+
+        $.ajax({
+            url: apiURL + "getProductInCart.php",
+            type: "get",
+            data: {"userId": userId},
+            dataType: "json",
+            async: false,
+            success: function(resProducts) {
+                if (resProducts.message)
+                    console.log(Product.message)
+                else
+                {
+                    $.each(resProducts, (index, Product)=>{
+
+                        if (Product.product_id == productId)
+                            product = Object.assign(product, Product);
+
+                    })
+                }
+
+            },
+            error: function(error) {
+                console.log(error.responseText)
+            }
+        })
+
+        return product;
+    }
 
     function addProductToCart(){
         const quantity = $("#Qty").val();
@@ -224,6 +290,37 @@ $(document).ready(function() {
             url: apiURL + "addProductToCart.php",
             type: "post",
             data: JSON.stringify(product),
+            dataType: "json",
+            success: function(res) {
+                const successMessage = `
+                                        <div class="alert alert-success mt-1" style="text-align:center;" role="alert">
+                                            <div>
+                                                Đã thêm vào giỏ hàng
+                                            </div>
+                                        </div>
+                                       `;
+
+                $(".cartMessage").append(successMessage)
+            },
+            error: function(error) {
+                console.log(error.responseText)
+            }
+        })
+    }
+
+    function updateProductInCart(product){
+        const quantity = $("#Qty").val();
+        const cartId = product.id;
+
+        const Item = {
+            "id": cartId,
+            "quantity": product.quantity + parseInt(quantity)
+        }
+
+        $.ajax({
+            url: apiURL + "updateCart.php",
+            type: "post",
+            data: JSON.stringify(Item),
             dataType: "json",
             success: function(res) {
                 const successMessage = `
@@ -375,6 +472,22 @@ function clearContentErrorMessage(){
 function clearCartMessage(){
     $(".cartMessage").find(".alert").remove()
 }
+
+function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
 
 
 
