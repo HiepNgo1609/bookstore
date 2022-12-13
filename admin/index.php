@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
 
 <head>
 	<meta charset="UTF-8">
-	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon1.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="admin/images/favicon1.png">
 	<title>Form Đăng nhập</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 	<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900'>

@@ -2,45 +2,34 @@
 <html lang="en">
 <?php
 
-$message = $success1="";
 session_start();
 error_reporting(0);
-include("../connection/connect.php");
-
-if(isset($_POST['check'])){
-    $check_username2= mysqli_query($db, "SELECT username FROM users where username = '".$_POST['username']."' ");
-       if(mysqli_num_rows($check_username2) > 0) //check username
-       {
-        $message="Tên đăng nhập đã tồn tại";
-       }
-          
-       
-       else {
-        $success1 = "Tên đăng nhập hợp lệ";
-       }
-    }
-else if(isset($_POST['submit'] ))
+include("connection/connect.php");
+/*
+if(isset($_POST['submit'] ))
 {
-    if(empty($_POST['username']) ||
-   	    empty($_POST['firstname'])|| 
+    if(empty($_POST['username'])||
+        empty($_POST['firstname'])|| 
 		empty($_POST['lastname']) ||  
 		empty($_POST['email'])||
 		empty($_POST['password'])||
-		empty($_POST['phone_number']) ||
-       
-        empty($_POST['role']))
-		
+        empty($_POST['district_id'])||
+        empty($_POST['ward_id'])||
+        empty($_POST['role'])||
+		empty($_POST['phone_number']))
+        
 		{
+            
 			$error = '<div class="alert alert-danger alert-dismissible fade show">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<strong>Bạn phải điền vào tất cả các ô!</strong>
-			</div>';
+																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<strong>Bạn phải điền vào tất cả các ô!</strong>
+															</div>';
 		}
 	else
 	{
-           
-	$check_email = mysqli_query($db, "SELECT email FROM users where email = '$_POST[email]' ");
-    $check_username = mysqli_query($db, "SELECT username FROM users where username = '$_POST[username]' ");
+		
+
+	
 	
     if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) // Validate email address
     {
@@ -49,53 +38,38 @@ else if(isset($_POST['submit'] ))
 																<strong>Email không hợp lệ!</strong>
 															</div>';
     }
-	elseif(strlen($_POST['password']) < 6)
+	else if(strlen($_POST['password']) < 6)
 	{
 		$error = '<div class="alert alert-danger alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																<strong>Mật khẩu phải nhiều hơn 5 ký tự</strong>
+																<strong>Mật khẩu phải có nhiều hơn 5 ký tự!</strong>
 															</div>';
 	}
 	
-	elseif(strlen($_POST['phone_number']) != 10)
+	else if(strlen($_POST['phone_number']) > 10)
 	{
 		$error = '<div class="alert alert-danger alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																<strong>Số điện thoại không hợp lệ</strong>
+																<strong>Số điện thoại không hợp lệ!</strong>
 															</div>';
 	}
-    elseif(mysqli_num_rows($check_username) > 0)
-     {
-    	$error = '<div class="alert alert-danger alert-dismissible fade show">
-																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																<strong>Tên đăng nhập này đã tồn tại</strong>
-															</div>';
-     }
 	
-	elseif(mysqli_num_rows($check_email) > 0)
-     {
-    	$error = '<div class="alert alert-danger alert-dismissible fade show">
-																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																<strong>Địa chỉ email này đã tồn tại</strong>
-															</div>';
-     }
-	else {
+	else{
        
 	
-	$mql = "INSERT INTO users(username,firstname,lastname,email,phone_number,password,address,role) VALUES('".$_POST['username']."','".$_POST['firstname']."','".$_POST['lastname']."',
-    '".$_POST['email']."','".$_POST['phone_number']."','".password_hash("$_POST[password]", PASSWORD_BCRYPT)."','".$_POST['address']."','".($_POST['role'])."')";
+	$mql = "update users set username = '$_POST[username]', firstname='$_POST[firstname]', lastname='$_POST[lastname]',email='$_POST[email]',
+    phone_number='$_POST[phone_number]',password='$_POST[password]',ward_id='$_POST[ward_id]',
+    district_id='$_POST[district_id]', role='$_POST[role]' where id='$_GET[user_upd]' ";
 	mysqli_query($db, $mql);
 			$success = 	'<div class="alert alert-success alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																<strong>Chúc mừng!</strong> Tài khoản được tạo thành công.</br></div>';
+																<strong>Tài khoản cập nhật thành công</strong></div>';
 	
     }
-    
-}
+	}
 
 }
-
-
+*/
 ?>
 <head>
     <meta charset="utf-8">
@@ -105,19 +79,13 @@ else if(isset($_POST['submit'] ))
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon1.png">
-    <title>Thêm tài khoản</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="admin/images/favicon1.png">
+    <title>Thông tin tài khoản</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="css/helper.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/animsition.min.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
     <!--[if lt IE 9]>
@@ -126,17 +94,16 @@ else if(isset($_POST['submit'] ))
 <![endif]-->
 </head>
 
-<body class="fix-header" >
+<body class="fix-header">
     <!-- Preloader - style you can find in spinners.css -->
+    
     <div class="preloader">
         <svg class="circular" viewBox="25 25 50 50">
 			<circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
     </div>
+    
     <!-- Main wrapper  -->
-    <div id="main-wrapper">         
-        <?php include 'header.php'?>
-        <?php include 'left_sidebar.php'?>
-        <!-- Page wrapper  -->
+    <div id="main-wrapper">
         <div class="page-wrapper" style="height:1200px;">
             <!-- Bread crumb -->
             <div class="row page-titles">
@@ -149,62 +116,54 @@ else if(isset($_POST['submit'] ))
             <div class="container-fluid">
                 <!-- Start Page Content -->
                      <div class="row">
-                   
-                   
-					
 					 <div class="container-fluid">
                 <!-- Start Page Content -->
-
-									<?php  //echo var_dump($_POST);
+							
+									<?php  /*
 									        echo $error;
-                                            echo $success;
-									        ?>
-	
+									        echo $success; 
+									*/?>	
 					    <div class="col-lg-12">
                         <div class="card card-outline-primary">
                             <div class="card-header">
-                                <h4 class="m-b-0 text-white">Thêm tài khoản</h4>
+                                <h4 class="m-b-0 text-white">Cập nhật tài khoản</h4>
                             </div>
                             <div class="card-body">
-                                <form action='' method='post'  enctype="multipart/form-data">
+							  <?php /*$ssql ="select * from users where username='$_SESSION[username]'";
+													$res=mysqli_query($db, $ssql); 
+													$newrow=mysqli_fetch_array($res);  */ ?>
+                                <form action='' method='post'  >
                                     <div class="form-body">
-                                       
-                                        <hr>
-                                        <div class="row p-t-20">
+                                    <hr>
+                                        <div class="row p-t-15">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Tên đăng nhập</label>
-                                                    <input id="username" value="<?php echo $_POST['username']?>"type="text" name="username" class="form-control" placeholder="Nhập tên đăng nhập">
+                                                    <input type="text" name="username" class="form-control" value="<?php  //echo $newrow['username']; ?>" placeholder="username">
                                                    </div>
-                                                   <p style="color:red; font-weight:600"><?php echo $message?></p>
-                                                   <p style="color:green; font-weight:600"><?php echo $success1?></p>
-                                                   <p> <input type="submit" name="check" value="Kiểm tra" class="btn btn-danger"></input>
-                                                   
-                                                </div>
-                                            
+                                            </div>
                                             <!--/span-->
                                             <div class="col-md-6">
                                                 <div class="form-group has-danger">
                                                     <label class="control-label">Họ và tên lót</label>
-                                                    <input type="text" style="text-transform: capitalize;" name="firstname" class="form-control form-control-danger" placeholder="Nhập họ và tên lót">
+                                                    <input type="text" name="firstname" class="form-control form-control-danger"  value="<?php  //echo $newrow['firstname'];  ?>" placeholder="jon">
                                                     </div>
                                             </div>
                                             <!--/span-->
                                         </div>
-                                        
                                         <!--/row-->
                                         <div class="row p-t-20">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Tên</label>
-                                                    <input style="text-transform: capitalize;" type="text" name="lastname" class="form-control" placeholder="Nhập tên">
+                                                    <input type="text" name="lastname" class="form-control" placeholder="doe"  value="<?php  //echo $newrow['lastname']; ?>">
                                                    </div>
                                             </div>
                                             <!--/span-->
                                             <div class="col-md-6">
                                                 <div class="form-group has-danger">
                                                     <label class="control-label">Email</label>
-                                                    <input type="text" name="email" class="form-control form-control-danger" placeholder="example@gmail.com">
+                                                    <input type="text" name="email" class="form-control form-control-danger"  value="<?php  //echo $newrow['email'];  ?>" placeholder="example@gmail.com">
                                                     </div>
                                             </div>
                                             <!--/span-->
@@ -214,41 +173,41 @@ else if(isset($_POST['submit'] ))
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Mật khẩu</label>
-                                                    <input type="password" name="password" class="form-control form-control-danger" placeholder="Nhập mật khẩu">
+                                                    <input type="text" name="password" class="form-control form-control-danger"   value="<?php  //echo $newrow['password'];  ?>" placeholder="Mật khẩu">
                                                     </div>
                                                 </div>
                                         
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="control-label">Số điện thoại</label>
-                                                    <input type="text" name="phone_number" class="form-control form-control-danger" placeholder="Nhập số điện thoại">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
                                                     <label class="control-label">Địa chỉ</label>
-                                                    <input style="text-transform: capitalize;" type="text" name="address" class="form-control form-control-danger" placeholder="Nhập địa chỉ">
-                                                    </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="control-label">Vai trò</label><br>
-                                                        <select style="font-size:medium; padding: 9px; border:1px solid rgb(232,232,232); color:rgb(80,80,80)" name = "role" aria-label="select example">
-                                                            <option value="admin">admin</option>
-                                                            <option value="customer" selected>customer</option>
-                                                        </select>
+                                                    <input type="text" name="phone_number" class="form-control form-control-danger"   value="<?php  //echo $newrow['address'];  ?>" placeholder="Số điện thoại">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!--/span-->
-                                        
-                                      
-                                      
-                                            <!--/span-->
+                                            
+                                            <div class= row>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Số điện thoại</label>
+                                                    <input type="text" name="phone_number" class="form-control form-control-danger" value="<?php  //echo $newrow['phone_number'];  ?>" placeholder="Số điện thoại">
+                                                    
+                                                </div> 
+                                            </div>
+                                                <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Vai trò</label><br>
+                                                    <select style="font-size:medium; padding: 5px; border:1px solid rgb(232,232,232); color:rgb(80,80,80)" name = "role" aria-label="select example">
+                                                        <option value="Quản trị viên">Quản trị viên</option>
+                                                        <option value="Khách hàng" selected>Khách hàng</option>
+                                                    </select>
+                                                </div>
+                                                
+                                                </div>
+                                           
                                         </div>
                                     </div>
                                     <div class="form-actions">
-                                        <input type="submit" name="submit" class="btn btn-primary" value="Lưu"> 
+                                        <input type="submit" name="submit" class="btn btn-success" value="Lưu"> 
                                         <a href="dashboard.php" class="btn btn-inverse">Hủy</a>
                                     </div>
                                 </form>
@@ -279,15 +238,6 @@ else if(isset($_POST['submit'] ))
     <script src="js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <!--Custom JavaScript -->
     <script src="js/custom.min.js"></script>
-
-    <script src="js/jquery.min.js"></script>
-    <script src="js/tether.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/animsition.min.js"></script>
-    <script src="js/bootstrap-slider.min.js"></script>
-    <script src="js/jquery.isotope.min.js"></script>
-    <script src="js/headroom.js"></script>
-    <script src="js/foodpicky.min.js"></script>
     
 
 </body>

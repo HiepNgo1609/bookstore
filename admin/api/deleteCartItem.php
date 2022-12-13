@@ -1,7 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-header('Access-Control-Allow-Methods: PUT');
+header('Access-Control-Allow-Methods: DELETE');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 include_once '../config/Database.php';
@@ -10,24 +10,22 @@ include_once '../models/Cart.php';
 $database = new Database();
 $db = $database->connect();
 
-$cart = new Cart($db);
+$cartItem = new Cart($db);
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-// $data = {
-//     "id": "1",
-//     "quantity": "2"
+// $data  = {
+//     "id":"3"
 // }
 
-$cart->id = $data['id'];
-$cart->qty = $data['quantity'];
+$cartItem->id = $data["id"];
 
-if ($cart->updateProductInCart()) {
+if ($cartItem->removeProductInCart()) {
     echo json_encode(
-        array('message' => 'Cart Updated!')
+        array('message' => 'Cart Item Deleted!')
     );
 } else {
     echo json_encode(
-        array('message' => 'Cart Not Updated!')
+        array('message' => 'Cart Item Not Deleted!')
     );
 }

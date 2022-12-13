@@ -78,7 +78,7 @@ if(isset($_POST['submit']))           //if upload btn is pressed
         mysqli_query($db, $mql);
                 $success = 	'<div class="alert alert-success alert-dismissible fade show">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <strong>Congrass!</strong>Cập nhật thành công!</br></div>';
+                        <strong>Chúc mừng! </strong>Cập nhật thành công!</br></div>';
         
     }
     
@@ -95,7 +95,7 @@ if(isset($_POST['submit']))           //if upload btn is pressed
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon1.png">
-    <title>Cập nhật sách</title>
+    <title>Cập nhật thông tin sách</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -151,7 +151,7 @@ if(isset($_POST['submit']))           //if upload btn is pressed
                         <div class="card card-outline-primary">
                             
                             <div class="card-header">
-                                    <h4 class="m-b-0 text-white">Chỉnh sửa thông tin sách</h4>
+                                    <h4 class="m-b-0 text-white">Cập nhật thông tin sách</h4>
                                 </div>
                             
                             <div class="card-body">
@@ -178,7 +178,7 @@ if(isset($_POST['submit']))           //if upload btn is pressed
 													}  
                                                  
 													?> 
-													 </select>
+													</select>
                                                 
                                                 </div>
                                                 <div class="form-group">
@@ -254,19 +254,6 @@ if(isset($_POST['submit']))           //if upload btn is pressed
                             </div>
                         </div>
                     </div>
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
                 </div>
                 <!-- End PAge Content -->
             </div>

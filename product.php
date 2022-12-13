@@ -52,6 +52,7 @@ if (isset($_GET['id'])) {
                             Book</a></li>
                     <li class="col-xs-12 col-sm-4 link-item"><span>2</span><a href="cart.php">Check out</a></li>
                     <li class="col-xs-12 col-sm-4 link-item"><span>3</span><a href="">Payment</a></li>
+
                 </ul>
             </div>
         </div>
@@ -451,4 +452,7 @@ if (isset($_GET['id'])) {
     <script src="js/foodpicky.min.js"></script>
     <script src="js/pagination.js"></script>
     <script src="js/product.js"></script>
-    <sc
+
+    <script src="js/search.js"></script>
+    <script src="js/cart.js"></script>
+</body>
