@@ -187,7 +187,7 @@ session_start();
     <script src="js/foodpicky.min.js"></script>
     <script src="js/pagination.js"></script>
     <script src="js/category.js"></script>
-    <script src="js/search.js"></script>
+
 </body>
 
 </html>
