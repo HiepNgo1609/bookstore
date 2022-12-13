@@ -16,7 +16,7 @@ Just create new database in phpmyadmin and import SQL file which is located in `
 
 To access admin portal type this in your URL BAR **\`root**/admin/ \`  where **root** is your root directory
 
- **Admin credentials:** Username: **admin** Password: **1234**
+ **Admin credentials:** Username: **admin** Password: **123456**
 
 ## Technologies Used
 
