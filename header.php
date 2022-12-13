@@ -33,7 +33,7 @@ session_start();
                     <li class="nav-item"> <a class="nav-link active" href="category.php">Kho sách<span
                                 class="sr-only"></span></a> </li>
                     <?php
-                    if (empty($_SESSION["username"])) // if user is not login
+                    if (empty($_SESSION['username'])) // if user is not login
                     {
                         echo '<li class="nav-item"><a href="login.php" class="nav-link active">Đăng nhập</a> </li>
 							  <li class="nav-item"><a href="registration.php" class="nav-link active">Đăng ký tài khoản</a> </li>';
@@ -44,7 +44,7 @@ session_start();
                         echo  '<li class="nav-item"><a href="your_orders.php" class="nav-link active">Giỏ hàng </a> </li>';
                         echo '<li class="nav-item dropdown">
                         <a style="color: red; font-weight:600" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Hello '.$_SESSION["username"].' !
+                          Hello '.$_SESSION['username'].' !
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <a class="dropdown-item" href="infoUser.php">Thông tin cá nhân</a>

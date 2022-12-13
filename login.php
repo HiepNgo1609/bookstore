@@ -27,7 +27,7 @@
 	<?php
 	include("connection/connect.php"); //INCLUDE CONNECTION
 	error_reporting(0); // hide undefine index errors
-	// session_start(); // temp sessions
+	session_start(); // temp sessions
 	if (isset($_POST['submit']))   // if button is submit
 	{
 		$username = $_POST['username'];  //fetch records from login form
@@ -43,7 +43,8 @@
 
 			if (is_array($row)) {
 				if (password_verify($password, $row['password'])) {
-					setcookie("user_id", $row['id'], time() + (86400*30), "/");
+					//setcookie("user_id", $row['id'], time() + (86400*30), "/");
+					$_SESSION['username'] = $username;
 					$success = "Đăng nhập thành công!";
 					header("refresh:1;url=index.php");
 				} else {
