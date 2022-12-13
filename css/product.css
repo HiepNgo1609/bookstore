@@ -162,6 +162,7 @@ a.btn.bg-primary-color:focus {
 .comment-rule {
   font-size: 0.8rem;
   text-align: center;
+  height: 100%;
 }
 
 .comment-list {
@@ -225,7 +226,7 @@ justify-content: center; */
 
 .list-item.card {
   height: 450px;
-  max-width: 270px;
+  width: 270px;
   display: flex;
   padding: 16px;
   flex-direction: column;
@@ -326,6 +327,7 @@ justify-content: center; */
 
 .ratings__container {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
 }
 
@@ -343,7 +345,7 @@ justify-content: center; */
 /* Rating Bar */
 .bar {
   display: inline-flex;
-  width: 80%;
+  width: calc(100% - 80px);
   height: 4px;
   background: #ccc;
   border-radius: 4px;
@@ -357,3 +359,21 @@ justify-content: center; */
 }
 
 /* Search */
+@media (max-width: 767px) {
+  .comment-rule {
+    margin-top: 16px;
+  }
+
+  .ratings-bar {
+    margin-top: 16px;
+  }
+
+  .bar {
+  }
+}
+
+@media (max-width: 991px) {
+  .comment-rule {
+    margin-top: 16px;
+  }
+}

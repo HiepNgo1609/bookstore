@@ -14,7 +14,7 @@ session_start();
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="#">
+    <link rel="icon" type="image/png" sizes="16x16" href="admin/images/favicon1.png">
     <title>Kho sách</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -35,10 +35,10 @@ session_start();
         <div class="top-links">
             <div class="container">
                 <ul class="row links">
-                    <li class="col-xs-12 col-sm-4 link-item active"><span>1</span><a href="restaurants.php">Choose
+                    <li class="col-xs-12 col-sm-4 link-item active"><span>1</span><a href="category.php">Choose
                             Book</a></li>
-                    <li class="col-xs-12 col-sm-4 link-item"><span>2</span><a href="#">Check out</a></li>
-                    <li class="col-xs-12 col-sm-4 link-item"><span>3</span><a href="#">Payment</a></li>
+                    <li class="col-xs-12 col-sm-4 link-item"><span>2</span><a href="cart.php">Check out</a></li>
+                    <li class="col-xs-12 col-sm-4 link-item"><span>3</span><a href="">Payment</a></li>
                 </ul>
             </div>
         </div>
@@ -116,7 +116,18 @@ session_start();
                                 Lọc theo:
                             </span>
 
-                            <ul class="tags text-title filter"></ul>
+                            <ul class="tags text-title filter">
+                                <?php
+                                if (isset($_POST["category"])) {
+                                    echo "  <li class='tag filter-item category-filter'>
+                                                " . $_POST["category"] . "
+                                                <a href='#'>
+                                                    <i class='fa fa-times' aria-hidden='true'></i>
+                                                </a>
+                                            </li>";
+                                }
+                                ?>
+                            </ul>
 
                             <div class="clearfix"></div>
                         </div>
