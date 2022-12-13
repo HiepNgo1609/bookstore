@@ -46,8 +46,13 @@ session_start();
 
                     } else {
                         //if user is login
+<<<<<<< HEAD
                     
                         echo '<li class="nav-item"><a style="color: white" class="has-arrow  "href="#" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="hide-menu"> Giỏ hàng</span> </li>';
+=======
+                       
+                        echo  '<li class="nav-item"><a style="color: white" class="has-arrow  "href="cart.php" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="hide-menu"> Giỏ hàng</span> </li>';
+>>>>>>> 670154d4d67d56bde766db4adf14ab13138ffe17
                         echo '<li class="nav-item dropdown" style="font-weight: 600; font-style: italic; margin-top: -1.2%">
                         <a style="color: red" class="nav-link dropdown-toggle" data-toggle="dropdown" href="infoUser.php" aria-expanded="false"><span><i class="fa fa-user f-s-20 "></i></span><span class="hide-menu">  Xin chào ' . $_SESSION['username'] . ' !</span></a>
 

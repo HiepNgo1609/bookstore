@@ -456,3 +456,4 @@ if (isset($_GET['id'])) {
     <script src="js/search.js"></script>
     <script src="js/cart.js"></script>
 </body>
+</html>

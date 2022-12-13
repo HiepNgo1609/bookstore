@@ -5,7 +5,7 @@ $(document).ready(function() {
     const queryStr = window.location.search;
     const urlParam = new URLSearchParams(queryStr);
     const productId = parseInt(urlParam.get('id'));
-    const userId = parseInt(getCookie("userId"));
+    const userId = parseInt(getCookie("user_id"));
 
     let count_star =
         {
