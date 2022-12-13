@@ -184,9 +184,10 @@ if(isset($_POST['submit'] ))
 																								<td>'.$rows['created_at'].'</td>
                                                                                                 <td>'.$rows['updated_at'].'</td>
 																								
-																								<td><a id="vamos" href="delete_category.php?cat_del='.$rows['id'].'" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
+																								<td> 
 																								<a href="update_category.php?cat_upd='.$rows['id'].'" " class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5"><i class="ti-settings"></i></a>
-																								</td></tr>';
+																								<a id="vamos" href="delete_category.php?cat_del='.$rows['id'].'" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a>
+                                                                                                </td></tr>';
 																					 
 																						
 																						

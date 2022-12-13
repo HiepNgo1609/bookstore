@@ -101,8 +101,9 @@ if(isset($_POST['submit'] ))
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary"><a href="index.php" style="color:blue; font-weight:700">Quay lại Trang chủ</a></h3> </div>
-               
+                <a href="index.php"><i class="fa fa-home" aria-hidden="true" style="scale:150%"><span> Trang chủ</span></i></a>
+                    <!--h3 class="text-primary"><a href="index.php" style="color:blue; font-weight:700">Quay lại Trang chủ</a></h3--> </div>
+                    
             </div>
             <!-- End Bread crumb -->
             <!-- Container fluid  -->
@@ -119,7 +120,11 @@ if(isset($_POST['submit'] ))
 					    <div class="col-lg-12">
                         <div class="card card-outline-primary">
                             <div class="card-header">
-                                <h4 class="m-b-0 text-white">Thông tin tài khoản của <?php echo '<span style="font-style:italic; font-weight:600; color: red">'.$_SESSION['username'].'<span>'?></h4>
+                            <?php $ssql ="select * from users where username='$_SESSION[username]'";
+													$res=mysqli_query($db, $ssql); 
+													$newrow=mysqli_fetch_array($res);?>
+
+                            <h4 class="m-b-0 text-white">Thông tin tài khoản của khách hàng <?php echo '<span style="font-style:italic; font-weight:600; color: red">'.$newrow['firstname'] ." ".$newrow['lastname'].'</span>'?></h4>
                             </div>
                             <div class="card-body">
 							  <?php $ssql ="select * from users where username='$_SESSION[username]'";

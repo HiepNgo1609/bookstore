@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-
-
 session_start();
 error_reporting(0);
 include("../connection/connect.php");
@@ -47,20 +45,25 @@ if(isset($_POST['submit'] ))
 															</div>';
 	}
 	
-	else if(strlen($_POST['phone_number']) > 10)
+	else if(strlen($_POST['phone_number']) != 10)
 	{
 		$error = '<div class="alert alert-danger alert-dismissible fade show">
 																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 																<strong>Số điện thoại không hợp lệ!</strong>
 															</div>';
 	}
-    
+    else if($_POST['password'] != $_POST['cpassword']){  //matching passwords
+        $error = '<div class="alert alert-danger alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Mật khẩu chưa chính xác! Vui lòng nhập lại</strong>
+        </div>';
+    }
 	
 	else{
        
 	
 	$mql = "update users set firstname='$_POST[firstname]', lastname='$_POST[lastname]',email='$_POST[email]',
-    phone_number='$_POST[phone_number]',password='$_POST[password]',address='$_POST[address]',
+    phone_number='$_POST[phone_number]',password='".password_hash("$_POST[password]", PASSWORD_BCRYPT)."',address='$_POST[address]',
      role='$_POST[role]' where id='$_GET[user_upd]' ";
 	mysqli_query($db, $mql);
 			$success = 	'<div class="alert alert-success alert-dismissible fade show">
@@ -141,8 +144,9 @@ if(isset($_POST['submit'] ))
                             </div>
                             <div class="card-body">
 							  <?php $ssql ="select * from users where id='$_GET[user_upd]'";
-													$res=mysqli_query($db, $ssql); 
-													$newrow=mysqli_fetch_array($res);?>
+									$res=mysqli_query($db, $ssql); 
+									$newrow=mysqli_fetch_array($res);
+                                ?>
                                 <form action='' method='post'  >
                                     <div class="form-body">
                                     <hr>
@@ -180,23 +184,14 @@ if(isset($_POST['submit'] ))
                                             <!--/span-->
                                         </div>
                                         <!--/row-->
-										 <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Mật khẩu</label>
-                                                    <input type="text" name="password" class="form-control form-control-danger"   value="<?php  echo $newrow['password'];  ?>" placeholder="Mật khẩu">
-                                                    </div>
-                                                </div>
-                                        
+										
+                                        <div class= "row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Địa chỉ</label>
                                                     <input type="text" name="address" class="form-control form-control-danger"   value="<?php  echo $newrow['address'];  ?>" placeholder="Địa chỉ">
                                                     </div>
                                                 </div>
-                                            </div>
-                                            
-                                            <div class= row>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Số điện thoại</label>
@@ -204,6 +199,9 @@ if(isset($_POST['submit'] ))
                                                     
                                                 </div> 
                                             </div>
+                                            </div>
+                                        
+                                            <div class = "row">
                                                 <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Vai trò</label><br>
@@ -228,11 +226,25 @@ if(isset($_POST['submit'] ))
                                                 </div>
                                                 
                                                 </div>
-                                           
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Mật khẩu</label>
+                                                    <input type="password" name="password" class="form-control form-control-danger"   value="" placeholder="Nhập Mật khẩu">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Nhập lại Mật khẩu</label>
+                                                    <input type="password" name="cpassword" class="form-control form-control-danger"   value="" placeholder="Nhập lại Mật khẩu">
+                                                    </div>
+                                                </div>
                                         </div>
                                     </div>
                                     <div class="form-actions">
-                                        <input type="submit" name="submit" class="btn btn-success" value="Lưu"> 
+                                        <input type="submit" name="submit" class="btn btn-success" value="Cập nhật"> 
                                         <a href="allusers.php" class="btn btn-inverse">Hủy</a>
                                     </div>
                                 </form>
