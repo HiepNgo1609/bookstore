@@ -2723,3 +2723,16 @@ a[aria-expanded=false] .fa-angle-down {
     color: #3a3e47;
 }
 
+
+.header-mobile {
+    display: none;
+}
+
+@media only screen and (max-width: 1200px) {
+    .header-desktop {
+        display: none;
+    }
+    .header-mobile {
+        display: block;
+    }
+}

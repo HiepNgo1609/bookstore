@@ -159,6 +159,7 @@ $(document).ready(function() {
     }
 
     function loadUserData(object) {
+        console.log(object)
         $("#fullName").val(object.fullName)
         $("#phone").val(object.phone)
         $("#email").val(object.email)

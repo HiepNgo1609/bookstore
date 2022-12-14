@@ -39,7 +39,7 @@ h5 {
     display: none;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 769px) {
     .item_info p {
         display: none;
     }
@@ -58,7 +58,7 @@ h5 {
     }
 }
 
-@media only screen and (max-width: 414px) {
+@media only screen and (max-width: 415px) {
     .mobile .mobile_product_list strong {
         display: block;
     }

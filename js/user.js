@@ -7,13 +7,13 @@ $(document).ready(function() {
         url: userInfoURL + "?userId=" + user_id,
         dataType: 'json',
         success: function(res) {
+            console.log(res)
             loadUserData(res)
         },
         error: function(res) {
             console.error(res.message)
         }
     })
-
     function loadUserData(userObj) {
         $("#firstname").val(userObj.firstName)
         $("#lastname").val(userObj.lastName)

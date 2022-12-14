@@ -20,8 +20,8 @@ if ($result->rowCount() > 0) {
     $row = $result->fetch(PDO::FETCH_ASSOC);
     
     echo json_encode(array(
-        "fullName" => $row['firstname'] . ' ' . $row['lastname'],
         "firstName" => $row['firstname'],
+        "fullName" => $row['firstname'] . '' . $row['lastname'],
         "lastName" => $row['lastname'],
         "username" => $row['username'],
         "email" => $row['email'],
